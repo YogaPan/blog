@@ -1,8 +1,7 @@
 import React from "react"
 import styled from "styled-components"
-import Box from "./Box"
 
-const SocialMediaContainer = styled(Box)`
+const SocialMediaContainer = styled.div`
   position: fixed;
   right: 100px;
   bottom: 100px;
