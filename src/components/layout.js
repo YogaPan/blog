@@ -29,15 +29,14 @@ const Layout = ({ children }) => {
       <div
         style={{
           margin: `0 auto`,
-          maxWidth: 960,
+          maxWidth: 840,
           padding: `0px 1.0875rem 1.45rem`,
           paddingTop: 0,
         }}
       >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
+        <main style={{ minHeight: "80vh" }}>{children}</main>
+        <footer style={{ marginTop: 0 }}>
+          © {new Date().getFullYear()} Galtz, Powered by{" "}
           <a href="https://www.gatsbyjs.org">Gatsby</a>
         </footer>
       </div>

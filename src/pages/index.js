@@ -3,21 +3,38 @@ import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import styled from "styled-components"
+
+const Article = styled.div`
+  padding: 8px 16px;
+  transition: 0.1s;
+  &:hover {
+    /* transform: scale(1.01); */
+  }
+`
 
 const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" />
-    <h1>{data.allMarkdownRemark.totalCount} Posts</h1>
+    {/* <h1>{data.allMarkdownRemark.totalCount} Posts</h1> */}
     {data.allMarkdownRemark.edges.map(({ node }) => (
-      <div key={node.id}>
+      <Article key={node.id}>
         <Link to={node.fields.slug}>
-          <h3>
-            {node.frontmatter.title} <span>— {node.frontmatter.date}</span>
-          </h3>
-          <p>{node.excerpt}</p>
+          <h2>{node.frontmatter.title}</h2>
+          <p
+            style={{
+              fontSize: 16,
+              marginBottom: 16,
+              color: "hsla(0,0%,0%,0.8)",
+            }}
+          >
+            {node.frontmatter.date}
+          </p>
+          <p style={{ color: "hsla(0,0%,0%,0.8)" }}>{node.excerpt}</p>
         </Link>
-      </div>
+      </Article>
     ))}
+    {/* TODO: Pagination Component */}
     <Link to="/page-2/">Go to page 2</Link>
   </Layout>
 )
@@ -33,7 +50,7 @@ export const query = graphql`
           id
           frontmatter {
             title
-            date(formatString: "DD MMMM, YYYY")
+            date(formatString: "YYYY-MM-DD")
           }
           fields {
             slug

@@ -1,19 +1,32 @@
 import { Link } from "gatsby"
-import PropTypes from "prop-types"
+import { string } from "prop-types"
 import React from "react"
+import styled from "styled-components"
+
+const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+
+  height: 100px;
+`
 
 const Header = ({ siteTitle }) => (
-  <header>
+  <HeaderContainer>
     <div>
-      <h1 style={{ margin: 0 }}>
+      <p style={{ margin: 0 }}>
         <Link to="/">{siteTitle}</Link>
-      </h1>
+      </p>
     </div>
-  </header>
+    <div>
+      <Link to="/about-me">About Me</Link>
+    </div>
+  </HeaderContainer>
 )
 
 Header.propTypes = {
-  siteTitle: PropTypes.string,
+  siteTitle: string,
 }
 
 Header.defaultProps = {

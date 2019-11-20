@@ -7,9 +7,9 @@ import SEO from "../components/seo"
 const AboutMePage = () => (
   <Layout>
     <SEO title="Home" />
-    <SocialMedia />
+    {/* <SocialMedia /> */}
     {/* <Avatar /> */}
-    <h1>NOT sdfsdf</h1>
+    <h1>About Me</h1>
     <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
   </Layout>
 )

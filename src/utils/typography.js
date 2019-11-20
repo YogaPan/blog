@@ -1,5 +1,8 @@
 import Typography from "typography"
-import FunstonTheme from "typography-theme-funston"
-const typography = new Typography(FunstonTheme)
+import FairyGatesTheme from "typography-theme-fairy-gates"
+
+FairyGatesTheme.headerWeight = 500
+const typography = new Typography(FairyGatesTheme)
+
 export const { scale, rhythm, options } = typography
 export default typography
