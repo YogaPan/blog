@@ -14,7 +14,11 @@ tag: "javascript"
 ```js
 function createCountFunction() {
   let count = 0
+
+  console.log(count) // output: 0
 }
+
+console.log(count) // error!
 ```
 
 count 這個變數在只能夠在 createCountFunction 這個 function 內被讀取， 外部是無法讀取的。

@@ -1,6 +1,6 @@
 import React from "react"
 import SocialMedia from "../components/SocialMedia"
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 import SEO from "../components/seo"
 // import Avatar from "../components/Avatar"
 
