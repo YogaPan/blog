@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import { Link, graphql } from 'gatsby'
 import SEO from '../components/seo'
 import Layout from '../components/Layout'
-import Pagination from '../components/Pagination'
 
 const COLOR = {
   GREEN: '#1ca086',
+  BLACK: 'hsla(0,0%,0%,0.8)',
 }
 
 const Article = styled.div`
@@ -22,33 +22,31 @@ const ArticleTitle = styled.h3`
   }
 `
 
-const IndexPage = ({ data }) => (
-  <Layout>
-    <SEO title="Home" />
-    {/* <h1>{data.allMarkdownRemark.totalCount} Posts</h1> */}
-    {data.allMarkdownRemark.edges.map(({ node }) => (
-      <Article key={node.id}>
-        <Link to={node.fields.slug}>
-          <ArticleTitle>{node.frontmatter.title}</ArticleTitle>
-          <ArticleTitle>{node.frontmatter.tag}</ArticleTitle>
-        </Link>
-        <p style={{ color: 'hsla(0,0%,0%,0.8)' }}>{node.excerpt}</p>
-        <p
-          style={{
-            fontSize: 16,
-            marginBottom: 16,
-            color: 'hsla(0,0%,0%,0.8)',
-          }}
-        >
-          {node.frontmatter.date}
-        </p>
-      </Article>
-    ))}
-    <Pagination />
-  </Layout>
-)
-
-export default IndexPage
+export default function IndexPage({ data }) {
+  return (
+    <Layout>
+      <SEO title="Home" />
+      {/* <h1>{data.allMarkdownRemark.totalCount} Posts</h1> */}
+      {data.allMarkdownRemark.edges.map(({ node }) => (
+        <Article key={node.id}>
+          <Link to={node.fields.slug}>
+            <ArticleTitle>{node.frontmatter.title}</ArticleTitle>
+          </Link>
+          <p style={{ color: COLOR.BLACK }}>{node.excerpt}</p>
+          <p
+            style={{
+              fontSize: 16,
+              marginBottom: 16,
+              color: COLOR.BLACK,
+            }}
+          >
+            {node.frontmatter.date}
+          </p>
+        </Article>
+      ))}
+    </Layout>
+  )
+}
 
 export const query = graphql`
   query {

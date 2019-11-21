@@ -1,7 +1,7 @@
 ---
-title: "利用 Closure 實作 memorized function"
-date: "2019-11-28"
-tag: "javascript"
+title: '利用 Closure 實作 Memorized Function'
+date: '2019-11-28'
+tag: 'javascript'
 ---
 
 ## Table of Content
@@ -21,7 +21,7 @@ function createCountFunction() {
 console.log(count) // error!
 ```
 
-count 這個變數在只能夠在 createCountFunction 這個 function 內被讀取， 外部是無法讀取的。
+`count` 這個變數在只能夠在 createCountFunction 這個 function 內被讀取， 外部是無法讀取的。
 
 ```js
 function createCountFunction() {

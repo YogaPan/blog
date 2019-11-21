@@ -8,14 +8,18 @@ const Title = styled.h1`
   margin-bottom: 56px;
 `
 
-export default ({ data }) => {
+const PostContainer = styled.div`
+  width: 100%;
+`
+
+export default function BlogPost({ data }) {
   const post = data.markdownRemark
   return (
     <Layout>
-      <div>
+      <PostContainer>
         <Title>{post.frontmatter.title}</Title>
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
-      </div>
+      </PostContainer>
     </Layout>
   )
 }

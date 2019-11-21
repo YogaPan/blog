@@ -10,9 +10,11 @@ const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
-
+  justify-content: space-between;
   height: 100px;
+  width: 100%;
+  max-width: 840px;
+  padding: 1.45rem 1.0875rem;
 `
 
 const Header = ({ siteTitle }) => (
@@ -28,10 +30,10 @@ const Header = ({ siteTitle }) => (
     </div>
     <div>
       <Link to="/about-me">About Me</Link>
-      <a href="https://github.com/YogaPan">
+      <a href="https://github.com/YogaPan" target="_blank">
         <img src={githubIcon} style={{ height: 32, padding: '0 8px' }} />
       </a>
-      <a href="https://medium.com/@galtz0321">
+      <a href="https://medium.com/@galtz0321" target="_blank">
         <img src={mediumIcon} style={{ height: 32, padding: '0 8px' }} />
       </a>
     </div>

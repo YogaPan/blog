@@ -2,8 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 
-const Avatar = ({ data }) => {
-  console.log(data)
+export default function Avatar({ data }) {
   return <Img fluid={data.file.childImageSharp.fixed} />
 }
 
@@ -18,5 +17,3 @@ export const query = graphql`
     }
   }
 `
-
-export default Avatar
