@@ -1,12 +1,12 @@
-import React from "react"
-import styled from "styled-components"
-import { Link, graphql } from "gatsby"
-import SEO from "../components/seo"
-import Layout from "../components/Layout"
-import Pagination from "../components/Pagination"
+import React from 'react'
+import styled from 'styled-components'
+import { Link, graphql } from 'gatsby'
+import SEO from '../components/seo'
+import Layout from '../components/Layout'
+import Pagination from '../components/Pagination'
 
 const COLOR = {
-  GREEN: "#1ca086",
+  GREEN: '#1ca086',
 }
 
 const Article = styled.div`
@@ -32,12 +32,12 @@ const IndexPage = ({ data }) => (
           <ArticleTitle>{node.frontmatter.title}</ArticleTitle>
           <ArticleTitle>{node.frontmatter.tag}</ArticleTitle>
         </Link>
-        <p style={{ color: "hsla(0,0%,0%,0.8)" }}>{node.excerpt}</p>
+        <p style={{ color: 'hsla(0,0%,0%,0.8)' }}>{node.excerpt}</p>
         <p
           style={{
             fontSize: 16,
             marginBottom: 16,
-            color: "hsla(0,0%,0%,0.8)",
+            color: 'hsla(0,0%,0%,0.8)',
           }}
         >
           {node.frontmatter.date}

@@ -1,9 +1,9 @@
-import React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import React from 'react'
+import PropTypes from 'prop-types'
+import { useStaticQuery, graphql } from 'gatsby'
 
-import Header from "./Header"
-import "./layout.css"
+import Header from './Header'
+import './layout.css'
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -27,9 +27,9 @@ const Layout = ({ children }) => {
           paddingTop: 0,
         }}
       >
-        <main style={{ minHeight: "80vh" }}>{children}</main>
+        <main style={{ minHeight: '80vh' }}>{children}</main>
         <footer style={{ marginTop: 0 }}>
-          © {new Date().getFullYear()} Galtz, Powered by{" "}
+          © {new Date().getFullYear()} Galtz, Powered by{' '}
           <a href="https://www.gatsbyjs.org">Gatsby</a>
         </footer>
       </div>

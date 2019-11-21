@@ -1,10 +1,10 @@
-import { Link } from "gatsby"
-import { string } from "prop-types"
-import React from "react"
-import styled from "styled-components"
-import homeIcon from "../images/home.svg"
-import mediumIcon from "../images/medium.svg"
-import githubIcon from "../images/github.svg"
+import { Link } from 'gatsby'
+import { string } from 'prop-types'
+import React from 'react'
+import styled from 'styled-components'
+import homeIcon from '../images/home.svg'
+import mediumIcon from '../images/medium.svg'
+import githubIcon from '../images/github.svg'
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -29,10 +29,10 @@ const Header = ({ siteTitle }) => (
     <div>
       <Link to="/about-me">About Me</Link>
       <a href="https://github.com/YogaPan">
-        <img src={githubIcon} style={{ height: 32, padding: "0 8px" }} />
+        <img src={githubIcon} style={{ height: 32, padding: '0 8px' }} />
       </a>
       <a href="https://medium.com/@galtz0321">
-        <img src={mediumIcon} style={{ height: 32, padding: "0 8px" }} />
+        <img src={mediumIcon} style={{ height: 32, padding: '0 8px' }} />
       </a>
     </div>
   </HeaderContainer>

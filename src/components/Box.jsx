@@ -1,5 +1,5 @@
-import React from "react"
-import styled from "styled-components"
+import React from 'react'
+import styled from 'styled-components'
 
 const customCSSProperties = {
   marginVertical: value => `margin-top:${value};margin-bottom:${value};`,
@@ -20,10 +20,10 @@ const supportedCSSProperties = Object.keys({
 }, {})
 
 const toCSSProperty = ([key, value]) => {
-  if (!value && value !== 0) return ""
-  if (typeof value === "number") value = `${value}px`
+  if (!value && value !== 0) return ''
+  if (typeof value === 'number') value = `${value}px`
   if (customCSSProperties[key]) return customCSSProperties[key](value)
-  key = key.replace(/[A-Z]/g, c => "-" + c.toLowerCase())
+  key = key.replace(/[A-Z]/g, c => '-' + c.toLowerCase())
   return `${key}: ${value};`
 }
 
@@ -32,5 +32,5 @@ export default React.memo(styled.div`
     Object.entries(props)
       .filter(([key]) => supportedCSSProperties[key])
       .map(toCSSProperty)
-      .join("")};
+      .join('')};
 `)

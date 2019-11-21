@@ -1,7 +1,7 @@
-import React from "react"
-import { graphql } from "gatsby"
-import Layout from "../components/Layout"
-import styled from "styled-components"
+import React from 'react'
+import { graphql } from 'gatsby'
+import Layout from '../components/Layout'
+import styled from 'styled-components'
 
 const Title = styled.h1`
   text-align: center;
