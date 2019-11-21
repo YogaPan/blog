@@ -3,9 +3,17 @@ a {
   background-image: none;
 }
 
+a:hover {
+  text-decoration: underline;
+}
+
 div {
   margin: 0;
   padding: 0;
+}
+
+img {
+  margin-bottom: 0;
 }
 
 p,

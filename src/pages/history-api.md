@@ -1,6 +1,7 @@
 ---
-title: "Snake"
-date: "2019-09-21"
+title: "Web History API"
+date: "2019-12-10"
+tag: "javascript"
 ---
 
 Snake are silly.

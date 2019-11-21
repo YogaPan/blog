@@ -1,15 +1,24 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
-
-import Layout from "../components/layout"
-import SEO from "../components/seo"
 import styled from "styled-components"
+import { Link, graphql } from "gatsby"
+import SEO from "../components/seo"
+import Layout from "../components/Layout"
+import Pagination from "../components/Pagination"
+
+const COLOR = {
+  GREEN: "#1ca086",
+}
 
 const Article = styled.div`
-  padding: 8px 16px;
-  transition: 0.1s;
+  transition: 0.5s;
+  padding: 24px 0;
+`
+
+const ArticleTitle = styled.h3`
+  transition: 0.2s;
   &:hover {
-    /* transform: scale(1.01); */
+    text-decoration: underline;
+    color: ${COLOR.GREEN};
   }
 `
 
@@ -20,22 +29,22 @@ const IndexPage = ({ data }) => (
     {data.allMarkdownRemark.edges.map(({ node }) => (
       <Article key={node.id}>
         <Link to={node.fields.slug}>
-          <h2>{node.frontmatter.title}</h2>
-          <p
-            style={{
-              fontSize: 16,
-              marginBottom: 16,
-              color: "hsla(0,0%,0%,0.8)",
-            }}
-          >
-            {node.frontmatter.date}
-          </p>
-          <p style={{ color: "hsla(0,0%,0%,0.8)" }}>{node.excerpt}</p>
+          <ArticleTitle>{node.frontmatter.title}</ArticleTitle>
+          <ArticleTitle>{node.frontmatter.tag}</ArticleTitle>
         </Link>
+        <p style={{ color: "hsla(0,0%,0%,0.8)" }}>{node.excerpt}</p>
+        <p
+          style={{
+            fontSize: 16,
+            marginBottom: 16,
+            color: "hsla(0,0%,0%,0.8)",
+          }}
+        >
+          {node.frontmatter.date}
+        </p>
       </Article>
     ))}
-    {/* TODO: Pagination Component */}
-    <Link to="/page-2/">Go to page 2</Link>
+    <Pagination />
   </Layout>
 )
 
