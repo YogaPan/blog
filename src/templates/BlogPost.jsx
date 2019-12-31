@@ -1,6 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Layout from '../components/Layout'
+import Layout from '../components/Layout/Layout'
+import SEO from '../components/seo'
 import styled from 'styled-components'
 
 const Title = styled.h1`
@@ -12,13 +13,20 @@ const PostContainer = styled.div`
   width: 100%;
 `
 
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+`
+
 export default function BlogPost({ data }) {
   const post = data.markdownRemark
   return (
     <Layout>
+      <SEO title={post.frontmatter.title} />
       <PostContainer>
         <Title>{post.frontmatter.title}</Title>
-        <div dangerouslySetInnerHTML={{ __html: post.html }} />
+        <Content dangerouslySetInnerHTML={{ __html: post.html }} />
       </PostContainer>
     </Layout>
   )

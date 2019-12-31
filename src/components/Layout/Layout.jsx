@@ -3,8 +3,7 @@ import styled from 'styled-components'
 import { node } from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
 import Header from './Header'
-import Pagination from '../components/Pagination'
-import './layout.css'
+import Footer from './Footer'
 
 const LayoutContainer = styled.div`
   min-height: 100vh;
@@ -22,13 +21,6 @@ const Main = styled.div`
   flex-direction: column;
 `
 
-const Footer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 64px;
-`
-
 export default function Layout({ children }) {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -44,11 +36,7 @@ export default function Layout({ children }) {
     <LayoutContainer>
       <Header siteTitle={data.site.siteMetadata.title} />
       <Main>{children}</Main>
-      <Pagination />
-      <Footer style={{ marginTop: 0 }}>
-        <span>© {new Date().getFullYear()} Galtz, Powered by</span>
-        <a href="https://www.gatsbyjs.org">Gatsby</a>
-      </Footer>
+      <Footer />
     </LayoutContainer>
   )
 }

@@ -5,12 +5,21 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from 'react'
+import React, { useState, useMemo } from 'react'
+import useDidMount from '../common/hooks/useDidMount'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
 
 function SEO({ description, lang, meta, title }) {
+  const theme = useMemo(() => localStorage.getItem('theme'), [])
+  const [preload, setPreload] = useState(true)
+  useDidMount(() => {
+    window.addEventListener('load', () => {
+      setPreload(false)
+    })
+  })
+
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -33,7 +42,7 @@ function SEO({ description, lang, meta, title }) {
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      titleTemplate={`${site.siteMetadata.title} | %s`}
       meta={[
         {
           name: `description`,
@@ -68,7 +77,9 @@ function SEO({ description, lang, meta, title }) {
           content: metaDescription,
         },
       ].concat(meta)}
-    />
+    >
+      <html data-theme={theme} data-preload={preload} />
+    </Helmet>
   )
 }
 
