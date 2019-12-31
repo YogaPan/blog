@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSpring, animated } from 'react-spring'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout/Layout'
 import SEO from '../components/seo'
@@ -19,15 +20,30 @@ const Content = styled.div`
   align-items: stretch;
 `
 
+const AnimatedPostContainer = animated(PostContainer)
+
 export default function BlogPost({ data }) {
   const post = data.markdownRemark
+  const props = useSpring({
+    config: {
+      duration: 200,
+    },
+    opacity: 1,
+    transform: 'translateY(0)',
+    from: { opacity: 0, transform: 'translateY(10px)' },
+  })
+
   return (
     <Layout>
       <SEO title={post.frontmatter.title} />
-      <PostContainer>
+      <AnimatedPostContainer style={props}>
         <Title>{post.frontmatter.title}</Title>
-        <Content dangerouslySetInnerHTML={{ __html: post.html }} />
-      </PostContainer>
+        <Content
+          dangerouslySetInnerHTML={{
+            __html: post.html,
+          }}
+        />
+      </AnimatedPostContainer>
     </Layout>
   )
 }

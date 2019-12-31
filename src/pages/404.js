@@ -4,8 +4,7 @@ import Layout from '../components/Layout/Layout'
 import SEO from '../components/seo'
 
 const Container = styled.div`
-  height: 400px;
-
+  height: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
