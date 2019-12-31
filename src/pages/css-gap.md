@@ -1,5 +1,5 @@
 ---
-title: 'CSS Tip 1: 子元素的間距'
+title: 'CSS Tips 1: 子元素的間距'
 date: '2019-12-21'
 tags: 'javascript'
 ---
