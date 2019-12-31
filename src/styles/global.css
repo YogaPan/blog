@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 html {
   --brand-color: #1ca086;
 
@@ -30,6 +34,24 @@ html[data-theme='dark'] {
 
   --primary-icon-color: var(--brand-color);
   --primary-icon-hover-color: #fff;
+}
+
+html::-webkit-scrollbar {
+  width: 5px;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #000;
+  border-radius: 5px;
+}
+
+html[data-theme='dark']::-webkit-scrollbar-track {
+  background: var(--primary-black-bg-color);
+}
+
+html[data-theme='dark']::-webkit-scrollbar-thumb {
+  background: var(--brand-color);
+  border-radius: 5px;
 }
 
 /*
@@ -72,9 +94,11 @@ img {
 }
 
 pre {
+  transition: var(--transition-duration);
   background-color: var(--code-bg-color);
 }
 
 code {
+  transition: var(--transition-duration);
   color: var(--primary-text-color);
 }
