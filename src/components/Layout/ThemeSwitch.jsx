@@ -58,7 +58,7 @@ const Container = styled.div`
 `
 
 const utils = {
-  setTheme: isDarkTheme => {
+  changeTheme: isDarkTheme => {
     if (isDarkTheme) {
       document.querySelector('html').setAttribute('data-theme', 'dark')
       localStorage.setItem('theme', 'dark')
@@ -70,12 +70,13 @@ const utils = {
 }
 
 export default function ThemeSwitch() {
-  const [isDarkTheme, toggleTheme] = useSwitch(
-    () => localStorage.getItem('theme') === 'dark'
-  )
+  const [isDarkTheme, toggleTheme] = useSwitch(() => {
+    if (typeof window !== 'undefined')
+      return localStorage.getItem('theme') === 'dark'
+  })
 
   useDidUpdate(() => {
-    utils.setTheme(isDarkTheme)
+    utils.changeTheme(isDarkTheme)
   }, [isDarkTheme])
 
   return (

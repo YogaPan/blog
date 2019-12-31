@@ -12,7 +12,10 @@ import Helmet from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
 
 function SEO({ description, lang, meta, title }) {
-  const theme = useMemo(() => localStorage.getItem('theme'), [])
+  const theme = useMemo(
+    () => typeof window !== 'undefined' && localStorage.getItem('theme'),
+    []
+  )
   const [preload, setPreload] = useState(true)
   useDidMount(() => {
     window.addEventListener('load', () => {
@@ -78,7 +81,7 @@ function SEO({ description, lang, meta, title }) {
         },
       ].concat(meta)}
     >
-      <html data-theme={theme} data-preload={preload} />
+      <html data-theme={theme} data-preload={preload} lang={lang} />
     </Helmet>
   )
 }
