@@ -4,6 +4,10 @@ date: '2019-12-21'
 tag: 'zsh shell'
 ---
 
+## 前言講幹話
+
+TODO
+
 ## Step1: 自訂工作目錄，將所有專案集中管理
 
 我自己個人的習慣是把所有程式相關的 Repository 放在 `~/Developer` 目錄下，並且 export `WORKSPACE` 這個變數，方便 zsh script 讀取：
@@ -54,7 +58,7 @@ compdef _c c
 
 ## Demo Time:
 
-GIphy Here
+TODO: GIF Here
 
 ## Reference & Further Reading
 

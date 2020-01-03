@@ -1,0 +1,44 @@
+---
+title: 'ZSH Tips 2: Editor Shortcut & Variable Substitution'
+date: '2019-12-21'
+tag: 'zsh shell'
+---
+
+## Step1
+
+先設定好你愛用的編輯器，像是我最愛的編輯器是 [VSCode](https://code.visualstudio.com/)
+
+```shell
+export EDITOR="code"
+```
+
+## Step2
+
+接著定義我們的 zsh function。為求快速，名稱使用左手輸入的單一字母：e
+
+```shell
+e() {
+  "$EDITOR" "${1:-.}"
+}
+```
+
+你看！很簡單吧！Image Here
+
+屁啦！！！！上面那一串 `${1:-.}` 到底是什麼鬼東西呀！！！
+
+這個一堆括號一堆錢字號一堆莫名符號的東東，叫做 Variable Substitution。
+
+## Variable Substitution
+
+Variable Substitution 是在 Shell 中很常使用到的語法，如果你想要成為 shell 的王者，這條路是躲不掉的。
+
+## Demo Time
+
+離題了，最後讓我們看一下
+
+Giphy Here
+
+## Reference
+
+- TODO
+- TODO

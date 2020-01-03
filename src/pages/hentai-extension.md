@@ -4,5 +4,18 @@ date: '2019-12-13'
 tag: 'javascript, chrome'
 ---
 
-Snake are silly.
-Here's a video of a snake eating mouse.
+## 1. 前言
+
+TODO
+
+## 2. Chrome Extension
+
+TODO
+
+## 3. Extension reload
+
+TODO
+
+## 4. Reference
+
+TODO
