@@ -10,11 +10,17 @@ const Article = styled.div`
   padding: 24px 0;
 `
 
-const ArticleTitle = styled.h3`
+const ArticleTitle = styled(Link)`
+  display: block;
+  margin: 16px 0;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--primary-text-color);
   transition: var(--transition-duration);
+
   &:hover {
-    text-decoration: underline;
-    color: var(--brand-color);
+    color: var(--primary-icon-hover-color);
   }
 `
 
@@ -36,9 +42,9 @@ export default function IndexPage({ data }) {
           .map(({ node }) => {
             return (
               <Article key={node.id}>
-                <Link to={node.fields.slug}>
-                  <ArticleTitle>{node.frontmatter.title}</ArticleTitle>
-                </Link>
+                <ArticleTitle to={node.fields.slug}>
+                  {node.frontmatter.title}
+                </ArticleTitle>
                 <p>{node.excerpt}</p>
                 <p style={{ marginBottom: 16 }}>{node.frontmatter.date}</p>
                 {/* <p style={{ marginBottom: 16 }}>{node.frontmatter.tags}</p> */}
