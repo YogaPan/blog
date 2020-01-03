@@ -7,6 +7,7 @@ import styled from 'styled-components'
 
 const Title = styled.h1`
   text-align: center;
+  margin-top: 56px;
   margin-bottom: 56px;
 `
 
