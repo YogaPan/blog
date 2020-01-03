@@ -1,7 +1,8 @@
 import React from 'react'
+import styled from 'styled-components'
 import useSwitch from '../../common/hooks/useSwitch'
 import useDidUpdate from '../../common/hooks/useDidUpdate'
-import styled from 'styled-components'
+import SunIcon from '../../assets/sun.svg'
 
 const Container = styled.div`
   position: relative;
@@ -79,12 +80,14 @@ export default function ThemeSwitch() {
     utils.changeTheme(isDarkTheme)
   }, [isDarkTheme])
 
-  return (
-    <Container>
-      <label className="switch">
-        <input type="checkbox" checked={isDarkTheme} onChange={toggleTheme} />
-        <span className="slider"></span>
-      </label>
-    </Container>
-  )
+  const style = {
+    height: 30,
+    width: 30,
+    marginLeft: 16,
+    cursor: 'pointer',
+    // fill: 'red',
+    fill: 'rgb(50, 56, 63)',
+  }
+
+  return <SunIcon style={style} onClick={toggleTheme} />
 }

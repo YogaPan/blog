@@ -3,16 +3,15 @@ import React from 'react'
 import { string } from 'prop-types'
 import styled, { css } from 'styled-components'
 import { gapHorizontal } from '../../utils/style'
-import HomeIcon from '../../assets/home.svg'
 import GithubIcon from '../../assets/github.svg'
+import LinkedInIcon from '../../assets/linkedin.svg'
+import BrandIcon from '../../assets/brand.svg'
 import ThemeSwitch from './ThemeSwitch'
 
 const linkStyleMixin = css`
-  line-height: 0;
-
   svg {
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 30px;
     fill: var(--primary-icon-color);
     transition: var(--transition-duration);
 
@@ -24,6 +23,18 @@ const linkStyleMixin = css`
 
 const Link = styled(BaseLink)`
   ${linkStyleMixin}
+  display: flex;
+  align-items: center;
+  color: var(--primary-text-color);
+  font-size: 32px;
+
+  &:hover {
+    color: var(--primary-icon-hover-color);
+  }
+
+  &:hover svg {
+    fill: var(--primary-icon-hover-color);
+  }
 `
 
 const OutsideLink = styled.a.attrs({
@@ -49,25 +60,25 @@ const SubContainer = styled.div`
   align-items: center;
 `
 
-const Header = ({ siteTitle }) => (
-  <HeaderContainer>
-    <SubContainer>
+const Header = () => {
+  return (
+    <HeaderContainer>
       <Link to="/">
-        <HomeIcon />
+        <BrandIcon style={{ height: 40, width: 40 }} />
+        <span style={{ marginLeft: 16, width: 200 }}>Galtz's Blog</span>
       </Link>
-      <OutsideLink href="https://github.com/YogaPan">
-        <GithubIcon />
-      </OutsideLink>
-    </SubContainer>
-    <SubContainer>
-      {/* <Link to="/about-me">About Me</Link> */}
-      <ThemeSwitch />
-      {/* <OutsideLink href="https://github.com/YogaPan">
-        <GithubIcon />
-      </OutsideLink> */}
-    </SubContainer>
-  </HeaderContainer>
-)
+      <SubContainer>
+        <OutsideLink href="https://www.linkedin.com/in/%E6%98%B1%E5%98%89-%E6%BD%98-5a7927ab/">
+          <LinkedInIcon />
+        </OutsideLink>
+        <OutsideLink href="https://github.com/YogaPan">
+          <GithubIcon />
+        </OutsideLink>
+        <ThemeSwitch />
+      </SubContainer>
+    </HeaderContainer>
+  )
+}
 
 Header.propTypes = {
   siteTitle: string,
@@ -77,4 +88,4 @@ Header.defaultProps = {
   siteTitle: ``,
 }
 
-export default Header
+export default React.memo(Header)

@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `小蛇蛇的 Blog`,
-    description: `小蛇蛇的 Blog`,
+    title: `Galtz's Blog`,
+    description: `Galtz's Blog`,
     author: `@galtz0321`,
   },
   plugins: [
@@ -52,7 +52,7 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`,
+        icon: `src/images/brand.png`,
       },
     },
     {

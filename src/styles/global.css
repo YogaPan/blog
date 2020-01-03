@@ -4,6 +4,7 @@
 
 html {
   --brand-color: #1ca086;
+  --linkedin-color: #0077b5;
 
   --primary-bg-color: #fff;
   --primary-black-bg-color: #0f111a;
@@ -13,10 +14,13 @@ html {
 
   --code-bg-color: #f8f8f8;
 
-  --primary-icon-color: #000;
-  --primary-icon-hover-color: var(--brand-color);
+  --primary-icon-color: rgb(50, 56, 63);
+  --primary-icon-hover-color: #777;
 
   --transition-duration: 0.2s;
+
+  --scroll-button-color: black;
+  --scroll-button-shadow: rgba(255, 255, 255, 0.5) 0px -1px 20px;
 
   color: var(--primary-text-color);
   background-color: var(--primary-bg-color);
@@ -34,6 +38,9 @@ html[data-theme='dark'] {
 
   --primary-icon-color: var(--brand-color);
   --primary-icon-hover-color: #fff;
+
+  --scroll-button-color: rgb(50, 56, 63);
+  --scroll-button-shadow: none;
 }
 
 html::-webkit-scrollbar {
@@ -42,6 +49,7 @@ html::-webkit-scrollbar {
 
 html::-webkit-scrollbar-thumb {
   background: #000;
+  /* background: rgba(0, 0, 0, 0); */
   border-radius: 5px;
 }
 
@@ -76,12 +84,12 @@ a {
   text-decoration: none;
   text-shadow: none;
   background-image: none;
+  cursor: pointer;
+  transition: var(--transition-duration);
 }
 
 a:hover {
-  text-decoration: underline;
-  color: var(--brand-color);
-  transition: var(--transition-duration);
+  color: #3fccb0;
 }
 
 div {
