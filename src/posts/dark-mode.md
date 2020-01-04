@@ -1,5 +1,5 @@
 ---
-title: '暗黑浪潮來襲！ 教你用 CSS Variable 實現網站 Dark Mode'
+title: 'WIP: 暗黑浪潮來襲！ 教你用 CSS Variable 實現網站 Dark Mode'
 date: '2020-01-01'
 tag: 'javascript'
 ---

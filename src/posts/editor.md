@@ -1,5 +1,5 @@
 ---
-title: 'ZSH Tips 2: Editor Shortcut & Variable Substitution'
+title: 'WIP: ZSH Tips 2: Editor Shortcut & Variable Substitution'
 date: '2019-12-21'
 tag: 'zsh shell'
 ---

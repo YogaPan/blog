@@ -12,6 +12,8 @@
 - [ ] Refine color variables
 - [ ] Article Pagination
 - [ ] List Mode/Grid Mode
+- [ ] 文章大分類
+- [ ] Use Typescript
 
 ## Page
 
@@ -20,7 +22,7 @@
 
 ## Header
 
-- [ ] Favicon
+- [x] Brand Icon
 - [x] LinkedIn Link
 - [ ] Theme Switch Icon: Solar/Lunar
 

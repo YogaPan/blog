@@ -5,9 +5,18 @@
 - [Material Design](https://material.io/resources/icons/?style=baseline)
 - [Simple Icon](https://simpleicons.org/)
 
-如果找不到再去以下網站搜尋
+如果找不到再去以下網站搜尋:
 
-- [Flat Icon](https://www.flaticon.com/): free svg need credit author.
-- [icon8](https://icons8.com/): free svg need credit author.
-- [Noun Project](https://thenounproject.com/): 極簡扁平風格，free svg need credit author.
-- [Free Icon Shop](https://freeiconshop.com/): Free Svg, No need credit author，可商業使用
+可免費商業使用
+
+- [Free Icon Shop](https://freeiconshop.com/)
+
+Free svg need to credit author.
+
+- [Flat Icon](https://www.flaticon.com/)
+- [icon8](https://icons8.com/)
+- [Noun Project](https://thenounproject.com/): 極簡扁平風格
+
+其他 icon 包
+
+- [SVG Icons](http://svgicons.sparkk.fr/)

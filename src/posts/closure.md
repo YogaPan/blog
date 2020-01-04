@@ -1,7 +1,7 @@
 ---
 title: 'WIP: 用愛把你包起來！Javascript Closure 的應用'
 date: '2019-12-21'
-tag: 'javascript'
+tags: 'javascript'
 ---
 
 ## 1. Closure Basic
