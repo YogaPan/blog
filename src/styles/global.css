@@ -21,6 +21,8 @@ html {
   --theme-icon-color: var(--primary-icon-color);
   --theme-icon-hover-color: var(--brand-color);
 
+  --border-color: rgba(0, 0, 0, 0.12);
+
   --transition-duration: 0.2s;
 
   --scroll-button-color: black;
@@ -46,6 +48,8 @@ html[data-theme='dark'] {
   --theme-icon-color: var(--brand-color);
   --theme-icon-hover-color: var(--primary-icon-hover-color);
 
+  --border-color: rgba(255, 255, 255, 0.24);
+
   --scroll-button-color: rgb(50, 56, 63);
   --scroll-button-shadow: none;
 }
@@ -56,7 +60,6 @@ html::-webkit-scrollbar {
 
 html::-webkit-scrollbar-thumb {
   background: #000;
-  /* background: rgba(0, 0, 0, 0); */
   border-radius: 5px;
 }
 
@@ -69,8 +72,7 @@ html[data-theme='dark']::-webkit-scrollbar-thumb {
   border-radius: 5px;
 }
 
-/*
-html[data-preload='true'] {
+/* html[data-preload='true'] {
   --transition-duration: 0s;
 } */
 
@@ -106,6 +108,15 @@ div {
 
 img {
   margin-bottom: 0;
+}
+
+table {
+  color: var(--primary-text-color);
+  transition: var(--transition-duration);
+}
+
+table td {
+  border-bottom: 1px solid var(--border-color);
 }
 
 pre {
