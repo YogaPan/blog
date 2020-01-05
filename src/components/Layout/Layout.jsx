@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useSpring } from 'react-spring'
 import { node } from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
-import ArrowUpIcon from '../../assets/arrow-up.svg'
-import ShareIcon from '../../assets/share.svg'
+import ArrowUpIcon from '@assets/arrow-up.svg'
+import ShareIcon from '@assets/share.svg'
 import Header from './Header'
 import Footer from './Footer'
-import { useSpring } from 'react-spring'
 
 const LayoutContainer = styled.div`
   min-height: 100vh;

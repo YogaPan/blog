@@ -1,9 +1,9 @@
 import React from 'react'
 import { animated, useTransition } from 'react-spring'
 import styled, { css } from 'styled-components'
+import BaseSunIcon from '@assets/sun.svg'
+import BaseMoonIcon from '@assets/night.svg'
 import useThemeSwitch from './useThemeSwitch'
-import BaseSunIcon from '../../assets/sun.svg'
-import BaseMoonIcon from '../../assets/night.svg'
 
 const Container = styled.div`
   position: relative;

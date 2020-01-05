@@ -1,5 +1,5 @@
-import useSwitch from '../../common/hooks/useSwitch'
-import useDidUpdate from '../../common/hooks/useDidUpdate'
+import useSwitch from '@hooks/useSwitch'
+import useDidUpdate from '@hooks/useDidUpdate'
 
 const utils = {
   changeTheme: isDarkTheme => {

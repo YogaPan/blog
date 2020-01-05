@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import Layout from '../components/Layout/Layout'
-import SEO from '../components/seo'
+import Layout from '@components/Layout/Layout'
+import SEO from '@components/seo'
 
 const Container = styled.div`
   height: 300px;

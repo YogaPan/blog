@@ -1,9 +1,9 @@
 import React from 'react'
 import { useSpring, animated } from 'react-spring'
 import { graphql } from 'gatsby'
-import Layout from '../components/Layout/Layout'
-import SEO from '../components/seo'
 import styled from 'styled-components'
+import Layout from '@components/Layout/Layout'
+import SEO from '@components/seo'
 
 const Title = styled.h1`
   text-align: center;

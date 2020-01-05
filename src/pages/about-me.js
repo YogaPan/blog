@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSpring, animated } from 'react-spring'
-import Layout from '../components/Layout/Layout'
-import SEO from '../components/seo'
+import Layout from '@components/Layout/Layout'
+import SEO from '@components/seo'
 
 const AboutMePage = () => {
   const props = useSpring({

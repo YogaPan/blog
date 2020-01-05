@@ -6,7 +6,7 @@
  */
 
 import React, { useState, useMemo } from 'react'
-import useDidMount from '../common/hooks/useDidMount'
+import useDidMount from '@hooks/useDidMount'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'

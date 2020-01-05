@@ -2,8 +2,8 @@ import React from 'react'
 import { useSpring, animated } from 'react-spring'
 import styled from 'styled-components'
 import { Link, graphql } from 'gatsby'
-import SEO from '../components/seo'
-import Layout from '../components/Layout/Layout'
+import SEO from '@components/seo'
+import Layout from '@components/Layout/Layout'
 
 const Article = styled.div`
   transition: 0.5s;
