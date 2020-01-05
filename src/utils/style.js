@@ -1,7 +1,15 @@
-export function gapHorizontal(value) {
-  return `> * + * { margin-left: ${value}; }`
-}
+import { css } from 'styled-components'
 
-export function gapVertical(value) {
-  return `> * + * { margin-top: ${value}; }`
-}
+export const gapHorizontal = value =>
+  css`
+    > * + * {
+      margin-left: ${value};
+    }
+  `
+
+export const gapVertical = value =>
+  css`
+    > * + * {
+      margin-top: ${value};
+    }
+  `
