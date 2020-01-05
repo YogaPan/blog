@@ -5,22 +5,20 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React, { useState, useMemo } from 'react'
-import useDidMount from '@hooks/useDidMount'
+import React, { useState } from 'react'
+import { useLocalStorage, useMount } from 'react-use'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
 
 function SEO({ description, lang, meta, title }) {
-  const theme = useMemo(
-    () => typeof window !== 'undefined' && localStorage.getItem('theme'),
-    []
-  )
+  const [theme] = useLocalStorage('theme')
   const [preload, setPreload] = useState(true)
-  useDidMount(() => {
-    window.addEventListener('load', () => {
-      setPreload(false)
-    })
+
+  useMount(() => {
+    document.readyState === 'complete'
+      ? setPreload(false)
+      : window.addEventListener('load', () => setPreload(false))
   })
 
   const { site } = useStaticQuery(
