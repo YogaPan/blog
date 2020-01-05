@@ -9,32 +9,30 @@ const Container = styled.div`
   position: relative;
   width: 30px;
   height: 30px;
+  cursor: pointer;
+
+  svg {
+    fill: var(--theme-icon-color);
+  }
+
+  &:hover svg {
+    fill: var(--theme-icon-hover-color);
+  }
 `
 
 const switchIconMixin = css`
   position: absolute;
   height: 100%;
   width: 100%;
-  cursor: pointer;
   transition: var(--transition-duration);
-
-  &:hover {
-    fill: var(--brand-color);
-  }
 `
 
 const SunIcon = styled(BaseSunIcon)`
   ${switchIconMixin}
-  fill: var(--brand-color);
-
-  &:hover {
-    fill: var(--primary-icon-hover-color);
-  }
 `
 
 const MoonIcon = styled(BaseMoonIcon)`
   ${switchIconMixin}
-  fill: var(--primary-icon-color);
 `
 
 const AnimatedSunIcon = animated(SunIcon)
@@ -51,12 +49,12 @@ export default function ThemeSwitch() {
   })
 
   return (
-    <Container>
+    <Container onClick={toggleTheme}>
       {transitions.map(({ item, key, props }) =>
         item ? (
-          <AnimatedSunIcon key={key} style={props} onClick={toggleTheme} />
+          <AnimatedSunIcon key={key} style={props} />
         ) : (
-          <AnimatedMoonIcon key={key} style={props} onClick={toggleTheme} />
+          <AnimatedMoonIcon key={key} style={props} />
         )
       )}
     </Container>

@@ -4,6 +4,7 @@
 
 html {
   --brand-color: #1ca086;
+  --link-hover-color: #3fccb0;
   --linkedin-color: #0077b5;
 
   --primary-bg-color: #fff;
@@ -16,6 +17,9 @@ html {
 
   --primary-icon-color: rgb(50, 56, 63);
   --primary-icon-hover-color: #777;
+
+  --theme-icon-color: var(--primary-icon-color);
+  --theme-icon-hover-color: var(--brand-color);
 
   --transition-duration: 0.2s;
 
@@ -38,6 +42,9 @@ html[data-theme='dark'] {
 
   --primary-icon-color: var(--brand-color);
   --primary-icon-hover-color: #fff;
+
+  --theme-icon-color: var(--brand-color);
+  --theme-icon-hover-color: var(--primary-icon-hover-color);
 
   --scroll-button-color: rgb(50, 56, 63);
   --scroll-button-shadow: none;
@@ -89,7 +96,7 @@ a {
 }
 
 a:hover {
-  color: #3fccb0;
+  color: var(--link-hover-color);
 }
 
 div {

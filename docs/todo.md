@@ -3,6 +3,7 @@
 ## Whole Website
 
 - [ ] Favicon
+- [x] webpack resolve alias
 - [ ] Performance: useMemo/React.memo
 - [ ] Mobile View Port
 - [ ] Animated Component Refactor
