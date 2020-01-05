@@ -26,12 +26,10 @@ const AnimatedPostContainer = animated(PostContainer)
 export default function BlogPost({ data }) {
   const post = data.markdownRemark
   const props = useSpring({
-    config: {
-      duration: 200,
-    },
+    config: { duration: 200 },
+    from: { opacity: 0, transform: 'translateY(10px)' },
     opacity: 1,
     transform: 'translateY(0)',
-    from: { opacity: 0, transform: 'translateY(10px)' },
   })
 
   return (

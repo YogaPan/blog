@@ -9,32 +9,46 @@ import BrandIcon from '../../assets/brand.svg'
 import ThemeSwitch from './ThemeSwitch'
 
 const linkStyleMixin = css`
+  display: flex;
+  align-items: center;
+  font-size: 32px;
+  line-height: 1;
+  color: var(--primary-text-color);
+
+  &:hover {
+    color: var(--primary-icon-hover-color);
+    svg {
+      fill: var(--primary-icon-hover-color);
+    }
+  }
+
   svg {
     height: 30px;
     width: 30px;
     fill: var(--primary-icon-color);
     transition: var(--transition-duration);
+  }
+`
 
-    &:hover {
-      fill: var(--primary-icon-hover-color);
-    }
+const brandCss = css`
+  svg {
+    height: 40px;
+    width: 40px;
+  }
+  span {
+    margin-left: 16px;
+    width: 200px;
+  }
+`
+
+const linkedInCss = css`
+  &:hover svg {
+    fill: var(--linkedin-color);
   }
 `
 
 const Link = styled(BaseLink)`
   ${linkStyleMixin}
-  display: flex;
-  align-items: center;
-  color: var(--primary-text-color);
-  font-size: 32px;
-
-  &:hover {
-    color: var(--primary-icon-hover-color);
-  }
-
-  &:hover svg {
-    fill: var(--primary-icon-hover-color);
-  }
 `
 
 const OutsideLink = styled.a.attrs({
@@ -63,16 +77,19 @@ const SubContainer = styled.div`
 const Header = () => {
   return (
     <HeaderContainer>
-      <Link to="/">
-        <BrandIcon style={{ height: 40, width: 40 }} />
-        <span style={{ marginLeft: 16, width: 200 }}>Galtz's Blog</span>
+      <Link to="/" css={brandCss}>
+        <BrandIcon />
+        <span>Galtz's Blog</span>
       </Link>
       <SubContainer>
-        <OutsideLink href="https://www.linkedin.com/in/%E6%98%B1%E5%98%89-%E6%BD%98-5a7927ab/">
-          <LinkedInIcon />
-        </OutsideLink>
         <OutsideLink href="https://github.com/YogaPan">
           <GithubIcon />
+        </OutsideLink>
+        <OutsideLink
+          css={linkedInCss}
+          href="https://www.linkedin.com/in/%E6%98%B1%E5%98%89-%E6%BD%98-5a7927ab/"
+        >
+          <LinkedInIcon />
         </OutsideLink>
         <ThemeSwitch />
       </SubContainer>

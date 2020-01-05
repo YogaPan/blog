@@ -10,6 +10,7 @@
 - [ ] SEO
 - [ ] GA
 - [ ] Refine color variables
+- [ ] Refine Icon Size, Font Size
 - [ ] Article Pagination
 - [ ] List Mode/Grid Mode
 - [ ] 文章大分類
@@ -24,7 +25,8 @@
 
 - [x] Brand Icon
 - [x] LinkedIn Link
-- [ ] Theme Switch Icon: Solar/Lunar
+- [x] Theme Switch Icon: Solar/Lunar
+- [x] Theme Toggle Hooks
 
 ## Footer
 
