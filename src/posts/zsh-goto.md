@@ -1,16 +1,16 @@
 ---
-title: 'ZSH Tips 1: Goto any Repository from AnyWhere'
+title: 'ZSH Tips 1: 自定義指令快速進入專案目錄'
 date: '2019-12-21'
-tag: 'zsh shell'
+tag: 'zsh, shell'
 ---
 
-## 前言講幹話
+追求快速是工程師
 
-TODO
+這篇文章假設你是使用 Oh My ZSH。那麼我們開始設定 .zshrc 檔唄:
 
 ## Step1: 自訂工作目錄，將所有專案集中管理
 
-我自己個人的習慣是把所有程式相關的 Repository 放在 `~/Developer` 目錄下，並且 export `WORKSPACE` 這個變數，方便 zsh script 讀取：
+我自己個人的習慣是把所有開發的 Repository 放在 **~/Developer** 目錄下，並且 export **WORKSPACE** 這個變數，方便讀取：
 
 ```shell
 export WORKSPACE=~/Developer
@@ -24,15 +24,16 @@ c() {
 }
 ```
 
-為求快速，這裡把 zsh function 定義成左手輸入的單一字母，`c` 讓你能夠到達 `WORKSPACE` 底下任一目錄：
+為求快速，這裡把 function 定義成左手輸入的單一字母，**c** 讓你能夠到達 **WORKSPACE** 底下任一目錄：
 
 ```shell
+$ c  # 等於 cd ~/Developer
 $ c application-backoffice  # 等於 cd ~/Developer/application-backoffice
 ```
 
 然而，你該不會以為真的會有人想要手打這一長串又臭又長的專案名稱吧 🙄️
 
-## Step3: 利用 zsh completion 讓你擁有超能力
+## Step3: 自動補全
 
 ```shell
 # initialize autocomplete here, otherwise functions won't be loaded
@@ -51,16 +52,17 @@ _c() {
 compdef _c c
 ```
 
-- compdef: 對應補全 function
-- \_files: complete filepaths
-- -W: 指定路徑 prefix
+**compdef \_c c** 的意思是 \_c 定義 c 的補全行為，要放在檔案結尾
+
+- \_files: 補全檔案路徑
+- -W: 指定 補全檔案路徑的 prefix
 - -/: 只匹配 directory
 
 ## Demo Time:
 
 TODO: GIF Here
 
-## Reference & Further Reading
+## Reference
 
 - https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
 - http://zsh.sourceforge.net/Doc/Release/Completion-System.html

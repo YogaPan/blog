@@ -1,0 +1,12 @@
+---
+title: 'WIP: npm 版號'
+date: '2020-01-01'
+tag: 'npm'
+---
+
+## Semantic Version System
+
+- https://medium.com/hybrid-maker/%E4%BD%BF%E7%94%A8-npm-version-%E5%B9%AB%E4%BD%A0%E7%9A%84-js-%E7%A8%8B%E5%BC%8F%E6%89%93%E7%89%88%E8%99%9F-48234d0e8020
+- https://docs.npmjs.com/misc/semver
+- https://ithelp.ithome.com.tw/articles/10185297
+- https://poychang.github.io/package-json-version/
