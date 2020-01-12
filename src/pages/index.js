@@ -6,7 +6,6 @@ import SEO from '@components/seo'
 import Layout from '@components/Layout/Layout'
 
 const Article = styled.div`
-  transition: 0.5s;
   padding: 24px 0;
 `
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { useSpring, animated } from 'react-spring'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
+import { Box, Flex } from 'rebass'
 import Layout from '@components/Layout/Layout'
 import SEO from '@components/seo'
 
@@ -11,17 +12,7 @@ const Title = styled.h1`
   margin-bottom: 56px;
 `
 
-const PostContainer = styled.div`
-  width: 100%;
-`
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-`
-
-const AnimatedPostContainer = animated(PostContainer)
+const AnimatedPostContainer = animated(Box)
 
 export default function BlogPost({ data }) {
   const post = data.markdownRemark
@@ -35,9 +26,11 @@ export default function BlogPost({ data }) {
   return (
     <Layout>
       <SEO title={post.frontmatter.title} />
-      <AnimatedPostContainer style={props}>
+      <AnimatedPostContainer style={props} width="100%">
         <Title>{post.frontmatter.title}</Title>
-        <Content
+        <Flex
+          flexDirection="column"
+          alignItems="stretch"
           dangerouslySetInnerHTML={{
             __html: post.html,
           }}
