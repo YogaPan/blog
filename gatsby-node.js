@@ -4,7 +4,6 @@ const { createFilePath } = require('gatsby-source-filesystem')
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
   if (node.internal.type === 'Mdx') {
-    const fileNode = getNode(node.parent)
     const slug = createFilePath({ node, getNode, basePath: 'posts' })
     createNodeField({
       name: 'slug',

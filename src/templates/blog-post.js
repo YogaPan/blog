@@ -2,8 +2,9 @@ import React from 'react'
 import { useSpring, animated } from 'react-spring'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { MDXProvider } from '@mdx-js/react'
 import styled from 'styled-components'
-import { Box, Flex } from 'rebass'
+import { Box } from 'rebass'
 import Layout from '@components/Layout/Layout'
 import SEO from '@components/seo'
 
@@ -14,6 +15,10 @@ const Title = styled.h1`
 `
 
 const AnimatedPostContainer = animated(Box)
+
+const components = {
+  // TODO
+}
 
 export default function BlogPost({ data: { mdx } }) {
   const props = useSpring({
@@ -28,14 +33,9 @@ export default function BlogPost({ data: { mdx } }) {
       <SEO title={mdx.frontmatter.title} />
       <AnimatedPostContainer style={props} width="100%">
         <Title>{mdx.frontmatter.title}</Title>
-        <MDXRenderer>{mdx.body}</MDXRenderer>
-        {/* <Flex
-          flexDirection="column"
-          alignItems="stretch"
-          dangerouslySetInnerHTML={{
-            __html: post.html,
-          }}
-        /> */}
+        <MDXProvider components={components}>
+          <MDXRenderer>{mdx.body}</MDXRenderer>
+        </MDXProvider>
       </AnimatedPostContainer>
     </Layout>
   )
