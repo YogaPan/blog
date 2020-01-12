@@ -1,13 +1,13 @@
 import React from 'react'
 import { useSpring, animated } from 'react-spring'
-import styled from 'styled-components'
 import { Link, graphql } from 'gatsby'
+import { Box } from 'rebass'
+import styled from 'styled-components'
+import useFadeIn from '@hooks/useFadeIn'
 import SEO from '@components/seo'
 import Layout from '@components/Layout/Layout'
 
-const Article = styled.div`
-  padding: 24px 0;
-`
+const AnimatedBox = animated(Box)
 
 const ArticleTitle = styled(Link)`
   display: block;
@@ -23,34 +23,29 @@ const ArticleTitle = styled(Link)`
   }
 `
 
-export default function IndexPage({ data }) {
-  const props = useSpring({
-    config: { duration: 200 },
-    opacity: 1,
-    transform: 'translateY(0)',
-    from: { opacity: 0, transform: 'translateY(10px)' },
-  })
+const utils = {
+  isDone: ({ node }) => !/^WIP:/.test(node.frontmatter.title),
+  renderArticle: ({ node }) => (
+    <Box key={node.id} py={24}>
+      <ArticleTitle to={node.fields.slug}>
+        {node.frontmatter.title}
+      </ArticleTitle>
+      <p>{node.excerpt}</p>
+      <p style={{ marginBottom: 16 }}>{node.frontmatter.date}</p>
+      {/* <p style={{ marginBottom: 16 }}>{node.frontmatter.tags}</p> */}
+    </Box>
+  ),
+}
 
+export default function IndexPage({ data }) {
+  const props = useFadeIn
   return (
     <Layout>
       <SEO title="Home" />
       {/* <h1>{data.allMdx.totalCount} Posts</h1> */}
-      <animated.div style={props}>
-        {data.allMdx.edges
-          .filter(({ node }) => !/^WIP:/.test(node.frontmatter.title))
-          .map(({ node }) => {
-            return (
-              <Article key={node.id}>
-                <ArticleTitle to={node.fields.slug}>
-                  {node.frontmatter.title}
-                </ArticleTitle>
-                <p>{node.excerpt}</p>
-                <p style={{ marginBottom: 16 }}>{node.frontmatter.date}</p>
-                {/* <p style={{ marginBottom: 16 }}>{node.frontmatter.tags}</p> */}
-              </Article>
-            )
-          })}
-      </animated.div>
+      <AnimatedBox style={props}>
+        {data.allMdx.edges.filter(utils.isDone).map(utils.renderArticle)}
+      </AnimatedBox>
     </Layout>
   )
 }

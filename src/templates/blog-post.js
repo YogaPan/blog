@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSpring, animated } from 'react-spring'
+import { animated } from 'react-spring'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import { Box } from 'rebass'
 import Layout from '@components/Layout/Layout'
 import SEO from '@components/seo'
+import useFadeIn from '@hooks/useFadeIn'
 
 const Title = styled.h1`
   text-align: center;
@@ -14,29 +15,23 @@ const Title = styled.h1`
   margin-bottom: 56px;
 `
 
-const AnimatedPostContainer = animated(Box)
+const AnimatedBox = animated(Box)
 
 const components = {
   // TODO
 }
 
 export default function BlogPost({ data: { mdx } }) {
-  const props = useSpring({
-    config: { duration: 200 },
-    from: { opacity: 0, transform: 'translateY(10px)' },
-    opacity: 1,
-    transform: 'translateY(0)',
-  })
-
+  const props = useFadeIn()
   return (
     <Layout>
       <SEO title={mdx.frontmatter.title} />
-      <AnimatedPostContainer style={props} width="100%">
+      <AnimatedBox style={props} width="100%">
         <Title>{mdx.frontmatter.title}</Title>
         <MDXProvider components={components}>
           <MDXRenderer>{mdx.body}</MDXRenderer>
         </MDXProvider>
-      </AnimatedPostContainer>
+      </AnimatedBox>
     </Layout>
   )
 }
