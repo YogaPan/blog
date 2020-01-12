@@ -34,9 +34,9 @@ export default function IndexPage({ data }) {
   return (
     <Layout>
       <SEO title="Home" />
-      {/* <h1>{data.allMarkdownRemark.totalCount} Posts</h1> */}
+      {/* <h1>{data.allMdx.totalCount} Posts</h1> */}
       <animated.div style={props}>
-        {data.allMarkdownRemark.edges
+        {data.allMdx.edges
           .filter(({ node }) => !/^WIP:/.test(node.frontmatter.title))
           .map(({ node }) => {
             return (
@@ -57,7 +57,7 @@ export default function IndexPage({ data }) {
 
 export const query = graphql`
   query {
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
       totalCount
       edges {
         node {
