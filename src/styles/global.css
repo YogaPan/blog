@@ -76,6 +76,10 @@ html[data-theme='dark']::-webkit-scrollbar-thumb {
   --transition-duration: 0s;
 } */
 
+body {
+  overflow: hidden;
+}
+
 h1,
 h2,
 h3,
