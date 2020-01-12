@@ -1,26 +1,12 @@
+import { ThemeProvider } from 'emotion-theming'
 import React from 'react'
-import styled from 'styled-components'
 import { node } from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
 import Header from './Header'
 import Footer from './Footer'
 import FloatingButton from './FloatingButton'
-
-const LayoutContainer = styled.div`
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-
-const Main = styled.div`
-  margin: 0 auto;
-  max-width: 840px;
-  padding: 0px 1.0875rem 1.45rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-`
+import { Flex } from 'rebass'
+import theme from '@config/theme'
 
 export default function Layout({ children }) {
   const data = useStaticQuery(graphql`
@@ -34,12 +20,16 @@ export default function Layout({ children }) {
   `)
 
   return (
-    <LayoutContainer>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <Main>{children}</Main>
-      <Footer />
-      <FloatingButton />
-    </LayoutContainer>
+    <ThemeProvider theme={theme}>
+      <Flex flexDirection="column" alignItems="center" minHeight="100vh">
+        <Header siteTitle={data.site.siteMetadata.title} />
+        <Flex flexDirection="column" flex="1" maxWidth={840}>
+          {children}
+        </Flex>
+        <Footer />
+        <FloatingButton />
+      </Flex>
+    </ThemeProvider>
   )
 }
 
