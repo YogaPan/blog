@@ -1,7 +1,7 @@
 import React from 'react'
 import { Flex } from 'rebass'
 import Layout from '@components/Layout/Layout'
-import SEO from '@components/seo'
+import SEO from '@components/Seo'
 
 const NotFoundPage = () => (
   <Layout>
