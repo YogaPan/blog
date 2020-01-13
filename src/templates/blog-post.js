@@ -6,7 +6,7 @@ import { MDXProvider } from '@mdx-js/react'
 import styled from 'styled-components'
 import { Box } from 'rebass'
 import Layout from '@components/Layout/Layout'
-import SEO from '@components/seo'
+import SEO from '@components/Seo'
 import useFadeIn from '@hooks/useFadeIn'
 
 const Title = styled.h1`

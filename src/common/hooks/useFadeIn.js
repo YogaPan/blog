@@ -1,3 +1,5 @@
+import { useSpring } from 'react-spring'
+
 export default function() {
   return useSpring({
     config: { duration: 200 },

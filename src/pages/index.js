@@ -4,7 +4,7 @@ import { Link, graphql } from 'gatsby'
 import { Box } from 'rebass'
 import styled from 'styled-components'
 import useFadeIn from '@hooks/useFadeIn'
-import SEO from '@components/seo'
+import SEO from '@components/Seo'
 import Layout from '@components/Layout/Layout'
 
 const AnimatedBox = animated(Box)
