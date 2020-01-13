@@ -80,6 +80,19 @@ function SEO({ description, lang, meta, title }) {
       ].concat(meta)}
     >
       <html data-theme={theme} data-preload={preload} lang={lang} />
+      <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=UA-156129570-1"
+      ></script>
+      <script>
+        {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-156129570-1');
+        `}
+      </script>
     </Helmet>
   )
 }
