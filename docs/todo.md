@@ -5,11 +5,11 @@
 - [ ] Favicon
 - [x] webpack resolve alias
 - [ ] Performance: useMemo/React.memo
-- [ ] Mobile View Port
+- [x] Mobile View Port
 - [ ] Animated Component Refactor
 - [ ] React Highlight
 - [ ] SEO
-- [ ] GA
+- [x] GA
 - [ ] Refine color variables
 - [ ] Refine Icon Size, Font Size
 - [ ] Article Pagination
