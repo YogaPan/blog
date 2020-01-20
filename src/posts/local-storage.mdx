@@ -65,7 +65,7 @@ JSON.parse(localStorage.getItem('person')) // {name: "Galtz", age: 23}
 
 ## Life Cycle
 
-不會隨著頁面重整或是瀏覽器關閉而丟失。除非呼叫 _localStorage.removeItem_ 或是 _localStorage.clear_，否則永遠存在。
+不會隨著頁面重整或是瀏覽器關閉而丟失。除非呼叫 **localStorage.removeItem** 或是 **localStorage.clear**，否則永遠存在。
 
 ## Session Storage
 
@@ -113,8 +113,37 @@ const Demo = () => {
 }
 ```
 
+## LocalForage
+
+破萬星的 Library，API 幾乎和 LocalStorage 一模一樣：
+
+```js
+// Set a value with localStorage:
+localStorage.setItem('key', JSON.stringify('value'))
+doSomethingElse()
+
+// The same code with localForage:
+localforage.setItem('key', 'value').then(doSomethingElse)
+
+// localForage also support callbacks:
+localforage.setItem('key', 'value', doSomethingElse)
+```
+
+簡單的來說 [LocalForage](https://github.com/localForage/localForage) 做的是以下事情:
+
+1. 如果 Browser 支援 [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Using_IndexedDB)，就優先使用 IndexedDB 來儲存
+2. 如果不支援，則使用 WebSQL
+3. 如果連 WebSQL 都不支援，才會使用 LocaloStorage 來儲存資料。
+
+LocalForage 解決了以下幾個問題:
+
+1. 因為使用 IndexedDB ，效能較好、儲存大小幾乎沒有限制，且可以非同步操作
+2. API 幾乎和 LocalStorage 一模一樣，解決 IndexedDB 不好上手的困擾
+3. 自動進行 **JSON.parse()** 和 **JSON.stringify()**
+
 ## 參考資料
 
 - [Using the Web Storage API - MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API)
 - [[第七週] 瀏覽器資料儲存 - Cookie、LocalStorage、SessionStorage](https://yakimhsu.com/project/project_w7_storage.html)
 - [Cookie、LocalStorage、SessionStorage 差異 - Peggy Chan - Medium](https://medium.com/@bebebobohaha/cookie-localstorage-sessionstorage-%E5%B7%AE%E7%95%B0-9e1d5df3dd7f)
+- [localForage/localForage: 💾 Offline storage, improved. Wraps IndexedDB, WebSQL, or localStorage using a simple but powerful API.](https://github.com/localForage/localForage)
