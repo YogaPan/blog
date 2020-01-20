@@ -91,6 +91,16 @@ const max = (...args) =>
   args.reduce((max, value) => (value > max ? value : max))
 ```
 
+將所有參數向下傳遞：
+
+```js
+const foo = (...args) {
+  // 略
+  bar(...args)
+  // 略
+}
+```
+
 ## 參考資料
 
 - [The arguments object - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments)
