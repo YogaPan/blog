@@ -1,5 +1,128 @@
 ---
 title: 'History API 筆記'
 date: '2020-01-02'
-tag: 'javascript'
+tag: 'js, WebAPIS'
 ---
+
+## 瀏覽器的基本操作
+
+![browser action](../images/history-api/001.png)
+
+### Methods:
+
+```js
+history.back() // 回上一頁
+history.forward() // 下一頁
+widnow.history.go(0) // 重新整理
+history.go() // same as widnow.history.go(0)
+history.go(-1) // same as history.back()
+history.go(2) // 回上兩頁
+```
+
+### Properties:
+
+- [history.length](https://developer.mozilla.org/en-US/docs/Web/API/History/length): 歷史紀錄中的頁面總數
+- [history.scrollRestoration](https://developer.mozilla.org/en-US/docs/Web/API/History/scrollRestoration):
+  - **auto**: The location on the page to which the user has scrolled will be restored.
+  - **manual**: The location on the page is not restored. The user will have to scroll to the location manually.
+- [history.state](https://developer.mozilla.org/en-US/docs/Web/API/History/state): 下面會接著提到
+
+除了以上幾個基本的操作方式以外，html5 還新增了 `pushState/replaceState`，可以在不刷新頁面的情況下動態改變瀏覽器 URL 的顯示。
+
+## pushState
+
+添加一條歷史紀錄，改變瀏覽器 URL 顯示且不刷新頁面
+
+API: **[history.pushState(state, title, url)](https://developer.mozilla.org/en-US/docs/Web/API/History/pushState)**
+
+- **state**: 儲存狀態，當瀏覽器 url 改變時，可利用 **window.onstatepop** 捕捉到。
+- **title**: 對目前大多數的瀏覽且不刷器沒有任何作用。通常帶入 null 即可。
+- **url**: 指定瀏覽器的 URL 顯示
+
+### Case 1: Relative Path
+
+當代入 URL 的是相對路徑時，會直接附加在當前 URL 後。
+
+```js
+// Current URL: https://www.example.com/blog/1
+history.pushState(null, null, '123')
+// Current URL: https://www.example.com/blog/123
+history.pushState(null, null, '#one')
+// Current URL: https://www.example.com/blog/123#one
+```
+
+### Case 2: Absolute Path
+
+當代入的 URL 是絕對路徑時，URL 會整個替換換掉，但必須要和當前 URL 同 origin，不能換成其他網域的網址。
+
+```js
+// current URL: https://www.example.com/blog/1
+history.pushState(null, null, '/123')
+// current URL: https://www.example.com/123
+history.pushState(null, null, 'https://www.example.com/456')
+// current URL: https://www.example.com/456
+history.pushState(null, null, 'https://www.google.com') // DOMException
+```
+
+### Case 3: Null Path
+
+網址不變，但是會新增一筆歷史紀錄。
+
+```js
+// current URL: https://www.example.com/blog/1
+history.pushState(null, null, null)
+// current URL: https://www.example.com/blog/1
+```
+
+### Case 4: Push state
+
+```js
+history.state // null
+history.pushState({ foo: 'bar' }, null, null)
+history.state // { foo: 'bar'}
+```
+
+## replaceState
+
+覆蓋當前歷史紀錄，改變瀏覽器 URL 顯示且不刷新頁面
+
+API: **[history.replaceState(state, title, url)](https://developer.mozilla.org/en-US/docs/Web/API/History/replaceState)**
+
+參數同 pushState
+
+## onstatepop event
+
+[MDN 的解釋：](https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onpopstate)A popstate event is dispatched to the window each time the active history entry changes between two history entries for the same document
+
+同一份 Document 進行瀏覽器操作：如 history.back() 或是點擊上一頁時觸發，但 **pushState/replaceState** 時不會觸發 onstatepop event.
+
+Usage Example:
+
+```js
+window.onpopstate = function(event) {
+  alert(
+    'location: ' + document.location + ', state: ' + JSON.stringify(event.state)
+  )
+}
+
+history.pushState({ page: 1 }, 'title 1', '?page=1')
+history.pushState({ page: 2 }, 'title 2', '?page=2')
+history.replaceState({ page: 3 }, 'title 3', '?page=3')
+history.back() // alerts "location: http://example.com/example.html?page=1, state: {"page":1}"
+history.back() // alerts "location: http://example.com/example.html, state: null
+history.go(2) // alerts "location: http://example.com/example.html?page=3, state: {"page":3}
+```
+
+See Also: [WindowEventHandlers.onhashchange - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onhashchange)
+
+## 參考資料
+
+- [History API - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/History_API)
+- [HTML5 : History API - 掘金](https://juejin.im/post/5aebc4a26fb9a07acc11924d)
+- [[WebAPIs] 瀏覽記錄 Browser History API | PJCHENder 私房菜](https://pjchender.github.io/2018/08/01/webapis-%E7%80%8F%E8%A6%BD%E8%A8%98%E9%8C%84-browser-history-api/)
+- [PJAX 深入淺出 - Kingsley Zheng - Medium](https://medium.com/@kingsleyzheng/pjax-%E6%B7%B1%E5%85%A5%E6%B7%BA%E5%87%BA-ad051295b2a6)
+
+## 延伸閱讀
+
+- [Location -sio Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Location)
+- [ReactTraining/history: Manage sesn history with JavaScript](https://github.com/ReactTraining/history)
