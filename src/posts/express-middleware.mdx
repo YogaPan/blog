@@ -1,0 +1,317 @@
+---
+title: 'Express Middleware'
+date: '2020-01-02'
+tags: 'node.js js express backend'
+---
+
+## Middleware
+
+最近開始工作開始接觸到後端開發。Express 這個基於 Node.js 的框架前端工程師也可以快速上手進行開發。Express 最重要的概念便是 middleware 了，以下紀錄幾個常見的使用情境：
+
+### Case 1:
+
+基本使用情境
+
+```js
+app.use((req, res, next) => {
+  console.log('middleware 1 start')
+  next()
+  console.log('middleware 1 end')
+})
+
+app.get(
+  '/',
+  (req, res, next) => {
+    console.log('middleware 2 start')
+    next()
+    console.log('middleware 2 end')
+  },
+  (req, res, next) => {
+    console.log('middleware 3 start')
+    next()
+    console.log('middleware 3 end')
+  }
+)
+
+app.get('/', (req, res) => {
+  console.log('response')
+  res.send('hello!')
+})
+```
+
+server output:
+
+```sh
+middleware 1 start
+middleware 2 start
+middleware 3 start
+response
+middleware 3 end
+middleware 2 end
+middleware 1 end
+```
+
+### Case 2:
+
+沒有呼叫 **next** 便不會進入下一個 middleware
+
+```js
+app.get(
+  '/',
+  (req, res, next) => {
+    console.log('middleware 1 start')
+    res.send('hello from middleware 1')
+    console.log('middleware 1 end')
+  },
+  (req, res) => {
+    console.log('middleware 2 start')
+    res.send('hello from middleware 2')
+    console.log('middleware 2 end')
+  }
+)
+```
+
+- server output:
+
+```
+middleware 1 start
+middleware 1 end
+```
+
+- client: `hello from middleware 1`
+
+### Case 3:
+
+若無呼叫 **res.send**，client 端無法收到回應。
+
+```js
+app.get(
+  '/',
+  (req, res, next) => {
+    console.log('middleware 1 start')
+    console.log('middleware 1 end')
+  },
+  (req, res) => {
+    console.log('response')
+    res.send('hello from middleware 2')
+  }
+)
+```
+
+Server Output:
+
+```
+middleware 1 start
+middleware 1 end
+```
+
+Client 無法得到回應
+
+### Case 4:
+
+```js
+app.get(
+  '/',
+  (req, res, next) => {
+    console.log('middleware 1 start')
+    next()
+    res.send('hello from middleware 1')
+    console.log('middleware 1 end')
+  },
+  (req, res) => {
+    console.log('middleware 2 start')
+    res.send('hello from middleware 2')
+    console.log('middleware 2 end')
+  }
+)
+```
+
+server output:
+
+```
+middleware 1 start
+middleware 2 start
+middleware 2 end
+Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+```
+
+client: `hello from middleware 2`
+
+### Case 5:
+
+```js
+app.get(
+  '/',
+  (req, res, next) => {
+    console.log('middleware 1 start')
+    res.send('hello from middleware 1')
+    next()
+    console.log('middleware 1 end')
+  },
+  (req, res) => {
+    console.log('middleware 2 start')
+    res.send('hello from middleware 2')
+    console.log('middleware 2 end')
+  }
+)
+```
+
+server output:
+
+```
+middleware 1 start
+middleware 2 start
+middleware 1 end
+Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+```
+
+client: `hello from middleware 1`
+
+## Error Handling
+
+一定要帶入四個參數，且放在所有 middleware 的最後面
+
+```js
+app.use((err, req, res, next) => {
+  console.error(err)
+  res.status(500).send('Something broke!')
+})
+```
+
+### Case 1:
+
+Next 帶入參數
+
+```js
+app.get(
+  '/',
+  (req, res, next) => {
+    console.log('middleware 1 start')
+    next(new Error('my error'))
+    console.log('middleware 1 end')
+  },
+  (req, res) => {
+    console.log('middleware 2 start')
+    res.send('hello from middleware 2')
+    console.log('middleware 2 end')
+  }
+)
+
+app.use((err, req, res, next) => {
+  console.error(err) // Error: my error
+  res.status(500).send('Something broke!')
+})
+```
+
+server output
+
+```sh
+middleware 1 start
+Error: my error
+```
+
+### Case 2:
+
+Throw new Error
+
+```js
+app.get(
+  '/',
+  (req, res, next) => {
+    console.log('middleware 1 start')
+    throw new Error('my error')
+    console.log('middleware 1 end')
+  },
+  (req, res) => {
+    console.log('middleware 2 start')
+    res.send('hello from middleware 2')
+    console.log('middleware 2 end')
+  }
+)
+
+app.use((err, req, res, next) => {
+  console.error(err) // Error: my error
+  res.status(500).send('Something broke!')
+})
+```
+
+server output
+
+```sh
+middleware 1 start
+Error: my error
+```
+
+## Async Error Handling
+
+### Case 1
+
+以下情況並不會被 Handle
+
+```js
+app.get('/', async (req, res, next) => {
+  await Promise.reject(new Error('my error''))
+})
+
+app.use((err, req, res, next) => {
+  console.error(err)
+  res.status(500).send('Something broke!')
+})
+```
+
+server output:
+
+```
+UnhandledPromiseRejectionWarning: Error: 123
+```
+
+### Case 2
+
+透過 try catch 捕捉 error ，並透過 next 拋出 error 給我們自定義的 error handler
+
+```js
+app.get('/', async (req, res, next) => {
+  try {
+    await Promise.reject('my error')
+  } catch (err) {
+    next(err)
+  }
+})
+
+app.use((err, req, res, next) => {
+  console.error(err) // Error: my error
+  res.status(500).send('Something broke!')
+})
+```
+
+### Case 3
+
+經過包裝與簡化，不需重複寫出 try catch 的程式碼
+
+```js
+const asyncHandler = fn => (req, res, next) =>
+  Promise.resolve(fn(req, res, next)).catch(next)
+
+app.get(
+  '/',
+  asyncHandler(async (req, res, next) => {
+    // 略
+  })
+)
+
+app.get(
+  '/posts',
+  asyncHandler(async (req, res, next) => {
+    // 略
+  })
+)
+
+app.use((err, req, res, next) => {
+  console.error(err) // Error: my error
+  res.status(500).send('Something broke!')
+})
+```
+
+參考資料：
+
+- [Using async/await to write cleaner route handlers - ITNEXT](https://itnext.io/using-async-await-to-write-cleaner-route-handlers-7fc1d91b220b)
