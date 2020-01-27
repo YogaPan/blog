@@ -29,6 +29,10 @@
 - [x] Theme Switch Icon: Solar/Lunar
 - [x] Theme Toggle Hooks
 
+## Sidebar
+
+- [ ] 文章目錄
+
 ## Footer
 
 - [ ] Article Suggestion List
