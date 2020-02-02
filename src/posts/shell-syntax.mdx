@@ -1,0 +1,156 @@
+---
+title: 'Shell 語法備忘錄'
+date: '2020-01-01'
+tags: 'shell'
+---
+
+## 1.1 Basic syntax
+
+In the head of shell script file, you should specify which "shell"
+you want to use:
+
+```shell
+#!/bin/bash
+```
+
+Dollar sign paremeter:
+
+- **\$\***: Complete set of positional parameters as a single string.
+- **\$#**: Number of arguments.
+- **\$0**: Script name.
+- **\$1**: Fisrt parameter.
+
+- **\$?**: Exit status of last command.
+- **\$\$**: Pid of current shell
+- **\$!**: Pid of last background job.
+
+exit:
+
+```
+exit   # Default value is 0.
+exit 0 # Everything is nice.
+exit 1 # Something goes wrong.
+```
+
+Condition:
+
+```shell
+cmd1 && cmd2 # cmd2 execute if cmd1 success.
+cmd1 || cmd2 # cmd2 execute if cmd1 fail.
+
+if command is successful; then
+  # do something
+elif command is successful; then
+  # do something
+else
+  # do something
+fi
+
+case expression in
+  pattern1) command ;;
+  pattern2) command ;;
+         *) default command
+esac
+```
+
+Loop
+
+```shell
+for variables in list; do
+  # do somehing
+done
+
+for (( i=1; i<=${nu}; i=i+1  )); do
+  # do somehing
+done
+
+while condition is true; do
+  # do somehing
+done
+```
+
+"test" can used to check number, string and file.
+
+```shell
+test $x -eq $y
+```
+
+If x equals to y, then \$? will assign to 0, else 1.
+Or you can use squal brackets to wrap:
+
+```shell
+[ $x -eq $y  ]
+```
+
+Numercial Comparison:
+
+- -eq: Equal to.
+- -ne: Not equal to.
+- -gt: Greater than.
+- -ge: Greater than or equal.
+- -lt: Less than.
+- -le: Less than or equal to.
+
+String Comparison:
+
+```shell
+s1  = s2  # String s1 = s2.
+s1 != s2  #  String s1 is not equal to s2.
+-n stg    # String str is not a null string.
+-z stg    # String stg is a null string.
+stg       # String stg is assigned and not null.
+```
+
+File Attributes:
+
+- **-f file**: file exists and is regular file.
+- **-r file**: file exists and is readable.
+- **-w file**: file exists and is writable.
+- **-x file**: file exists and is executable.
+- **-d file**: file exists and is a directory.
+- **-s file**: file exists and has a size greater than zero.
+- **-u file**: file exists and has SUID bit set.
+- **-k file**: file exists and has sticky bit set.
+
+Function:
+
+```
+function fname() {
+  command1
+  command2
+}
+```
+
+Array:
+
+```
+name=(yoga shuo ha47 caspar)
+```
+
+## 1.2 Some Technique
+
+Get user input:
+
+```shell
+read a
+```
+
+Calculate:
+
+```shell
+x=6; y=2
+z=`expr $x + $y`;
+```
+
+## 1.3 Link
+
+- [the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line)
+- [The Unix Shell's Humble If](https://thoughtbot.com/blog/the-unix-shells-humble-if)
+- http://linux.vbird.org/linux_basic/0340bashshell-scripts.php
+- https://sites.google.com/site/tiger2000/
+
+## Tools
+
+- [robbyrussell/oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+- [TLDR pages](http://tldr-pages.github.io/)
+- [explainshell](http://explainshell.com/)
