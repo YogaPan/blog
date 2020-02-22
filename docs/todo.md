@@ -21,6 +21,7 @@
 
 - [ ] About Me
 - [ ] 404 page web animation
+- [ ] Cheatsheet
 
 ## Header
 
