@@ -127,7 +127,9 @@ Cache-Control: no-store
 **no-cache**: 每次都會發送 Request 去確認檔案是否更動
 **no-store**: 完全不使用快取
 
-## 檔名 Hash
+## Long Term Cache
+
+參考：https://developers.google.com/web/fundamentals/performance/webpack/use-long-term-caching
 
 Q: 有沒有辦法能夠甚至連請求都不發，但是卻能夠知道檔案已經更動了呢？
 
@@ -185,15 +187,15 @@ Cache-Control: max-age=31536000。
 
 - From Memory Cache vs From Disk Cache
 - Cache Control Default Value
+- Pragma
+- BF Cache
 
 ## 參考資料
 
 - [HTTP/1.1: Header Field Definitions](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.1)
 - [Cache-Control - HTTP | MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control)
 - [HTTP Caching  |  Web Fundamentals  |  Google Developers](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=en)
+- [Make use of long-term caching  |  Web Fundamentals  |  Google Developers](https://developers.google.com/web/fundamentals/performance/webpack/use-long-term-caching)
 - [循序漸進理解 HTTP Cache 機制](https://blog.techbridge.cc/2017/06/17/cache-introduction/)
 - [大公司里怎样开发和部署前端代码？ · Issue #6 · fouber/blog](https://github.com/fouber/blog/issues/6)
-
-```
-
-```
+- [新手坑：讓人又愛又恨的 HTTP Caching - Frochu - Medium](https://medium.com/frochu/http-caching-3382037ab06f)
