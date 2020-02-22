@@ -53,7 +53,7 @@ middleware 1 end
 
 ### Case 2:
 
-沒有呼叫 **next** 便不會進入下一個 middleware
+如果沒有呼叫 **next**，代表不想把控制權轉移給下個 middleware。
 
 ```js
 app.get(
