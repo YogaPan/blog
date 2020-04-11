@@ -5,8 +5,11 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@emotion/core": "^10.0.27",
+    "@emotion/styled": "^10.0.27",
     "@mdx-js/mdx": "^1.5.3",
     "@mdx-js/react": "^1.5.3",
+    "@styled-system/theme-get": "^5.1.2",
     "babel-plugin-styled-components": "^1.10.6",
     "emotion-theming": "^10.0.27",
     "gatsby": "^2.18.17",
@@ -50,7 +53,8 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \""
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \"",
+    "clear": "rm -rf node_modules public .cache "
   },
   "repository": {
     "type": "git",
