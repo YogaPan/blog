@@ -14,17 +14,18 @@ tags: 'http'
 
 ## HTTP Header
 
-[Content-Encoding](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding) 表頭欄位，指出應用於表示的編碼方式，以指示 (訊息) 接收方，使用相應的解碼機制來獲取資料，主要用於壓縮資料，以增進傳輸效率。
+在開始看 http header 之前，先來複習一下主動協商 (Proactive Negotiation)：
 
-參考 MDN: TODO
+User Agent 發送 `期望或偏好的` representation，使 Server 根據該偏好資訊，使用適當的演算法選擇 representation。
+但 server 仍可能回應非預期的 representation, 或是 [406 Not acceptable](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/406)、[415 Unsupported Media Type](https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Status/415)。
 
-Request Header Example
+[Accept-Encoding](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Encoding): `期望` server 使用的編碼方式。
 
 ```http
 Accept-Encoding: gzip, deflate, br
 ```
 
-Response Header Example
+[Content-Encoding](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding): 指出應用於表示的編碼方式，以指示瀏覽器使用相應的解碼機制來獲取資料。
 
 ```http
 Content-Encoding: gzip
@@ -38,9 +39,7 @@ Content-Encoding: gzip
 
 ## Expressd Middleware
 
-透過 [compression middleware](https://github.com/expressjs/compression)，可以對 response 進行 `deflate` 或 `gzip` 壓縮。
-
-Example
+透過 [compression middleware](https://github.com/expressjs/compression)，可以對 response 進行 `deflate` 或 `gzip` 壓縮：
 
 ```js
 const express = require('express')
@@ -51,21 +50,12 @@ const app = express()
 app.use(compression())
 
 app.get('/', (req, res) => {
-  res.send('Hello World')
+  // ...
 })
 ```
-
-壓縮前：
-
-TODO: Image Here...
-
-壓縮後：
-
-TODO: image here...
 
 ## 參考資料
 
 - [Optimizing Encoding and Transfer Size of Text-Based Assets](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer)
+- [HTTP 內容協商 (Content Negotiation) - NotFalse 技術客](https://notfalse.net/41/http-content-negotiation#-agent-driven)
 - [HTTP 內容類型 (Content-Type) & 內容編碼 (Content-Encoding) - NotFalse 技術客](https://notfalse.net/40/http-representation?subscribe=success#blog_subscription-9)
-
-- https://ihower.tw/blog/archives/8489
