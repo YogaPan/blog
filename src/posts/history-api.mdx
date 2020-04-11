@@ -13,8 +13,8 @@ tag: 'js, WebAPIS'
 ```js
 history.back() // 回上一頁
 history.forward() // 下一頁
-widnow.history.go(0) // 重新整理
-history.go() // same as widnow.history.go(0)
+history.go(0) // 重新整理
+history.go() // same as history.go(0)
 history.go(-1) // same as history.back()
 history.go(2) // 回上兩頁
 ```
@@ -25,7 +25,7 @@ history.go(2) // 回上兩頁
 - [history.scrollRestoration](https://developer.mozilla.org/en-US/docs/Web/API/History/scrollRestoration):
   - **auto**: The location on the page to which the user has scrolled will be restored.
   - **manual**: The location on the page is not restored. The user will have to scroll to the location manually.
-- [history.state](https://developer.mozilla.org/en-US/docs/Web/API/History/state): 下面會接著提到
+- [history.state](https://developer.mozilla.org/en-US/docs/Web/API/History/state): The History.state property returns a value representing the state at the top of the history stack
 
 除了以上幾個基本的操作方式以外，html5 還新增了 `pushState/replaceState`，可以在不刷新頁面的情況下動態改變瀏覽器 URL 的顯示。
 
@@ -36,7 +36,7 @@ history.go(2) // 回上兩頁
 API: **[history.pushState(state, title, url)](https://developer.mozilla.org/en-US/docs/Web/API/History/pushState)**
 
 - **state**: 儲存狀態，當瀏覽器 url 改變時，可利用 **window.onstatepop** 捕捉到。
-- **title**: 對目前大多數的瀏覽且不刷器沒有任何作用。通常帶入 null 即可。
+- **title**: 對目前大多數的瀏覽器沒有任何作用。通常帶入 null 即可。
 - **url**: 指定瀏覽器的 URL 顯示
 
 ### Case 1: Relative Path
