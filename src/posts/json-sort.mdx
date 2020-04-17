@@ -1,0 +1,90 @@
+---
+title: '能否對 Javascript Object 做排序？'
+date: '2020-04-10'
+tags: 'js'
+---
+
+各位小夥伴們都知道，陣列可以做排序:
+
+```js
+const arr = [5, 1, 11]
+arr.sort() // [1, 5, 11]
+```
+
+那麼 Object 能不能跟夠做排序呢？先說答案：**在 Key 都是字串的情況下可以**。
+
+參考 Stackoverflow 上的這篇解答: [sorting - Sort JavaScript object by key - Stack Overflow](https://stackoverflow.com/questions/5467129/sort-javascript-object-by-key)
+
+All methods that iterate over property keys do so in the same order:
+
+- First all Array indices, sorted numerically.
+- Then all string keys (that are not indices), in the order in which they were created.
+- Then all symbols, in the order in which they were created.
+
+所以我們只能夠排序 string key 和 symbol Key，而數字必定由小大排序，且數字 key 必定在 string key 前。以下舉例：
+
+```js
+const obj1 = { 2: 2, a: 'a', 1: 1, b: 'b' }
+Object.entries(obj1).forEach(e => console.log(e))
+/*
+Output:
+["1", 1]
+["2", 2]
+["a", "a"]
+["b", "b"]
+*/
+
+const obj2 = { [Symbol('s')]: 's', 2: 2, b: 'b', 1: 1, a: 'a' }
+Object.entries(obj2).forEach(e => console.log(e))
+/*
+Output:
+["1", 1]
+["2", 2]
+["b", "b"]
+["a", "a"]
+*/
+
+const obj3 = {}
+obj3[2] = 2
+obj3.b = 'b'
+obj3[1] = 1
+obj3.a = 'a'
+Object.entries(obj3).forEach(e => console.log(e))
+/*
+Output:
+["1", 1]
+["2", 2]
+["b", "b"]
+["a", "a"]
+*/
+```
+
+所以如果都是 string key 的話可以用以下兩種方式排序：
+
+1. 利用 key 做排序
+
+```js
+const obj = { b: 'b', a: 'a' }
+const sortedObj = Object.keys(obj)
+  .sort()
+  .reduce((dict, key) => {
+    dict[key] = obj[key]
+    return dict
+  }, {})
+```
+
+2. 利用 value 做排序:
+
+```js
+const obj = { b: 2, c: 12, a: 1 }
+const sortedObj = Object.entries(obj)
+  .sort((a, b) => a[1] - b[1])
+  .reduce((dict, [k, v]) => {
+    dict[k] = v
+    return dict
+  }, {})
+```
+
+## Reference
+
+- [sorting - Sort JavaScript object by key - Stack Overflow](https://stackoverflow.com/questions/5467129/sort-javascript-object-by-key)
