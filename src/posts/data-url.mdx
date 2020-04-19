@@ -100,74 +100,39 @@ $ base64 test.png
 
 ### URL
 
-```js
-const toDataURL = url =>
-  fetch(url)
-    .then(response => response.blob())
-    .then(
-      blob =>
-        new Promise((resolve, reject) => {
-          const reader = new FileReader()
-          reader.onloadend = () => resolve(reader.result)
-          reader.onerror = reject
-          reader.readAsDataURL(blob)
-        })
-    )
+直接把網路上的圖片轉成 data url
 
-toDataURL(
-  'https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0'
-).then(dataUrl => {
-  console.log('RESULT:', dataUrl)
-})
-```
+<iframe
+  src="https://codesandbox.io/embed/busy-cookies-owl80?fontsize=14&hidenavigation=1&theme=dark"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="busy-cookies-owl80"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
 
 ### Canvas
 
-```js
-function toDataURL(src, callback, outputFormat) {
-  const img = new Image()
-  img.crossOrigin = 'Anonymous'
-  img.onload = function() {
-    const canvas = document.createElement('CANVAS')
-    const ctx = canvas.getContext('2d')
-    canvas.height = this.naturalHeight
-    canvas.width = this.naturalWidth
-    ctx.drawImage(this, 0, 0)
-    const dataURL = canvas.toDataURL(outputFormat)
-    callback(dataURL)
-  }
-  img.src = src
-  if (img.complete || img.complete === undefined) {
-    img.src =
-      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='
-    img.src = src
-  }
-}
+將 Canvas 轉成 data url 後下載下來
 
-toDataURL(
-  'https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0',
-  dataUrl => {
-    console.log('RESULT:', dataUrl)
-  }
-)
-```
+<iframe
+  src="https://codesandbox.io/embed/fancy-fog-5lu88?fontsize=14&hidenavigation=1&theme=dark"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="fancy-fog-5lu88"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
 
 ### Form
 
-```js
-function encodeImageFileAsURL(element) {
-  const file = element.files[0]
-  const reader = new FileReader()
-  reader.onloadend = () => {
-    console.log('RESULT', reader.result)
-  }
-  reader.readAsDataURL(file)
-}
-```
+Data url 有一個很實用的功能，就是作為上傳的預覽：
 
-```html
-<input type="file" onchange="encodeImageFileAsURL(this)" />
-```
+<iframe
+  src="https://codesandbox.io/embed/charming-noyce-q1tbg?fontsize=14&hidenavigation=1&theme=dark"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="charming-noyce-q1tbg"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
 
 參考資料：
 
@@ -188,3 +153,7 @@ function encodeImageFileAsURL(element) {
 - [Data URI 前端優化 - cubemail88 - Medium](https://medium.com/cubemail88/data-uri-%E5%89%8D%E7%AB%AF%E5%84%AA%E5%8C%96-d83f833e376d)
 - [使用 DATA URI 將圖片以 Base64 編碼並內崁至網頁中，加速載入速度 - G. T. Wang](https://blog.gtwang.org/web-development/minimizing-http-request-using-data-uri/)
 - [實戰 Webpack 的 file-loader 和 url-loader - 《Chris 技術筆記》](https://dwatow.github.io/2018/12-29-webpack/action-url-loader-file-loader/)
+
+```
+
+```
