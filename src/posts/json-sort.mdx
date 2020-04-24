@@ -85,6 +85,26 @@ const sortedObj = Object.entries(obj)
   }, {})
 ```
 
+## JSON.stringify
+
+`JSON.stringify` 的第二個參數可以傳入一個 Array，指定要輸出的 key。且輸出 key 的順序會依照 Array 的順序 （就算 key 是數字一樣可以排！）。
+
+```js
+const obj = { 2: 2, a: 'a', 1: 1, b: 'b' }
+Object.entries(obj).forEach(e => console.log(e))
+/*
+Output:
+["1", 1]
+["2", 2]
+["a", "a"]
+["b", "b"]
+*/
+
+JSON.stringify(obj, ['b', 'a', 2, 1])
+"{"b":"b","a":"a","2":2,"1":1}"
+```
+
 ## Reference
 
 - [sorting - Sort JavaScript object by key - Stack Overflow](https://stackoverflow.com/questions/5467129/sort-javascript-object-by-key)
+- [JSON.stringify() - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
