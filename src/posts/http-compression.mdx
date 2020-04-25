@@ -12,6 +12,14 @@ tags: 'http'
 - GZIP performs best on text-based assets: CSS, JavaScript, HTML.
 - All modern browsers support GZIP compression and will automatically request it.
 
+不過也不是說任何資源我都無腦亂壓一通，根據 [ASP.NET Core 中的回應壓縮 | Microsoft Docs](https://docs.microsoft.com/zh-tw/aspnet/core/performance/response-compression?view=aspnetcore-3.1)：
+
+You shouldn't compress natively compressed assets, such as PNG files.
+If you attempt to further compress a natively compressed response,
+any small additional reduction in size and transmission time will likely be overshadowed by the time it took to process the compression.
+Don't compress files smaller than about 150-1000 bytes (depending on the file's content and the efficiency of compression).
+The overhead of compressing small files may produce a compressed file larger than the uncompressed file.
+
 ## HTTP Header
 
 在開始看 http header 之前，先來複習一下主動協商 (Proactive Negotiation)：
@@ -47,11 +55,58 @@ const compression = require('compression')
 
 const app = express()
 
-app.use(compression())
+app.use(compression({ threshold: 1000 }) // 可以給定參數 `threshold`，預設為 1kb
 
 app.get('/', (req, res) => {
   // ...
 })
+```
+
+## Dotnet Core Middleware
+
+透過 [NuGet Gallery | Microsoft.AspNetCore.ResponseCompression 2.2.0](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/)，可以對 response 進行 `brotli` 或 `gzip` 壓縮。
+
+donet Core 3.0 開始預設使用 `Brotli` 演算法壓縮：
+
+```c#
+using Microsoft.AspNetCore.ResponseCompression;
+
+public class Startup
+{
+  public void ConfigureServices(IServiceCollection services)
+  {
+    services.AddResponseCompression();
+  }
+
+  public void Configure(IApplicationBuilder app)
+  {
+    app.UseResponseCompression();
+  }
+}
+```
+
+也可以修改設定，關閉 `Brotli`，改用 `Gzip`:
+
+```c#
+using Microsoft.AspNetCore.ResponseCompression;
+using static System.IO.Compression.CompressionLevel;
+
+public class Startup
+{
+  public void ConfigureServices(IServiceCollection services)
+  {
+    services.Configure<GzipCompressionProviderOptions>(options => options.Level = Optimal);
+    services.AddResponseCompression(options =>
+    {
+      options.Providers.Add<GzipCompressionProvider>();
+    });
+  }
+
+  public void Configure(IApplicationBuilder app)
+  {
+    app.UseResponseCompression();
+  }
+}
 ```
 
 ## 參考資料
@@ -59,3 +114,6 @@ app.get('/', (req, res) => {
 - [Optimizing Encoding and Transfer Size of Text-Based Assets](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer)
 - [HTTP 內容協商 (Content Negotiation) - NotFalse 技術客](https://notfalse.net/41/http-content-negotiation#-server-driven)
 - [HTTP 內容類型 (Content-Type) & 內容編碼 (Content-Encoding) - NotFalse 技術客](https://notfalse.net/40/http-representation?subscribe=success#blog_subscription-9)
+- [ASP.NET Core 中的回應壓縮 | Microsoft Docs](https://docs.microsoft.com/zh-tw/aspnet/core/performance/response-compression?view=aspnetcore-3.1)
+- [expressjs/compression: Node.js compression middleware](https://github.com/expressjs/compression)
+- [google/brotli: Brotli compression format](https://github.com/google/brotli)
