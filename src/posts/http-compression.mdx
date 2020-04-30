@@ -66,22 +66,22 @@ app.get('/', (req, res) => {
 
 透過 [NuGet Gallery | Microsoft.AspNetCore.ResponseCompression 2.2.0](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/)，可以對 response 進行 `brotli` 或 `gzip` 壓縮。
 
-donet Core 3.0 開始預設使用 `Brotli` 演算法壓縮：
+Donet Core 3.0 開始預設使用 `Brotli` 演算法壓縮：
 
 ```c#
 using Microsoft.AspNetCore.ResponseCompression;
 
 public class Startup
 {
-  public void ConfigureServices(IServiceCollection services)
-  {
-    services.AddResponseCompression();
-  }
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddResponseCompression();
+    }
 
-  public void Configure(IApplicationBuilder app)
-  {
-    app.UseResponseCompression();
-  }
+    public void Configure(IApplicationBuilder app)
+    {
+        app.UseResponseCompression();
+    }
 }
 ```
 
@@ -93,19 +93,19 @@ using static System.IO.Compression.CompressionLevel;
 
 public class Startup
 {
-  public void ConfigureServices(IServiceCollection services)
-  {
-    services.Configure<GzipCompressionProviderOptions>(options => options.Level = Optimal);
-    services.AddResponseCompression(options =>
+    public void ConfigureServices(IServiceCollection services)
     {
-      options.Providers.Add<GzipCompressionProvider>();
-    });
-  }
+        services.Configure<GzipCompressionProviderOptions>(options => options.Level = Optimal);
+        services.AddResponseCompression(options =>
+        {
+            options.Providers.Add<GzipCompressionProvider>();
+        });
+    }
 
-  public void Configure(IApplicationBuilder app)
-  {
-    app.UseResponseCompression();
-  }
+    public void Configure(IApplicationBuilder app)
+    {
+        app.UseResponseCompression();
+    }
 }
 ```
 
