@@ -1,0 +1,157 @@
+---
+title: 'Dotnet Core 專案建置'
+date: '2020-07-20'
+tags: 'C#, Dotnet Core'
+---
+
+由於最近逐漸轉向開發 C# 的 API 程式，身為一名前端工程師一路上當然碰壁連連。
+這篇文章會簡單紀錄一下如何新建一個 .NET 的 Web Application，同時包含 gRPC 和 Test 的設置。
+
+文章中盡量會拿 Javascript 的專案建置和指令來和 .NET 對比，希望能讓前端工程師更快吸收。
+
+# Solution 和 Project 之間的關係
+
+**Project**
+
+When you create an app or website in Visual Studio, you start with a project. In a logical sense, a project contains all files that are compiled into an executable, library, or website.
+
+**Solution**
+
+It’s simply a container for one or more related projects, along with build information, Visual Studio window settings, and any miscellaneous files that aren’t associated with a particular project.
+
+舉例說：
+
+**Solution**: CompanyName.ProjectName.sln 底下會包含
+
+**Projects**
+
+- CompanyName.ProjectName.Web (真正拿來執行的本體)
+- CompanyName.ProjectName.Test (執行測試)
+- CompanyName.Message (根據 proto gRPC 產出)
+
+📖 常用 CLI 指令
+
+```sh
+$ dotnet new sln  # 新增 Solution
+$ dotnet sln list  # 顯示 sln 底下所有 project
+
+$ dotnet new <template> [-n|--name <name>] # 新 Project
+$ dotnet sln add <project_path>
+$ dotnet sln remove <project_path>
+```
+
+📖 常見的 Project Template
+
+- console: command line tools
+- classlib: 作為 common library (Common)
+- react: React SPA 應用 (Web)
+- nunit: donet core 測試框架 (Test)
+  如何管理套件
+
+💡 前端快速理解法
+
+- `NuGet` => `npm`
+- `NuGet.config` => `.npmrc`
+- NuGet config 設定 pacakgeSources, 類似 npm config registry
+
+```xml
+<configuration>
+    <packageSources>
+        <add key="Team Nuget" value="http://your.company.domain:8081/repository/nuget-group/" />
+        <add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" />
+    </packageSources>
+</configuration>
+```
+
+套用以上 NuGet Config 設定，安裝 Nuget Package 時會先從公司的 `Team Nuget` 嘗試安裝，若失敗再 Fallback 回原本官方的 `nuget.org`
+
+## 安裝套件
+
+```sh
+$ dotnet add package <name>  # npm install <package> --save
+$ dotnet remove package <name> # npm remove <package>
+$ dotnet restore  # npm install
+```
+
+🤫 dotnet restore 在 `dotnet new, dotnet run, dotnet build, dotnet test, dotnet publish, dotnet pack` 時他自己就會偷偷執行！
+
+## csproj 檔
+
+💡 前端快速理解法
+`csproj` => `package.json`
+
+常見到的的有
+`packageReference` 就像是 package.json 裡的 `dependencies`
+`projectReference` 則是指定要包含哪個 project，並且會一同被編譯
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+      <PackageReference Include="AsyncAwaitBestPractices" Version="4.1.1" />
+      <PackageReference Include="AutoMapper" Version="9.0.0" />
+      <PackageReference Include="IdGen" Version="2.4.0" />
+  </ItemGroup>
+  <ItemGroup>
+      <ProjectReference Include="..\Componny.Message\Compony.Message.csproj" />
+  </ItemGroup>
+</Project>
+```
+
+📖 Reference 指令
+
+```sh
+$ dotnet add reference
+$ dotnet remove reference
+$ dotnet list reference
+```
+
+## 開始執行專案
+
+### dotnet build
+
+執行 `dotnet build` 會將已下檔案打包至 `{ProjectName}/bin/Debug/{DotnetCoreVersion}/publish`
+
+1. 可執行和 的 `.dll`
+2. 相依函式庫的 `.dll`
+
+### dotnet run
+
+通常是為了開發使用，可以在 Project 底下直接執行 `dotnet run` 即可。
+`dotnet run` 會執行 `dotnet build` 去編譯程式碼。
+
+### dotnet publish
+
+執行 dotnet publish 會把以下檔案打包至 `{ProjectName}/bin/Debug/{DotnetCoreVersion}/publish` 底下
+
+1. 可執行和 的 `.dll`
+2. 相依函式庫的 `.dll`
+3. 如果當初專案是 ClientApp 中經過 npm 的 js 當案
+
+### dotnet
+
+```sh
+$ cd '${ProjectName}/bin/Debug/${DotnetCoreVersion}/publish/${CompanyName.ProjectName.Web.dll}' && \
+    dotnet ${CompanyName.ProjectName.Web.dll}
+```
+
+1. `dotnet` 和 `dotnet run` 差別在於 `dotnet` 會執行經過 `dotnet publish` 的 .dll，通常是在 Production 上使用。
+2. `dotnet` 指令不像 `dotnet run` 會自動幫你執行 `dotnet build`，並不會自動幫你執行 `dotnet publish`。
+
+## dotnet test
+
+自動幫你執行 Solution 或是 Project 底下的單元測試
+
+📖 常見指令
+
+```sh
+$ dotnet
+$ dotnet run
+$ dotnet build
+$ dotnet test
+$ dotnet publish
+$ dotnet pack  # npm publish
+```
+
+## Reference
+
+1. https://docs.microsoft.com/zh-tw/dotnet/core/tools/
