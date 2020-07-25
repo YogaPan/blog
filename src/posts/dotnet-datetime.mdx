@@ -4,22 +4,24 @@ date: '2020-06-10'
 tags: 'C# Dotnet'
 ---
 
-會寫這篇筆記的原因是，C# 官方對於 DateTime 的文件相當多。但是卻缺乏一個大方向的介紹，讓人很難入門不知道該從哪裡開始學起。
+會寫這篇筆記的原因是，C# 官方對於 DateTime 的文件相當多，但是卻缺乏一個大方向的介紹，讓人很難入門不知道該從哪裡開始學起。
 
 由於自己本身是比較擅長 Javascript 的開發者，
 以下很多用法都會跟 Javascript 中的 [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) 和 [Moment](https://momentjs.com/) 對照。
 並且為了解說方便，Local 的時區以台北時區 +08:00 為準。
 
-C# 中的時間主要有三個物件: DateTime, DateTimeOffset 和 TimeSpan。以下我們一一介紹：
+C# 中的時間主要有三個物件: DateTime, DateTimeOffset 和 TimeSpan，以下我們一一介紹：
 
 # DateTime
 
 ## Constructor
 
+指定年月日時分秒，以及 Kind
+
 ```C#
-new DateTime(2020, 1, 1, 0, 0, 0);  // Kind: Unspecified
-new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc);  // Kind: Utc
-new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Local);  // Kind: Local
+new DateTime(2020, 12, 31, 23, 59, 59);  // Kind: Unspecified
+new DateTime(2020, 12, 31, 23, 59, 59, DateTimeKind.Utc);  // Kind: Utc
+new DateTime(2020, 12, 31, 23, 59, 59, DateTimeKind.Local);  // Kind: Local
 ```
 
 ## Kind
