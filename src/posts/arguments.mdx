@@ -4,6 +4,13 @@ date: '2019-12-21'
 tags: 'javascript'
 ---
 
+## 目錄
+- [目錄](#目錄)
+- [Arguments](#arguments)
+- [Rest Operator](#rest-operator)
+- [實戰應用](#實戰應用)
+- [Reference](#reference)
+
 ## Arguments
 
 最近閱讀許多開源 Source Code，常看到 [arguments](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments) 這個東東。
@@ -45,9 +52,7 @@ const arr = Array.from(arguments)
 const arr = [...arguments]
 ```
 
-### 注意！
-
-要使用 arguments 必須在 **function** 內使用，[Arrow Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) 中無法使用 arguments，
+**注意！** 要使用 arguments 必須在 **function** 內使用，[Arrow Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) 中無法使用 arguments，
 
 ```js
 const foo = () => {
@@ -101,7 +106,7 @@ const foo = (...args) {
 }
 ```
 
-## 參考資料
+## Reference
 
 - [The arguments object - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments)
 - [Rest parameters - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters)

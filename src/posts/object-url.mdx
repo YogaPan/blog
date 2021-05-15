@@ -4,22 +4,36 @@ date: '2020-05-01'
 tags: 'js'
 ---
 
+## 目錄
+
+- [目錄](#目錄)
+- [什麼是 Object URL](#什麼是-object-url)
+- [如何使用 Object URL](#如何使用-object-url)
+  - [上傳預覽](#上傳預覽)
+  - [下載檔案](#下載檔案)
+  - [下載 canvas](#下載-canvas)
+- [Reference](#reference)
+
+## 什麼是 Object URL
+
 先來看看 Object URL 格式範例：
 
-```
+```http
 blob:http://localhost:8000/0f8b8668-7567-441a-9e31-322a864cf6ae"
 ```
 
-真正的檔案內容會被儲存在瀏覽器的記憶體當中，接著靠號碼牌 (GUID) 來提領內容。因為是把內容存放在記憶體，所以要透過呼叫 `revokeObjectURL` 來釋放記憶體。
+真正的檔案內容會被儲存在瀏覽器的記憶體當中，接著靠號碼牌 (GUID) 來提領內容。
 
-使用方法:
+## 如何使用 Object URL
+
+因為是把內容存放在記憶體，所以要透過呼叫 `revokeObjectURL` 來釋放記憶體。
 
 ```js
 const objectURL = URL.createObjectURL(object) // 參數接受 `File`, `Blob`, `MediaSource`
 URL.revokeObjectURL(objectURL)
 ```
 
-1. 上傳預覽
+### 上傳預覽
 
 <iframe
   src="https://codesandbox.io/embed/objecturl-file-preview-7gwj6?fontsize=14&hidenavigation=1&theme=dark"
@@ -29,7 +43,7 @@ URL.revokeObjectURL(objectURL)
   sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 ></iframe>
 
-2. 下載檔案
+### 下載檔案
 
 先將檔案內容轉成 blob 後，可以透過 Object URL 下載下來。
 
@@ -41,7 +55,7 @@ URL.revokeObjectURL(objectURL)
   sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 ></iframe>
 
-3. 下載 canvas
+### 下載 canvas
 
 先將透過 `canvas.toBlob` 將內容轉為 blob 後下載。
 
@@ -53,12 +67,9 @@ URL.revokeObjectURL(objectURL)
   sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 ></iframe>
 
-## See Also
-
-- [Data URL 筆記](/data-url)
-
 ## Reference
 
+- [Data URL 筆記](/data-url)
 - [URL.createObjectURL() - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL)
 - [Using files from web applications - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications#Example_Using_object_URLs_to_display_images)
 - [HTML5 筆記–Object URL-黑暗執行緒](https://blog.darkthread.net/blog/html5-object-url/)

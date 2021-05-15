@@ -4,7 +4,18 @@ date: '2019-12-21'
 tags: 'javascript'
 ---
 
-## 1. Closure Basic
+## 目錄
+
+- [目錄](#目錄)
+- [1. Closure](#1-closure)
+- [2. Module Pattern](#2-module-pattern)
+- [3. Currying](#3-currying)
+- [4. Memorized Function](#4-memorized-function)
+- [5. Reference](#5-reference)
+  - [常見中英詞彙對照表](#常見中英詞彙對照表)
+  - [Further Reading](#further-reading)
+
+## 1. Closure
 
 先來簡單複習 [Scope](https://developer.mozilla.org/en-US/docs/Glossary/Scope) 的概念：
 
@@ -64,9 +75,9 @@ counter()
 Example 1:
 
 ```js
-const counter = (function(initialCount) {
+const counter = (function (initialCount) {
   let count = initialCount || 0 // private property
-  const change = v => (count += v) // private method
+  const change = (v) => (count += v) // private method
   return {
     // return public methods
     getCount: () => count,
@@ -87,7 +98,7 @@ Example 2:
 ```js
 function createCounter(initialCount) {
   let count = initialCount || 0 // private property
-  const change = v => (count += v) // private method
+  const change = (v) => (count += v) // private method
   return {
     // return public methods
     getCount: () => count,
@@ -164,8 +175,8 @@ Currying sum：
 
 ```js
 function sum(x) {
-  return function(y) {
-    return function(z) {
+  return function (y) {
+    return function (z) {
       return x + y + z
     }
   }
@@ -177,7 +188,7 @@ sum(1)(2)(3) // 6
 建議透過 [Arrow Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) 簡化成
 
 ```js
-const sum = x => y => z => x + y + z
+const sum = (x) => (y) => (z) => x + y + z
 sum(1)(2)(3) // 6
 ```
 
@@ -193,7 +204,7 @@ sum(1)(2)(3) // 6
 function memorize(fn) {
   let lastArgs = null
   let lastResult = null
-  return function() {
+  return function () {
     // 如果 arguments 和上次調用時不同時才呼叫
     if (!areArgumentsShallowlyEqual(equalityCheck, lastArgs, arguments)) {
       lastResult = func.apply(null, arguments)
@@ -220,7 +231,9 @@ memorizedExpensiveCalculation(11) // 參數和上次呼叫時不同，重新計�
 
 ---
 
-## 5. 常見中英詞彙對照表
+## 5. Reference
+
+### 常見中英詞彙對照表
 
 | en-gb    | zh-tw  |
 | -------- | ------ |
@@ -230,11 +243,8 @@ memorizedExpensiveCalculation(11) // 參數和上次呼叫時不同，重新計�
 | Function | 函數   |
 | Variable | 變數   |
 
-## 6. Further Reading
+### Further Reading
 
 - https://blog.techbridge.cc/2018/12/08/javascript-closure/
 - https://gist.github.com/zcaceres/bb0eec99c02dda6aac0e041d0d4d7bf2
-
-## 7. Reference
-
 - https://github.com/reduxjs/reselect/blob/master/src/index.js#L21

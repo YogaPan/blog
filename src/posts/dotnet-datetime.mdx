@@ -4,6 +4,41 @@ date: '2020-06-10'
 tags: 'C# Dotnet'
 ---
 
+- [前言](#前言)
+- [DateTime](#datetime)
+  - [Constructor](#constructor)
+  - [Kind](#kind)
+  - [Now](#now)
+  - [Parse](#parse)
+  - [Get & Set](#get--set)
+  - [Manipulate](#manipulate)
+    - [Add & Subtract](#add--subtract)
+    - [StartOf & EndOf](#startof--endof)
+  - [Query](#query)
+  - [Display](#display)
+  - [Serialize](#serialize)
+- [TimeSpan](#timespan)
+  - [Construct/Parse](#constructparse)
+    - [1. TimeSpan.Zero/TimeSpan()](#1-timespanzerotimespan)
+    - [2. TimeSpan(int hours, int minutes, int seconds)](#2-timespanint-hours-int-minutes-int-seconds)
+    - [3. Static Method](#3-static-method)
+    - [4. By calling a method or performing an operation that returns a TimeSpan value](#4-by-calling-a-method-or-performing-an-operation-that-returns-a-timespan-value)
+    - [5. Parsing from string](#5-parsing-from-string)
+  - [Operation](#operation)
+- [DateTimeOffset](#datetimeoffset)
+  - [Construct](#construct)
+  - [Convert to DateTime](#convert-to-datetime)
+  - [Convert to Unix Timestamp](#convert-to-unix-timestamp)
+  - [Parse](#parse-1)
+  - [Manipulate](#manipulate-1)
+  - [Query](#query-1)
+  - [Display](#display-1)
+  - [Serialize/Deserialize](#serializedeserialize)
+- [gRPC Timestamp](#grpc-timestamp)
+- [Reference](#reference)
+
+# 前言
+
 會寫這篇筆記的原因是，C# 官方對於 DateTime 的文件相當多，但是卻缺乏一個大方向的介紹，讓人很難入門不知道該從哪裡開始學起。
 
 由於自己本身是比較擅長 Javascript 的開發者，

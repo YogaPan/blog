@@ -4,6 +4,18 @@ date: '2020-02-01'
 tags: 'js f2e'
 ---
 
+## 目錄
+- [目錄](#目錄)
+- [什麼是 Data URLs](#什麼是-data-urls)
+- [使用範例](#使用範例)
+- [Webpack file-loader & url-loader](#webpack-file-loader--url-loader)
+- [Bonus: 動手玩 base64 編碼](#bonus-動手玩-base64-編碼)
+  - [URL](#url)
+  - [Canvas](#canvas)
+  - [Form](#form)
+- [小技巧](#小技巧)
+- [參考資料](#參考資料)
+
 ## 什麼是 Data URLs
 
 根據 MDN 的定義： Data URLs, URLs prefixed with the data: scheme, allow content creators to embed small files inline in documents.
@@ -12,7 +24,7 @@ tags: 'js f2e'
 
 格式：
 
-```
+```http
 data:[<mediatype>][;base64],<data>
 ```
 
@@ -134,22 +146,19 @@ Data url 有一個很實用的功能，就是作為上傳的預覽：
   sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 ></iframe>
 
-參考資料：
-
-- [How to convert image into base64 string using javascript - Stack Overflow](https://stackoverflow.com/questions/6150289/how-to-convert-image-into-base64-string-using-javascript)
-- [利用 canvas 中 toDataURL()將圖片轉為 dataURL(base64)的方法詳解 | 程式前沿](https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/227679/)
-- [[JS] 透過 JavaScript 處理檔案上傳（AJAX Upload byte / JSON / formData File） ~ PJCHENder 那些沒告訴你的小細節](https://pjchender.blogspot.com/2019/01/js-javascript-input-file-upload-file.html)
-
 ## 小技巧
 
 透過[開發工具](https://developers.google.com/web/updates/2015/05/copy-image-as-data-uri)的 Network 選取特定 Img Request，可以拷貝成 data URI 格式:
 
 ![001.png](../images/data-url/001.png)
 
-## 參考資料：
+## 參考資料
 
 - [RFC 2397 - The "data" URL scheme](https://tools.ietf.org/html/rfc2397)
 - [Data URLs - HTTP | MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs)
 - [Data URI 前端優化 - cubemail88 - Medium](https://medium.com/cubemail88/data-uri-%E5%89%8D%E7%AB%AF%E5%84%AA%E5%8C%96-d83f833e376d)
 - [使用 DATA URI 將圖片以 Base64 編碼並內崁至網頁中，加速載入速度 - G. T. Wang](https://blog.gtwang.org/web-development/minimizing-http-request-using-data-uri/)
 - [實戰 Webpack 的 file-loader 和 url-loader - 《Chris 技術筆記》](https://dwatow.github.io/2018/12-29-webpack/action-url-loader-file-loader/)
+- [How to convert image into base64 string using javascript - Stack Overflow](https://stackoverflow.com/questions/6150289/how-to-convert-image-into-base64-string-using-javascript)
+- [利用 canvas 中 toDataURL()將圖片轉為 dataURL(base64)的方法詳解 | 程式前沿](https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/227679/)
+- [[JS] 透過 JavaScript 處理檔案上傳（AJAX Upload byte / JSON / formData File） ~ PJCHENder 那些沒告訴你的小細節](https://pjchender.blogspot.com/2019/01/js-javascript-input-file-upload-file.html)
