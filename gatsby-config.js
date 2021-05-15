@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `Galtz's Blog`,
     description: `Galtz's Blog`,
-    author: `@galtz0321`,
+    author: `galtz0321@gmail.com`,
   },
   plugins: [
     `gatsby-plugin-styled-components`,
@@ -19,6 +19,17 @@ module.exports = {
               maxWidth: 1200,
             },
           },
+          `gatsby-remark-autolink-headers`,
+          // {
+          //   resolve: `gatsby-remark-prismjs`,
+          //   options: {
+          //     classPrefix: 'language-',
+          //     inlineCodeMarker: null,
+          //     showLineNumbers: true,
+          //     noInlineHighlight: false,
+          //     escapeEntities: {},
+          //   },
+          // },
         ],
       },
     },
@@ -45,8 +56,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `galtz's blog`,
+        short_name: `galtz blog`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,

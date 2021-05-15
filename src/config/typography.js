@@ -1,8 +1,12 @@
 import Typography from 'typography'
-import FairyGatesTheme from 'typography-theme-fairy-gates'
+import CodePlugin from 'typography-plugin-code'
+import FunstonTheme from 'typography-theme-funston'
 
-FairyGatesTheme.headerWeight = 500
-const typography = new Typography(FairyGatesTheme)
+FunstonTheme.headerWeight = 500
+FunstonTheme.baseFontSize = '18px'
+FunstonTheme.plugins = [new CodePlugin()]
+
+const typography = new Typography(FunstonTheme)
 
 export const { scale, rhythm, options } = typography
 export default typography

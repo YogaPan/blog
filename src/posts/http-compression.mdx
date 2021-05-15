@@ -45,7 +45,7 @@ Content-Encoding: gzip
 
 ![content-encoding](../images/http-compression/001.png)
 
-## Expressd Middleware
+## Expressed Middleware
 
 透過 [compression middleware](https://github.com/expressjs/compression)，可以對 response 進行 `deflate` 或 `gzip` 壓縮：
 
@@ -68,7 +68,7 @@ app.get('/', (req, res) => {
 
 Donet Core 3.0 開始預設使用 `Brotli` 演算法壓縮：
 
-```c#
+```csharp
 using Microsoft.AspNetCore.ResponseCompression;
 
 public class Startup
@@ -87,7 +87,7 @@ public class Startup
 
 也可以修改設定，關閉 `Brotli`，改用 `Gzip`:
 
-```c#
+```csharp
 using Microsoft.AspNetCore.ResponseCompression;
 using static System.IO.Compression.CompressionLevel;
 

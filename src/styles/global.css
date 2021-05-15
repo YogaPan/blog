@@ -94,7 +94,6 @@ li {
 }
 
 a {
-  text-decoration: none;
   text-shadow: none;
   background-image: none;
   cursor: pointer;
@@ -103,6 +102,11 @@ a {
 
 a:hover {
   color: var(--link-hover-color);
+}
+
+a.anchor {
+  margin-right: 8px;
+  vertical-align: baseline;
 }
 
 div {
@@ -123,7 +127,7 @@ table td {
   border-bottom: 1px solid var(--border-color);
 }
 
-pre {
+/* pre {
   transition: var(--transition-duration);
   background-color: var(--code-bg-color);
 }
@@ -131,4 +135,4 @@ pre {
 code {
   transition: var(--transition-duration);
   color: var(--primary-text-color);
-}
+} */

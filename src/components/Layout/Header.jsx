@@ -39,6 +39,8 @@ const brandCss = css`
     margin-left: 16px;
     width: 200px;
   }
+
+  text-decoration: none;
 `
 
 const linkedInCss = css`
