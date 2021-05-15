@@ -1,4 +1,4 @@
-import { ThemeProvider } from 'emotion-theming'
+import { ThemeProvider } from '@emotion/react'
 import React from 'react'
 import { node } from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'

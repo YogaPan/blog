@@ -40,7 +40,7 @@ const AnimatedMoonIcon = animated(MoonIcon)
 
 export default function ThemeSwitch() {
   const [isDarkTheme, toggleTheme] = useThemeSwitch()
-  const transitions = useTransition(isDarkTheme, null, {
+  const transitions = useTransition(isDarkTheme, {
     config: { duration: 100 },
     initial: null,
     from: { opacity: 0, transform: 'scale(0)' },
@@ -50,7 +50,7 @@ export default function ThemeSwitch() {
 
   return (
     <Container onClick={toggleTheme}>
-      {transitions.map(({ item, key, props }) =>
+      {transitions((props, item, key) =>
         item ? (
           <AnimatedSunIcon key={key} style={props} />
         ) : (
