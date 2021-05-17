@@ -20,16 +20,16 @@ module.exports = {
             },
           },
           `gatsby-remark-autolink-headers`,
-          // {
-          //   resolve: `gatsby-remark-prismjs`,
-          //   options: {
-          //     classPrefix: 'language-',
-          //     inlineCodeMarker: null,
-          //     showLineNumbers: true,
-          //     noInlineHighlight: false,
-          //     escapeEntities: {},
-          //   },
-          // },
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              classPrefix: 'language-',
+              inlineCodeMarker: null,
+              showLineNumbers: true,
+              noInlineHighlight: false,
+              escapeEntities: {},
+            },
+          },
         ],
       },
     },
