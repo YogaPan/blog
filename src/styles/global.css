@@ -90,7 +90,6 @@ p,
 li {
   transition: var(--transition-duration);
   color: var(--primary-text-color);
-  margin-top: 1rem;
 }
 
 a {
@@ -137,7 +136,6 @@ code[class*='language-'],
 pre[class*='language-'] {
   color: black;
   background: none;
-  text-shadow: 0 1px white;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
@@ -230,8 +228,6 @@ pre[class*='language-'] {
 .language-css .token.string,
 .style .token.string {
   color: #9a6e3a;
-  /* This background color was intended by the author of this theme. */
-  background: hsla(0, 0%, 100%, 0.5);
 }
 
 .token.atrule,
