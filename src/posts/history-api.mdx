@@ -4,11 +4,24 @@ date: '2020-01-02'
 tag: 'js, WebAPIS'
 ---
 
-## 瀏覽器的基本操作
+## 目錄
+
+- [目錄](#目錄)
+- [Methods](#methods)
+- [Properties](#properties)
+- [pushState](#pushstate)
+  - [Case 1: Relative Path](#case-1-relative-path)
+  - [Case 2: Absolute Path](#case-2-absolute-path)
+  - [Case 3: Null Path](#case-3-null-path)
+  - [Case 4: Push state](#case-4-push-state)
+- [replaceState](#replacestate)
+- [onstatepop event](#onstatepop-event)
+- [參考資料](#參考資料)
+- [延伸閱讀](#延伸閱讀)
 
 ![browser action](../images/history-api/001.png)
 
-### Methods:
+## Methods
 
 ```js
 history.back() // 回上一頁
@@ -19,7 +32,7 @@ history.go(-1) // same as history.back()
 history.go(2) // 回上兩頁
 ```
 
-### Properties:
+## Properties
 
 - [history.length](https://developer.mozilla.org/en-US/docs/Web/API/History/length): 歷史紀錄中的頁面總數
 - [history.scrollRestoration](https://developer.mozilla.org/en-US/docs/Web/API/History/scrollRestoration):
@@ -99,7 +112,7 @@ API: **[history.replaceState(state, title, url)](https://developer.mozilla.org/e
 Usage Example:
 
 ```js
-window.onpopstate = function(event) {
+window.onpopstate = function (event) {
   alert(
     'location: ' + document.location + ', state: ' + JSON.stringify(event.state)
   )

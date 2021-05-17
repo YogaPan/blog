@@ -4,18 +4,36 @@ date: '2020-07-20'
 tags: 'C#, Dotnet Core'
 ---
 
+- [前言](#前言)
+- [Solution 和 Project 之間的關係](#solution-和-project-之間的關係)
+  - [Project](#project)
+  - [Solution](#solution)
+- [管理套件](#管理套件)
+- [安裝套件](#安裝套件)
+- [csproj 檔](#csproj-檔)
+- [開始執行專案](#開始執行專案)
+  - [dotnet build](#dotnet-build)
+  - [dotnet run](#dotnet-run)
+  - [dotnet](#dotnet)
+  - [dotnet test](#dotnet-test)
+- [Reference](#reference)
+
+---
+
+## 前言
+
 由於最近逐漸轉向開發 C# 的 API 程式，身為一名前端工程師一路上當然碰壁連連。
 這篇文章會簡單紀錄一下如何新建一個 .NET 的 Web Application，同時包含 gRPC 和 Test 的設置。
 
 文章中盡量會拿 Javascript 的專案建置和指令來和 .NET 對比，希望能讓前端工程師更快吸收。
 
-# Solution 和 Project 之間的關係
+## Solution 和 Project 之間的關係
 
-**Project**
+### Project
 
 When you create an app or website in Visual Studio, you start with a project. In a logical sense, a project contains all files that are compiled into an executable, library, or website.
 
-**Solution**
+### Solution
 
 It’s simply a container for one or more related projects, along with build information, Visual Studio window settings, and any miscellaneous files that aren’t associated with a particular project.
 
@@ -23,36 +41,37 @@ It’s simply a container for one or more related projects, along with build inf
 
 **Solution**: CompanyName.ProjectName.sln 底下會包含
 
-**Projects**
+**Projects**:
 
-- CompanyName.ProjectName.Web (真正拿來執行的本體)
-- CompanyName.ProjectName.Test (執行測試)
-- CompanyName.Message (根據 proto gRPC 產出)
+- `CompanyName.ProjectName.Web`: 真正拿來執行的本體
+- `CompanyName.ProjectName.Test`:執行測試
+- `CompanyName.Message`: 根據 protos gRPC 產出
 
 📖 常用 CLI 指令
 
-```sh
-$ dotnet new sln  # 新增 Solution
-$ dotnet sln list  # 顯示 sln 底下所有 project
+```shell
+dotnet new sln  # 新增 Solution
+dotnet sln list  # 顯示 sln 底下所有 project
 
-$ dotnet new <template> [-n|--name <name>] # 新 Project
-$ dotnet sln add <project_path>
-$ dotnet sln remove <project_path>
+dotnet new <template> [-n|--name <name>] # 新 Project
+dotnet sln add <project_path>
+dotnet sln remove <project_path>
 ```
 
 📖 常見的 Project Template
 
-- console: command line tools
-- classlib: 作為 common library (Common)
-- react: React SPA 應用 (Web)
-- nunit: donet core 測試框架 (Test)
-  如何管理套件
+- `console`: command line tools
+- `classlib`: 作為 common library (Common)
+- `react`: React SPA 應用 (Web)
+- `nunit`: donet core 測試框架 (Test)
+
+## 管理套件
 
 💡 前端快速理解法
 
 - `NuGet` => `npm`
 - `NuGet.config` => `.npmrc`
-- NuGet config 設定 pacakgeSources, 類似 npm config registry
+- `NuGet config` 設定 `packageSources`, 類似 `npm config registry`
 
 ```xml
 <configuration>
@@ -67,10 +86,10 @@ $ dotnet sln remove <project_path>
 
 ## 安裝套件
 
-```sh
-$ dotnet add package <name>  # npm install <package> --save
-$ dotnet remove package <name> # npm remove <package>
-$ dotnet restore  # npm install
+```shell
+dotnet add package <name>  # npm install <package> --save
+dotnet remove package <name> # npm remove <package>
+dotnet restore  # npm install
 ```
 
 🤫 dotnet restore 在 `dotnet new, dotnet run, dotnet build, dotnet test, dotnet publish, dotnet pack` 時他自己就會偷偷執行！
@@ -99,10 +118,10 @@ $ dotnet restore  # npm install
 
 📖 Reference 指令
 
-```sh
-$ dotnet add reference
-$ dotnet remove reference
-$ dotnet list reference
+```shell
+dotnet add reference
+dotnet remove reference
+dotnet list reference
 ```
 
 ## 開始執行專案
@@ -119,7 +138,7 @@ $ dotnet list reference
 通常是為了開發使用，可以在 Project 底下直接執行 `dotnet run` 即可。
 `dotnet run` 會執行 `dotnet build` 去編譯程式碼。
 
-### dotnet publish
+dotnet publish
 
 執行 dotnet publish 會把以下檔案打包至 `{ProjectName}/bin/Debug/{DotnetCoreVersion}/publish` 底下
 
@@ -129,7 +148,7 @@ $ dotnet list reference
 
 ### dotnet
 
-```sh
+```shell
 $ cd '${ProjectName}/bin/Debug/${DotnetCoreVersion}/publish/${CompanyName.ProjectName.Web.dll}' && \
     dotnet ${CompanyName.ProjectName.Web.dll}
 ```
@@ -137,19 +156,19 @@ $ cd '${ProjectName}/bin/Debug/${DotnetCoreVersion}/publish/${CompanyName.Projec
 1. `dotnet` 和 `dotnet run` 差別在於 `dotnet` 會執行經過 `dotnet publish` 的 .dll，通常是在 Production 上使用。
 2. `dotnet` 指令不像 `dotnet run` 會自動幫你執行 `dotnet build`，並不會自動幫你執行 `dotnet publish`。
 
-## dotnet test
+### dotnet test
 
 自動幫你執行 Solution 或是 Project 底下的單元測試
 
 📖 常見指令
 
-```sh
-$ dotnet
-$ dotnet run
-$ dotnet build
-$ dotnet test
-$ dotnet publish
-$ dotnet pack  # npm publish
+```shell
+dotnet
+dotnet run
+dotnet build
+dotnet test
+dotnet publish
+dotnet pack  # npm publish
 ```
 
 ## Reference

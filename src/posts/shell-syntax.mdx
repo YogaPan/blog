@@ -4,6 +4,25 @@ date: '2020-01-01'
 tags: 'shell'
 ---
 
+## 目錄
+
+- [目錄](#目錄)
+- [基本語法](#基本語法)
+  - [Dollar sign parameter](#dollar-sign-parameter)
+  - [exit](#exit)
+  - [Condition](#condition)
+  - [Loop](#loop)
+  - [test](#test)
+  - [Numerical Comparison](#numerical-comparison)
+  - [String Comparison](#string-comparison)
+  - [File Attributes](#file-attributes)
+  - [Function](#function)
+  - [Array](#array)
+  - [Calculate](#calculate)
+  - [Parameter Substitution](#parameter-substitution)
+- [參考資料](#參考資料)
+- [工具](#工具)
+
 ## 基本語法
 
 在檔案開頭指定要使用哪種 Shell：
@@ -12,26 +31,26 @@ tags: 'shell'
 #!/bin/bash
 ```
 
-### Dollar sign parameter:
+### Dollar sign parameter
 
-- **\$\***: Complete set of positional parameters as a single string.
-- **\$#**: Number of arguments.
-- **\$0**: Script name.
-- **\$1**: Fisrt parameter.
+- `$`: Complete set of positional parameters as a single string.
+- `$#`: Number of arguments.
+- `$0`: Script name.
+- `$1`: Fisrt parameter.
 
-- **\$?**: Exit status of last command.
-- **\$\$**: Pid of current shell
-- **\$!**: Pid of last background job.
+- `$?`: Exit status of last command.
+- `$$`: Pid of current shell
+- `$!`: Pid of last background job.
 
-### exit:
+### exit
 
-```
+```shell
 exit    # Default value is 0.
 exit 0  # Everything is nice.
 exit 1  # Something goes wrong.
 ```
 
-### Condition:
+### Condition
 
 ```shell
 cmd1 && cmd2 # cmd2 execute if cmd1 success.
@@ -52,19 +71,19 @@ case expression in
 esac
 ```
 
-### Loop:
+### Loop
 
 ```shell
 for variables in list; do
-  # do somehing
+  # do something
 done
 
 for (( i=1; i<=${nu}; i=i+1  )); do
-  # do somehing
+  # do something
 done
 
 while condition is true; do
-  # do somehing
+  # do something
 done
 ```
 
@@ -77,13 +96,13 @@ test $x -eq $y
 ```
 
 If x equals to y, then \$? will assign to 0, else 1.
-Or you can use squal brackets to wrap:
+Or you can use equal brackets to wrap:
 
 ```shell
 [ $x -eq $y  ]
 ```
 
-### Numercial Comparison:
+### Numerical Comparison
 
 - -eq: Equal to.
 - -ne: Not equal to.
@@ -92,7 +111,7 @@ Or you can use squal brackets to wrap:
 - -lt: Less than.
 - -le: Less than or equal to.
 
-### String Comparison:
+### String Comparison
 
 ```shell
 s1  = s2  # String s1 = s2.
@@ -102,7 +121,7 @@ s1 != s2  #  String s1 is not equal to s2.
 stg       # String stg is assigned and not null.
 ```
 
-### File Attributes:
+### File Attributes
 
 - **-f file**: file exists and is regular file.
 - **-r file**: file exists and is readable.
@@ -113,29 +132,29 @@ stg       # String stg is assigned and not null.
 - **-u file**: file exists and has SUID bit set.
 - **-k file**: file exists and has sticky bit set.
 
-### Function:
+### Function
 
-```
+```shell
 function fname() {
   command1
   command2
 }
 ```
 
-### Array:
+### Array
 
-```
+```shell
 name=(yoga shuo ha47 caspar)
 ```
 
-### Calculate:
+### Calculate
 
 ```shell
 x=6; y=2
 z=`expr $x + $y`;
 ```
 
-### Parameter Subsitution
+### Parameter Substitution
 
 TODO
 

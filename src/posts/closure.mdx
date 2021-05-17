@@ -7,17 +7,26 @@ tags: 'javascript'
 ## 目錄
 
 - [目錄](#目錄)
-- [1. Closure](#1-closure)
-- [2. Module Pattern](#2-module-pattern)
-- [3. Currying](#3-currying)
-- [4. Memorized Function](#4-memorized-function)
-- [5. Reference](#5-reference)
+- [基本觀念](#基本觀念)
+  - [Scope](#scope)
+  - [Closure](#closure)
+- [實際應用](#實際應用)
+  - [Module Pattern](#module-pattern)
+  - [Currying](#currying)
+  - [Memorized Function](#memorized-function)
+- [Reference](#reference)
   - [常見中英詞彙對照表](#常見中英詞彙對照表)
   - [Further Reading](#further-reading)
 
-## 1. Closure
+## 基本觀念
 
-先來簡單複習 [Scope](https://developer.mozilla.org/en-US/docs/Glossary/Scope) 的概念：
+### Scope
+
+先來簡單複習 [Scope](https://developer.mozilla.org/en-US/docs/Glossary/Scope) 的定義：
+
+The current context of execution. The context in which [values](https://developer.mozilla.org/en-US/docs/Glossary/value) and expressions are "visible" or can be referenced. If a [variable](https://developer.mozilla.org/en-US/docs/Glossary/variable) or other expression is not "in the current scope," then it is unavailable for use. Scopes can also be layered in a hierarchy, so that child scopes have access to parent scopes, but not vice versa.
+
+以下舉例：
 
 ```js
 function foo() {
@@ -32,11 +41,9 @@ foo()
 console.log(count) // count is not defined
 ```
 
-關於 [Scope](https://developer.mozilla.org/en-US/docs/Glossary/Scope) 的定義
-
-> The current context of execution. The context in which [values](https://developer.mozilla.org/en-US/docs/Glossary/value) and expressions are "visible" or can be referenced. If a [variable](https://developer.mozilla.org/en-US/docs/Glossary/variable) or other expression is not "in the current scope," then it is unavailable for use. Scopes can also be layered in a hierarchy, so that child scopes have access to parent scopes, but not vice versa.
-
 **count** 這個變數的 scope 在 foo function 內，代表在只能夠在 foo 這個 function 內被讀取， 外部是無法讀取的。
+
+### Closure
 
 接著再看下一段 [Closure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) 範例：
 
@@ -59,9 +66,9 @@ function counter() {
 counter()
 ```
 
-關於 [Closure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) 的定義
+關於 [Closure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) 的定義：
 
-> A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment). In other words, a closure gives you access to an outer function’s scope from an inner function. In JavaScript, closures are created every time a function is created, at function creation time.
+A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment). In other words, a closure gives you access to an outer function’s scope from an inner function. In JavaScript, closures are created every time a function is created, at function creation time.
 
 重點是這句：a closure gives you access to an outer function’s scope from an inner function.
 
@@ -70,7 +77,9 @@ counter()
 
 如果這個時候我們把這 inner function 回傳的話會怎樣呢？
 
-## 2. Module Pattern
+## 實際應用
+
+### Module Pattern
 
 Example 1:
 
@@ -125,14 +134,15 @@ counter2.getCount() //10
 
 利用閉包的特性，外部無法存取內部的變數和 function，只能透過回傳的 function 進行操作，達成類似 Object Oriented 的概念。這麼做的好處是可以避免全域汙染，只提 public API，並隱藏實作。
 
-## 3. Currying
+### Currying
 
-在 Currying 之前，我們再來看 Closure 的另一個特性：Closure Scope Channing
+在 Currying 之前，我們再來看 Closure 的另一個特性：Closure Scope Chain
 
-> For every closure we have three scopes:
-> 1 Local Scope (Own scope)
-> 2 Outer Functions Scope
-> 3 Global Scope
+For every closure we have three scopes:
+
+1. Local Scope (Own scope)
+2. Outer Functions Scope
+3. Global Scope
 
 ```js
 // Global Scope
@@ -192,7 +202,7 @@ const sum = (x) => (y) => (z) => x + y + z
 sum(1)(2)(3) // 6
 ```
 
-## 4. Memorized Function
+### Memorized Function
 
 函數記憶是指將上次的計算結果緩存起来，當下次調用時，如果遇到相同的參數，就直接返回缓存中的結果。所以使用 Memorized 必須有一個先決條件：給予相同的 parameter 必須有相同的 result。
 
@@ -231,7 +241,7 @@ memorizedExpensiveCalculation(11) // 參數和上次呼叫時不同，重新計�
 
 ---
 
-## 5. Reference
+## Reference
 
 ### 常見中英詞彙對照表
 

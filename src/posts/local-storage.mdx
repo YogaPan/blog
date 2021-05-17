@@ -4,6 +4,21 @@ date: '2020-01-02'
 tag: 'javascript'
 ---
 
+## 目錄
+
+- [目錄](#目錄)
+- [Web Storage API](#web-storage-api)
+  - [轉型問題](#轉型問題)
+- [DevTools](#devtools)
+- [Life Cycle](#life-cycle)
+- [Session Storage](#session-storage)
+- [敏感資訊](#敏感資訊)
+- [使用情境](#使用情境)
+- [超級比一比](#超級比一比)
+- [React Hooks](#react-hooks)
+- [LocalForage](#localforage)
+- [Reference](#reference)
+
 LocalStorage 是瀏覽器最簡單的資料儲存方法，儲存的資料不會隨著頁面重整或是瀏覽器關閉而丟失。這篇文章會紀錄 localStorage 的使用方式和情境，以及和 Cookie 的比較。
 
 ## Web Storage API
@@ -22,7 +37,7 @@ console.log(localStorage.theme) // dark
 - 清除資料: **[localStorage.removeItem(key)](https://developer.mozilla.org/en-US/docs/Web/API/Storage/removeItem)**
 - 清除所有資料: **[localStorage.clear()](https://developer.mozilla.org/en-US/docs/Web/API/Storage/clear)**
 
-### 轉型問題：
+### 轉型問題
 
 Storage 中的 key value 為 string 型態，所以如果給予非 string 的 key value 會自動轉型。
 
@@ -141,7 +156,7 @@ LocalForage 解決了以下幾個問題:
 2. API 幾乎和 LocalStorage 一模一樣，解決 IndexedDB 不好上手的困擾
 3. 自動進行 **JSON.parse()** 和 **JSON.stringify()**
 
-## 參考資料
+## Reference
 
 - [Using the Web Storage API - MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API)
 - [[第七週] 瀏覽器資料儲存 - Cookie、LocalStorage、SessionStorage](https://yakimhsu.com/project/project_w7_storage.html)

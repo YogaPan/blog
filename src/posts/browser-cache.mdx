@@ -4,6 +4,28 @@ date: '2020-01-01'
 tags: 'http'
 ---
 
+## 目錄
+
+- [目錄](#目錄)
+- [Expires, Cache-Control, max-age](#expires-cache-control-max-age)
+  - [Case 1](#case-1)
+  - [Case 2](#case-2)
+  - [Case 3](#case-3)
+  - [重點整理](#重點整理)
+- [Last-Modified, If-Modified-Since](#last-modified-if-modified-since)
+  - [Case 1](#case-1-1)
+  - [Case 2](#case-2-1)
+  - [Case 3](#case-3-1)
+- [Etag, If-None-Match](#etag-if-none-match)
+- [no-store, no-cache](#no-store-no-cache)
+  - [Example](#example)
+  - [重點整理](#重點整理-1)
+- [Long Term Cache](#long-term-cache)
+  - [Example](#example-1)
+- [總結](#總結)
+- [待解決問題](#待解決問題)
+- [參考資料](#參考資料)
+
 ## Expires, Cache-Control, max-age
 
 以下範例中 Expires 為了閱讀方便，格式有稍作修改 😜，實際上 Expires 的格式會像是這樣： `Expires: Wed, 21 Oct 2017 07:28:00 GMT`
@@ -13,7 +35,7 @@ tags: 'http'
 假設現在時間 `2020-01-01 00:00:00`，Client 第一次請求 **index.html** 的資源，
 Server 回應 Header：
 
-```
+```http
 Cache-Control: max-age=3600
 ```
 
@@ -24,7 +46,7 @@ Cache-Control: max-age=3600
 
 Server 回應 Header：
 
-```
+```http
 Expires: 2020-01-01 12:00:00
 ```
 
@@ -35,7 +57,7 @@ Expires: 2020-01-01 12:00:00
 
 Server 回應 Header：
 
-```
+```http
 Expires: 2020-01-01 01:00:00
 Cache-Control: max-age=7200
 ```
@@ -44,7 +66,7 @@ Cache-Control: max-age=7200
 
 即使 Expires 的時間比 Cache-Control 的時間更早，但是這裏依然以 Cache-Control 的時間為準。
 
-### 重點整理：
+### 重點整理
 
 - 還沒超過 Expire 或者是在 max-age 規定的期限，就直接從快取裡面拿資料。如果過期了就發送 Request 去跟 Server 拿新的資料。
 - Expires 後面顯示具體時間，Cache-Control 後利用 max-age 指定時間間隔，單位為秒
@@ -54,7 +76,7 @@ Cache-Control: max-age=7200
 
 Server Response
 
-```
+```http
 Last-Modified: 2017-01-01 13:00:00
 Cache-Control: max-age=31536000
 ```
@@ -67,14 +89,14 @@ Cache-Control: max-age=31536000
 
 經過一年後，Client 發出 Request
 
-```
+```http
 GET /logo.png
 If-Modified-Since: 2017-01-01 13:00:00
 ```
 
 如果檔案在 `2017-01-01 13:00:00` 有再更改過，Server 就會再回一份新的檔案，並且設定 Cache：
 
-```
+```http
 Last-Modified: 2017-07-01 13:00:00
 Cache-Control: max-age=31536000
 ```
@@ -83,7 +105,7 @@ Cache-Control: max-age=31536000
 
 經過一年後，Client 發出 Request
 
-```
+```http
 GET /logo.png
 If-Modified-Since: 2017-01-01 13:00:00
 ```
@@ -104,21 +126,21 @@ A: 每次請求都問 Server 檔案是否有更動，如果有更動  則回應
 
 ### Example
 
-```
+```http
 Cache-Control: max-age=0
 Etag: 1234
 ```
 
 或者
 
-```
+```http
 Cache-Control: no-cache
 Etag: 1234
 ```
 
 完全不使用快取
 
-```
+```http
 Cache-Control: no-store
 ```
 

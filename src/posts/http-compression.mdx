@@ -4,7 +4,16 @@ date: '2020-01-10'
 tags: 'http'
 ---
 
-## 什麼是 Compression ？
+## 目錄
+
+- [目錄](#目錄)
+- [What is Compression？](#what-is-compression)
+- [Proactive Negotiation (內容協商)](#proactive-negotiation-內容協商)
+- [使用 Express Middleware 壓縮](#使用-express-middleware-壓縮)
+- [使用 Dotnet Core Middleware 壓縮](#使用-dotnet-core-middleware-壓縮)
+- [Reference](#reference)
+
+## What is Compression？
 
 [根據 Ilya Grigorik 的總整理](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer):
 
@@ -20,9 +29,7 @@ any small additional reduction in size and transmission time will likely be over
 Don't compress files smaller than about 150-1000 bytes (depending on the file's content and the efficiency of compression).
 The overhead of compressing small files may produce a compressed file larger than the uncompressed file.
 
-## HTTP Header
-
-在開始看 http header 之前，先來複習一下主動協商 (Proactive Negotiation)：
+## Proactive Negotiation (內容協商)
 
 User Agent 發送 `期望或偏好的` representation，使 Server 根據該偏好資訊，使用適當的演算法選擇 representation。
 但 server 仍可能回應非預期的 representation, 或是 [406 Not acceptable](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/406)、[415 Unsupported Media Type](https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Status/415)。
@@ -45,7 +52,7 @@ Content-Encoding: gzip
 
 ![content-encoding](../images/http-compression/001.png)
 
-## Expressed Middleware
+## 使用 Express Middleware 壓縮
 
 透過 [compression middleware](https://github.com/expressjs/compression)，可以對 response 進行 `deflate` 或 `gzip` 壓縮：
 
@@ -62,7 +69,7 @@ app.get('/', (req, res) => {
 })
 ```
 
-## Dotnet Core Middleware
+## 使用 Dotnet Core Middleware 壓縮
 
 透過 [NuGet Gallery | Microsoft.AspNetCore.ResponseCompression 2.2.0](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/)，可以對 response 進行 `brotli` 或 `gzip` 壓縮。
 
@@ -109,7 +116,7 @@ public class Startup
 }
 ```
 
-## 參考資料
+## Reference
 
 - [Optimizing Encoding and Transfer Size of Text-Based Assets](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer)
 - [HTTP 內容協商 (Content Negotiation) - NotFalse 技術客](https://notfalse.net/41/http-content-negotiation#-server-driven)
