@@ -1,6 +1,6 @@
 import { useSpring } from 'react-spring'
 
-export default function () {
+export default function useFadeIn() {
   return useSpring({
     config: { duration: 200 },
     from: { opacity: 0, transform: 'translateY(10px)' },

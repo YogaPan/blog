@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSpring, animated } from 'react-spring'
+import { animated } from 'react-spring'
 import { Link, graphql } from 'gatsby'
 import { Box } from 'rebass'
 import styled from 'styled-components'

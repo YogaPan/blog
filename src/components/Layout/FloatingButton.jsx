@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSpring } from 'react-spring'
 import styled from 'styled-components'
+import useScrollToTop from '@hooks/useScrollToTop'
 import ArrowUpIcon from '@assets/arrow-up.svg'
 import ShareIcon from '@assets/share.svg'
 
@@ -27,19 +28,10 @@ const ScrollTopButton = styled.div`
 `
 
 export default function FloatingButton() {
-  const [, setY] = useSpring(() => ({ y: 0 }))
+  const scrollToTop = useScrollToTop()
 
   return (
-    <ScrollTopButton
-      onClick={() => {
-        setY({
-          y: 0,
-          reset: true,
-          from: { y: window.scrollY },
-          onFrame: props => window.scroll(0, props.y),
-        })
-      }}
-    >
+    <ScrollTopButton onClick={scrollToTop}>
       <ArrowUpIcon height={32} width={32} fill={'#fff'} />
     </ScrollTopButton>
   )
