@@ -5,6 +5,7 @@ tags: 'javascript'
 ---
 
 ## 目錄
+
 - [目錄](#目錄)
 - [Arguments](#arguments)
 - [Rest Operator](#rest-operator)
@@ -12,15 +13,6 @@ tags: 'javascript'
 - [Reference](#reference)
 
 ## Arguments
-
-最近閱讀許多開源 Source Code，常看到 [arguments](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments) 這個東東。
-一開始還滿困惑的點在於: 它既不是 Window 底下的屬性，也不是傳進 function 的參數。這個 arguments 到底是從哪裡來的啊？
-
-根據 MDN 上的解釋：
-
-arguments is an Array-like object accessible inside functions that contains the values of the arguments passed to that function.
-
-簡單來說，`arguments` 就是一個能夠在 function 內存取的 **Array Like** Object，並且包含所有傳入這個 function 的參數值。
 
 ```js
 function foo() {
@@ -30,9 +22,14 @@ function foo() {
 foo('first argument', 'second argument', 'third argument')
 ```
 
+最近閱讀許多開源 Source Code，常看到 [arguments](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments) 這個傢伙。一開始還滿困惑的點在於：它既不是 global、window 底下的變數，也不是傳進 function 的參數，那這個 `arguments` 到底是從哪裡來的？
+
+簡單來說，**arguments 就是一個能夠在 function 內存取的 Array Like Object，這個物件包含所有傳入這個 function 的參數。**
+
+上面的程式碼的輸出結果如下：
 ![arguments](../images/arguments/001.png)
 
-Array-Like Object 有 Array 的屬性，但沒有 Array 的方法。
+這邊補充一下，所謂 Array-Like 指的就是**有 Array 的屬性，但沒有 Array 的方法。**
 
 ```js
 console.log(arguments[0]) // first argument
@@ -62,7 +59,7 @@ const foo = () => {
 
 ## Rest Operator
 
-The rest parameter syntax allows us to represent an indefinite number of arguments as an array.
+利用 Rest Operator 語法 `...`，讓我們**把非固定數量的參數作為 Array 處理**：
 
 ```js
 function myFun(a, b, ...manyMoreArgs) {
@@ -81,13 +78,13 @@ myFun('one', 'two', 'three', 'four', 'five', 'six')
 
 和 Arguments 比起來，使用 Rest Operator 的好處是
 
-1. 不需要再轉換成 Array
+1. 直接就是 Array，不需要再從 Array Like Object 進行轉換
 2. 可以任意在 Arrow Function 中使用
 3. ~~ES6 語法，就是比較潮~~
 
 ## 實戰應用
 
-主要的應用場景在於無法確定傳入的參數個數時：
+無法確定傳入的參數個數時：
 
 ```js
 const sum = (...args) => args.reduce((sum, value) => (sum += value), 0)
@@ -96,13 +93,13 @@ const max = (...args) =>
   args.reduce((max, value) => (value > max ? value : max))
 ```
 
-將所有參數向下傳遞：
+將所有參數向下傳遞時：
 
 ```js
-const foo = (...args) {
+const foo = (...args) => {
+  // Rest Operator
   // 略
-  bar(...args)
-  // 略
+  return bar(...args) //  要注意這個是 Spread Operator，和 Rest Operator 的作用不同
 }
 ```
 
