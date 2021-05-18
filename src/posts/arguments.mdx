@@ -14,19 +14,18 @@ tags: 'javascript'
 
 ## Arguments
 
+最近閱讀許多開源 Source Code，常看到 [arguments](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments) 這個傢伙。一開始還滿困惑的點在於：它既不是 global、window 底下的變數，也不是傳進 function 的參數，那這個 `arguments` 到底是從哪裡來的？
+
 ```js
 function foo() {
-  console.log(arguments)
+  console.log(arguments)  // where do you come from, bro?
 }
 
 foo('first argument', 'second argument', 'third argument')
 ```
 
-最近閱讀許多開源 Source Code，常看到 [arguments](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments) 這個傢伙。一開始還滿困惑的點在於：它既不是 global、window 底下的變數，也不是傳進 function 的參數，那這個 `arguments` 到底是從哪裡來的？
+簡單來說，**arguments 就是一個能夠在 function 內存取的 Array Like Object，這個物件包含所有傳入這個 function 的參數。**上面的程式碼的輸出結果如下：
 
-簡單來說，**arguments 就是一個能夠在 function 內存取的 Array Like Object，這個物件包含所有傳入這個 function 的參數。**
-
-上面的程式碼的輸出結果如下：
 ![arguments](../images/arguments/001.png)
 
 這邊補充一下，所謂 Array-Like 指的就是**有 Array 的屬性，但沒有 Array 的方法。**
