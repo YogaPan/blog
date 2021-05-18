@@ -1,9 +1,7 @@
 import React from 'react'
-import { useSpring } from 'react-spring'
 import styled from 'styled-components'
 import useScrollToTop from '@hooks/useScrollToTop'
 import ArrowUpIcon from '@assets/arrow-up.svg'
-import ShareIcon from '@assets/share.svg'
 
 const ScrollTopButton = styled.div`
   display: flex;

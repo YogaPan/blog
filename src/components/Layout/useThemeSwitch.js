@@ -1,6 +1,6 @@
 import { useLocalStorage, useUpdateEffect } from 'react-use'
 
-export default function() {
+export default function useThemeSwitch() {
   const [theme, setTheme] = useLocalStorage('theme', '')
   const isDarkTheme = theme === 'dark'
 
