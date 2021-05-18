@@ -37,7 +37,7 @@ tags: 'C# Dotnet'
 - [gRPC Timestamp](#grpc-timestamp)
 - [Reference](#reference)
 
-# 前言
+## 前言
 
 會寫這篇筆記的原因是，C# 官方對於 DateTime 的文件相當多，但是卻缺乏一個大方向的介紹，讓人很難入門不知道該從哪裡開始學起。
 
@@ -47,9 +47,9 @@ tags: 'C# Dotnet'
 
 C# 中的時間主要有三個物件: DateTime, DateTimeOffset 和 TimeSpan，以下我們一一介紹：
 
-# DateTime
+## DateTime
 
-## Constructor
+### Constructor
 
 指定年月日時分秒，以及 Kind
 
@@ -59,7 +59,7 @@ new DateTime(2020, 12, 31, 23, 59, 59, DateTimeKind.Utc);  // Kind: Utc
 new DateTime(2020, 12, 31, 23, 59, 59, DateTimeKind.Local);  // Kind: Local
 ```
 
-## Kind
+### Kind
 
 和 Javascript 中的 Date、Moment 不同的是，DateTime 有 Kind 這個屬性，表示這個時間代表哪個時區。例如：
 
@@ -93,14 +93,14 @@ var LocalTime = unspecifiedTime.toLocalTime();
 localTime.Hours();  // 8
 ```
 
-## Now
+### Now
 
 ```csharp
 DateTime.Now  // Kind: Local
 DateTime.UtcNow  // Kind: Utc
 ```
 
-## Parse
+### Parse
 
 https://docs.microsoft.com/en-us/dotnet/api/system.datetime.parse?view=netcore-3.1
 
@@ -116,7 +116,7 @@ DateTime.Parse("2020-01-01T00:00:00", null, DateTimeStyles.AdjustToUniversal);  
 DateTime.Parse("2020-01-01T00:00:00Z", null, DateTimeStyles.AdjustToUniversal);  // Kind: Utc
 ```
 
-## Get & Set
+### Get & Set
 
 ```csharp
 var t = new DateTime(2020, 1, 1);
@@ -137,9 +137,9 @@ var t1 = new DateTime(2020, 1, 1);
 var t2 = new DateTime(2019, d.Month, d.Day);
 ```
 
-## Manipulate
+### Manipulate
 
-### Add & Subtract
+#### Add & Subtract
 
 可以加上 TimeSpan
 
@@ -159,7 +159,7 @@ var interval = d2 - d1;
 Console.WriteLine(interval.Days);  // 365
 ```
 
-### StartOf & EndOf
+#### StartOf & EndOf
 
 DateTime 沒辦法和 moment 一樣直接求出 startOf 和 endOf。但是我們能夠用 Extension Methods 擴充:
 
@@ -175,7 +175,7 @@ public static DateTime EndOfDay(this DateTime date)
 }
 ```
 
-## Query
+### Query
 
 [DateTime.Compare(DateTime, DateTime) 方法 (System) | Microsoft Docs](https://docs.microsoft.com/zh-tw/dotnet/api/system.datetime.compare?view=netcore-3.1)
 
@@ -190,7 +190,7 @@ var t2 = new DateTime(2020, 1, 2);
 Console.WriteLine(DateTime.Compare(t1, t2) ? "Before" : "After")  // Before
 ```
 
-## Display
+### Display
 
 ```csharp
 var now = DateTime.Now;
@@ -201,7 +201,7 @@ Console.WriteLine(now.ToString("yyyy-MM-dd"));  // Customize Format
 
 ⚠️ 注意 y 和 d 不可以是大寫，在 C# 的 DateTime 裡會 Format 不出來。
 
-## Serialize
+### Serialize
 
 System.Text.Json 預設會轉為 ISO8601 的格式
 
@@ -211,22 +211,22 @@ Console.WriteLine(JsonSerializer.Serialize(DateTime.UtcNow)); // 2020-05-03T10:4
 
 客製化方法參考: [System.Text.Json 中的 DateTime 和 DateTimeOffset 支援 | Microsoft Docs](https://docs.microsoft.com/zh-tw/dotnet/standard/datetime/system-text-json-support#the-extended-iso-8601-12019-profile-in-systemtextjson)
 
-# TimeSpan
+## TimeSpan
 
 [TimeSpan 結構 (System) | Microsoft Docs](https://docs.microsoft.com/zh-tw/dotnet/api/system.timespan?view=netcore-3.1)
 
 TimeSpan 代表時間的間隔
 
-## Construct/Parse
+### Construct/Parse
 
-### 1. TimeSpan.Zero/TimeSpan()
+#### 1. TimeSpan.Zero/TimeSpan()
 
 ```csharp
 TimeSpan interval = new TimeSpan();
 Console.WriteLine(interval.Equals(TimeSpan.Zero));  // True
 ```
 
-### 2. TimeSpan(int hours, int minutes, int seconds)
+#### 2. TimeSpan(int hours, int minutes, int seconds)
 
 ```C$
 TimeSpan interval = new TimeSpan(2, 14, 18);
@@ -235,7 +235,7 @@ Console.WriteLine(interval.ToString());  // "02:14:18"
 
 ![TimeSpan](../images/dotnet-datetime/timeSpan.png)
 
-### 3. Static Method
+#### 3. Static Method
 
 ```csharp
 TimeSpan.FromDays(1)
@@ -244,7 +244,7 @@ TimeSpan.FromSeconds(14400)
 // ....
 ```
 
-### 4. By calling a method or performing an operation that returns a TimeSpan value
+#### 4. By calling a method or performing an operation that returns a TimeSpan value
 
 ```csharp
 var d1 = new DateTime(2020, 1, 1);
@@ -254,14 +254,14 @@ Console.WriteLine(interval.Days); // 365
 Console.WriteLine(interval.TotalDays); // 365.5084722222222
 ```
 
-### 5. Parsing from string
+#### 5. Parsing from string
 
 ```csharp
 var interval = TimeSpan.Parse("5.8:32:16");
 Console.WriteLine(interval.ToString()); // 5.08:32:16
 ```
 
-## Operation
+### Operation
 
 ```csharp
 var interval1 = TimeSpan.Parse("3:2:4");
@@ -273,13 +273,11 @@ var result = new DateTime(2020, 1, 1) + interval3;
 Console.WiteLine(result.ToString("O"));  // 2020-01-01T05:03:05.0000000
 ```
 
-# DateTimeOffset
+## DateTimeOffset
 
-> The [DateTimeOffset](https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset?view=netcore-3.1) structure includes a DateTime value,
-> together with an [Offset](https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset.offset?view=netcore-3.1) property that defines the difference between the current DateTimeOffset instance's date and time and Coordinated Universal Time (UTC).
-> Because it exactly defines a date and time relative to UTC, the DateTimeOffset structure does not include a Kind member,as the DateTime structure does.
+The [DateTimeOffset](https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset?view=netcore-3.1) structure includes a DateTime value, together with an [Offset](https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset.offset?view=netcore-3.1) property that defines the difference between the current DateTimeOffset instance's date and time and Coordinated Universal Time (UTC). Because it exactly defines a date and time relative to UTC, the DateTimeOffset structure does not include a Kind member,as the DateTime structure does.
 
-## Construct
+### Construct
 
 [Converting between DateTime and DateTimeOffset | Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/standard/datetime/converting-between-datetime-and-offset#conversions-from-datetime-to-datetimeoffset)
 
@@ -303,7 +301,7 @@ Implicit Conversion
 DateTimeOffset t = new DateTime(2020, 1, 1, 0, 0, 0);
 ```
 
-## Convert to DateTime
+### Convert to DateTime
 
 DateTimeOffset 有 DateTime 這個 property，不過這個 dateTime 的 Kind 是 `Unspecified`，所以不建議使用。比較好的方法是透過 `UtcDateTime` 和 `LocalDateTime` 這兩個 property 來得到 DateTime
 
@@ -314,14 +312,14 @@ tf.LocalDateTime;  //  2020-01-01T08:00:00, Kind: Local
 tf.UtcDateTime;  // 2020-01-01T:00:00:00, Kind: Utc
 ```
 
-## Convert to Unix Timestamp
+### Convert to Unix Timestamp
 
 ```csharp
 DateTimeOffset.Now.ToUnixTimeMilliseconds(); // 1588500202334
 DateTimeOffset.Now.ToUnixTimeSeconds(); // 1588500202
 ```
 
-## Parse
+### Parse
 
 ⚠️ 沒給予時區資訊會使用 Local Offset
 
@@ -331,7 +329,7 @@ DateTimeOffset.Parse("2020-01-01T00:00:00");  // default local time offset, Offs
 DateTimeOffset.Parse("2020-01-01T00:00:00+06:00");  // 2020-01-01T00:00:00, Offset: 6 hours
 ```
 
-## Manipulate
+### Manipulate
 
 - 和 DateTime 大同小異，不過要注意相減時會把 Offset 的差納入計算。
 - 沒有 Kind。
@@ -342,19 +340,19 @@ DateTimeOffset.Parse("2020-01-01T00:00:00+06:00");  // 2020-01-01T00:00:00, Offs
 DateTimeOffset.UtcNow.ToOffset(TimeSpan.FromHours(8));
 ```
 
-## Query
+### Query
 
 同 DateTime
 
-## Display
+### Display
 
 同 DateTime
 
-## Serialize/Deserialize
+### Serialize/Deserialize
 
 同 DateTime
 
-# gRPC Timestamp
+## gRPC Timestamp
 
 - [Protobuf 時間屬性該如何表示？ - Yowko's Notes](https://blog.yowko.com/protobuf-datetime-timestamp/)
 - [Google.Protobuf.WellKnownTypes.Timestamp Class Reference](https://developers.google.com/protocol-buffers/docs/reference/csharp/class/google/protobuf/well-known-types/timestamp)
@@ -397,6 +395,6 @@ public static DateTime? ToNullableDateTime(NullableTimestamp timestamp)
 }
 ```
 
-# Reference
+## Reference
 
 [Dropbox paper - C# 的時間管理術](https://paper.dropbox.com/doc/C-vRvh1MCurLWO2ji6tNqZD#:uid=911677147198949746518556&h2=Now)

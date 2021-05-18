@@ -4,6 +4,8 @@ date: '2020-01-02'
 tag: 'javascript'
 ---
 
+LocalStorage 是瀏覽器最簡單的資料儲存方法，儲存的資料不會隨著頁面重整或是瀏覽器關閉而丟失。這篇文章會紀錄 localStorage 的使用方式和情境，以及和 Cookie 的比較。
+
 ## 目錄
 
 - [目錄](#目錄)
@@ -14,12 +16,9 @@ tag: 'javascript'
 - [Session Storage](#session-storage)
 - [敏感資訊](#敏感資訊)
 - [使用情境](#使用情境)
-- [超級比一比](#超級比一比)
 - [React Hooks](#react-hooks)
 - [LocalForage](#localforage)
 - [Reference](#reference)
-
-LocalStorage 是瀏覽器最簡單的資料儲存方法，儲存的資料不會隨著頁面重整或是瀏覽器關閉而丟失。這篇文章會紀錄 localStorage 的使用方式和情境，以及和 Cookie 的比較。
 
 ## Web Storage API
 
@@ -80,11 +79,19 @@ JSON.parse(localStorage.getItem('person')) // {name: "Galtz", age: 23}
 
 ## Life Cycle
 
-不會隨著頁面重整或是瀏覽器關閉而丟失。除非呼叫 **localStorage.removeItem** 或是 **localStorage.clear**，否則永遠存在。
+不會隨著頁面重整或是瀏覽器關閉而丟失。除非呼叫 `localStorage.removeItem` 或是 `localStorage.clear`，否則永遠存在。
 
 ## Session Storage
 
 Session Storage 和 Local Storage 除了生命週期不同以外幾乎一模一樣。Session Storage 的生命周期只存在瀏覽囂的單一分頁中 ，也就是另開新分頁的話 ，又是一個新的 sessionStorage ，預設無逾期時間，除非關閉該分頁、關閉瀏覽器等，sessionStorage 就會消失。
+
+| 特性            | Cookie            | LocalStorage         | SessionStorage         |
+| --------------- | ----------------- | -------------------- | ---------------------- |
+| 生命週期        | 預設為 session    | 長生不老             | session                |
+| 大小限制        | 4K                | 5MB 以上             | 5MB 以上               |
+| 發送至 Server   | 每次              | No                   | No                     |
+| 設置方法        | Header Set-Cookie | localStorage.setItem | sessionStorage.setItem |
+| Client 讀取方法 | document.cookie   | localStorage.getItem | sessionStorage.getItem |
 
 ## 敏感資訊
 
@@ -97,16 +104,6 @@ Session Storage 和 Local Storage 除了生命週期不同以外幾乎一模一�
 ## 使用情境
 
 TODO
-
-## 超級比一比
-
-| 特性            | Cookie            | LocalStorage         | SessionStorage         |
-| --------------- | ----------------- | -------------------- | ---------------------- |
-| 生命週期        | 預設為 session    | 萬壽無疆             | session                |
-| 大小限制        | 4K                | 5MB 以上             | 5MB 以上               |
-| 發送至 Server   | 每次              | No                   | No                     |
-| 設置方法        | Header Set-Cookie | localStorage.setItem | sessionStorage.setItem |
-| Client 讀取方法 | document.cookie   | localStorage.getItem | sessionStorage.getItem |
 
 ## React Hooks
 
@@ -154,7 +151,7 @@ LocalForage 解決了以下幾個問題:
 
 1. 因為使用 IndexedDB ，效能較好、儲存大小幾乎沒有限制，且可以非同步操作
 2. API 幾乎和 LocalStorage 一模一樣，解決 IndexedDB 不好上手的困擾
-3. 自動進行 **JSON.parse()** 和 **JSON.stringify()**
+3. 自動進行 `JSON.parse()` 和 `JSON.stringify()`
 
 ## Reference
 
