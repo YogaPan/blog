@@ -136,7 +136,7 @@ counter2.getCount() //10
 
 ### Currying
 
-在 Currying 之前，我們再來看 Closure 的另一個特性：Closure Scope Chain
+在 Currying 之前，我們再來看 Closure 的另一個特性：Closure Scope Chaining
 
 For every closure we have three scopes:
 
@@ -167,10 +167,10 @@ function outer2() {
 ```
 
 因為在目前這個 scope 裡面找不到變數，就會去上一層 function 的 scope 裡面尋找，如果還是找不到，就會再往上一層直到找到為止：
-local function scope -> outer1 function scope -> outer2 function scope → global scope
-這就是 Closure Scope Channing 的概念。
+`local function scope -> outer1 function scope -> outer2 function scope → global scope`
+這就是 Closure Scope Chaining 的概念。
 
-有了 Closure Scope Channing 的概念後，就可以來看看 currying。
+有了 Closure Scope Chaining 的概念後，就可以來看看 currying。
 簡而言之，Currying 就是把多參數（Arity > 1）函數轉化成一系列單參數（Arity = 1）的函數
 
 ```js
