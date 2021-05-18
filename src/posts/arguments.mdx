@@ -20,7 +20,7 @@ tags: 'javascript'
 
 arguments is an Array-like object accessible inside functions that contains the values of the arguments passed to that function.
 
-簡單來說，arguments 就是一個能夠在 **function** 內存取的 **Array Like** 物件，並且包含所有傳入這個 function 的參數值。
+簡單來說，`arguments` 就是一個能夠在 function 內存取的 **Array Like** Object，並且包含所有傳入這個 function 的參數值。
 
 ```js
 function foo() {
@@ -43,7 +43,7 @@ console.log(arguments[2]) // third argument
 arguments.push('forth argument')
 ```
 
-要把 arguments 轉換成 Array，可以用以下幾種方式：
+要把 `arguments` 轉換成 Array，可以用以下幾種方式：
 
 ```js
 const arr = Array.prototype.slice.call(arguments)

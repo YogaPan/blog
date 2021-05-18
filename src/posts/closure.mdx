@@ -15,8 +15,6 @@ tags: 'javascript'
   - [Currying](#currying)
   - [Memorized Function](#memorized-function)
 - [Reference](#reference)
-  - [常見中英詞彙對照表](#常見中英詞彙對照表)
-  - [Further Reading](#further-reading)
 
 ## 基本觀念
 
@@ -72,8 +70,8 @@ A closure is the combination of a function bundled together (enclosed) with refe
 
 重點是這句：a closure gives you access to an outer function’s scope from an inner function.
 
-以上範例中，`counter` 就是 outer function, getCount, increment, decrement 則是 inner function。
-由於 child scope 能夠存取到 parent scope，所以 `getCount` 和 `increment`, `decrement` 能夠存取變數 count 。
+以上範例中，`counter` 就是 **outer function**, `getCount`, `increment`, `decrement` 則是 **inner function**。
+由於 child scope 能夠存取到 parent scope，所以 `getCount` 和 `increment`, `decrement` 能夠存取變數 `count` 。
 
 如果這個時候我們把這 inner function 回傳的話會怎樣呢？
 
@@ -242,18 +240,6 @@ memorizedExpensiveCalculation(11) // 參數和上次呼叫時不同，重新計�
 ---
 
 ## Reference
-
-### 常見中英詞彙對照表
-
-| en-gb    | zh-tw  |
-| -------- | ------ |
-| Scope    | 作用域 |
-| Closure  | 閉包   |
-| Currying | 柯里化 |
-| Function | 函數   |
-| Variable | 變數   |
-
-### Further Reading
 
 - https://blog.techbridge.cc/2018/12/08/javascript-closure/
 - https://gist.github.com/zcaceres/bb0eec99c02dda6aac0e041d0d4d7bf2
