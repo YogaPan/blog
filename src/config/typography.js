@@ -60,7 +60,7 @@ const customizedTheme = {
   ],
   headerFontFamily: ['Titillium Web', 'Noto Sans TC', 'sans-serif'],
   bodyFontFamily: ['Cabin Condensed', 'Noto Sans TC', 'georgia', 'sans-serif'],
-  plugins: [new CodePlugin()],
+  plugins: [CodePlugin()],
 }
 
 const typography = new Typography(customizedTheme)
