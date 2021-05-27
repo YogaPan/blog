@@ -8,7 +8,7 @@ const AboutMePage = () => {
     config: { duration: 200 },
     opacity: 1,
     transform: 'translateY(0)',
-    from: { opacity: 0, transform: 'translateY(10px)' },
+    from: { opacity: 0, transform: 'translateY(10px)' }
   })
 
   return (

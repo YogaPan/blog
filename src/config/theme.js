@@ -26,6 +26,6 @@ export default {
     blacks: ['#000', '#0f111a', '#090b10'],
     whites: ['#fff', '#f8f8f8'],
     green: ['#1ca086', '#3fccb0'],
-    blue: ['#0077b5'],
-  },
+    blue: ['#0077b5']
+  }
 }
