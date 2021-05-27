@@ -18,7 +18,7 @@ export default function useScrollToElement() {
     if (!isStopped) window.scroll(0, ctrl.get().y)
   }
 
-  const scrollToTarget = (node) => {
+  const scrollToTarget = node => {
     const value = window.scrollY + node.getBoundingClientRect().top
     window.addEventListener('wheel', onWheel)
     api.start({
@@ -26,7 +26,7 @@ export default function useScrollToElement() {
       reset: true,
       from: { y: window.scrollY },
       onRest,
-      onChange,
+      onChange
     })
   }
 

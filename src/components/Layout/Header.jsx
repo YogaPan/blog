@@ -54,7 +54,7 @@ const Link = styled(BaseLink)`
 `
 
 const OutsideLink = styled.a.attrs({
-  target: '_blank',
+  target: '_blank'
 })`
   ${linkStyleMixin}
 `
@@ -100,11 +100,11 @@ const Header = () => {
 }
 
 Header.propTypes = {
-  siteTitle: string,
+  siteTitle: string
 }
 
 Header.defaultProps = {
-  siteTitle: ``,
+  siteTitle: ``
 }
 
 export default React.memo(Header)

@@ -34,5 +34,5 @@ export default function Layout({ children }) {
 }
 
 Layout.propTypes = {
-  children: node.isRequired,
+  children: node.isRequired
 }

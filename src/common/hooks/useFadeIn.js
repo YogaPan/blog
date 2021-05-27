@@ -5,6 +5,6 @@ export default function useFadeIn() {
     config: { duration: 200 },
     from: { opacity: 0, transform: 'translateY(10px)' },
     opacity: 1,
-    transform: 'translateY(0)',
+    transform: 'translateY(0)'
   })
 }

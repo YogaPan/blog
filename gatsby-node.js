@@ -8,7 +8,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     createNodeField({
       name: 'slug',
       node,
-      value: slug,
+      value: slug
     })
   }
 }
@@ -35,8 +35,8 @@ exports.createPages = async ({ graphql, actions }) => {
       path: node.fields.slug,
       component: path.resolve(`./src/templates/blog-post.js`),
       context: {
-        slug: node.fields.slug,
-      },
+        slug: node.fields.slug
+      }
     })
   })
 }
@@ -52,8 +52,8 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
         '@hooks': path.resolve(__dirname, 'src/common/hooks'),
         '@utils': path.resolve(__dirname, 'src/utils'),
         '@assets': path.resolve(__dirname, 'src/assets'),
-        '@images': path.resolve(__dirname, 'src/images'),
-      },
-    },
+        '@images': path.resolve(__dirname, 'src/images')
+      }
+    }
   })
 }

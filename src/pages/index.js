@@ -34,7 +34,7 @@ const utils = {
       <p style={{ marginBottom: 16 }}>{node.frontmatter.date}</p>
       {/* <p style={{ marginBottom: 16 }}>{node.frontmatter.tags}</p> */}
     </Box>
-  ),
+  )
 }
 
 export default function IndexPage({ data }) {

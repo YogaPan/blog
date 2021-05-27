@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `Galtz's Blog`,
     description: `Galtz's Blog`,
-    author: `galtz0321@gmail.com`,
+    author: `galtz0321@gmail.com`
   },
   plugins: [
     `gatsby-plugin-styled-components`,
@@ -16,8 +16,8 @@ module.exports = {
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 1200,
-            },
+              maxWidth: 1200
+            }
           },
           `gatsby-remark-autolink-headers`,
           {
@@ -27,31 +27,31 @@ module.exports = {
               inlineCodeMarker: null,
               showLineNumbers: true,
               noInlineHighlight: false,
-              escapeEntities: {},
-            },
-          },
-        ],
-      },
+              escapeEntities: {}
+            }
+          }
+        ]
+      }
     },
     {
       resolve: 'gatsby-plugin-react-svg',
       options: {
-        rule: { include: /assets/ },
-      },
+        rule: { include: /assets/ }
+      }
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `posts`,
-        path: `${__dirname}/src/posts`,
-      },
+        path: `${__dirname}/src/posts`
+      }
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/images`,
-      },
+        path: `${__dirname}/src/images`
+      }
     },
     {
       resolve: `gatsby-plugin-manifest`,
@@ -62,15 +62,15 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/brand.png`,
-      },
+        icon: `src/images/brand.png`
+      }
     },
     {
       resolve: `gatsby-plugin-typography`,
       options: {
-        pathToConfigModule: `src/config/typography`,
-      },
+        pathToConfigModule: `src/config/typography`
+      }
     },
-    `gatsby-plugin-offline`,
-  ],
+    `gatsby-plugin-offline`
+  ]
 }

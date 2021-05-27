@@ -8,12 +8,12 @@ const customCSSProperties = {
   paddingHorizontal: value => `padding-right:${value};padding-left:${value};`,
   gapVertical: value => `>*+*{margin-top:${value};};`,
   gapHorizontal: value => `>*+*{margin-left:${value};};`,
-  css: value => value,
+  css: value => value
 }
 
 const supportedCSSProperties = Object.keys({
   ...document.body.style,
-  ...customCSSProperties,
+  ...customCSSProperties
 }).reduce((dict, key) => {
   dict[key] = true
   return dict
