@@ -17,9 +17,9 @@
     "gatsby-plugin-mdx": "^2.6.0",
     "gatsby-plugin-offline": "^4.6.0",
     "gatsby-plugin-react-helmet": "^4.6.0",
+    "gatsby-plugin-react-svg": "^3.0.1",
     "gatsby-plugin-sharp": "^3.6.0",
     "gatsby-plugin-styled-components": "^4.6.0",
-    "gatsby-plugin-react-svg": "^3.0.1",
     "gatsby-plugin-typography": "^3.6.0",
     "gatsby-remark-autolink-headers": "^4.3.0",
     "gatsby-remark-images": "^5.3.0",
@@ -45,6 +45,9 @@
     "typography-theme-funston": "^0.16.19"
   },
   "devDependencies": {
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-react": "^7.23.2",
     "prettier": "^2.3.0"
   },
   "keywords": [
@@ -54,7 +57,8 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "format": "prettier --write \"{scripts,src}/**/*.{js,jsx,json,md}\" \"gatsby-*.js\"",
+    "lint": "eslint \"{scripts,src}/**/*.{js,jsx}\" \"gatsby-*.js\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \"",
