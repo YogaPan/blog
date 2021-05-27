@@ -81,7 +81,7 @@ const Header = () => {
     <HeaderContainer>
       <Link to="/" css={brandCss}>
         <BrandIcon />
-        <span>Galtz's Blog</span>
+        <span>Galtz&apos;s Blog</span>
       </Link>
       <SubContainer>
         <OutsideLink href="https://github.com/YogaPan">
