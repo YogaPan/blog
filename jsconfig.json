@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": false,
+    "baseUrl": ".",
+    "jsx": "react",
+    "experimentalDecorators": true,
+    "target": "es2020",
+    "paths": {
+      "@app/*": ["./src/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@components/*": ["./src/components/*"],
+      "@config/*": ["./src/config/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@images/*": ["./src/images/*"]
+    }
+  },
+  "exclude": ["node_modules", "public", ".cache"]
+}
