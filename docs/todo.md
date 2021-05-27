@@ -16,6 +16,8 @@
 - [ ] List Mode/Grid Mode
 - [ ] 文章大分類
 - [ ] Use Typescript
+- [ ] Apply Design System
+- [ ] Add Git Commit SHA
 
 ## Page
 
