@@ -104,7 +104,7 @@ Header.propTypes = {
 }
 
 Header.defaultProps = {
-  siteTitle: ``
+  siteTitle: ''
 }
 
 export default React.memo(Header)

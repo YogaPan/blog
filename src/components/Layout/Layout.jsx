@@ -1,12 +1,12 @@
-import { ThemeProvider } from '@emotion/react'
 import React from 'react'
+import { Flex } from 'rebass'
 import { node } from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
+import theme from '@config/theme'
+import { ThemeProvider } from '@emotion/react'
 import Header from './Header'
 import Footer from './Footer'
 import FloatingButton from './FloatingButton'
-import { Flex } from 'rebass'
-import theme from '@config/theme'
 
 export default function Layout({ children }) {
   const data = useStaticQuery(graphql`
