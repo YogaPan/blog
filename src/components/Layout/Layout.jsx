@@ -21,14 +21,16 @@ export default function Layout({ children }) {
 
   return (
     <ThemeProvider theme={theme}>
-      <Flex flexDirection="column" alignItems="center" minHeight="100vh">
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <Flex flexDirection="column" flex="1" maxWidth={840}>
-          {children}
+      <Flex justifyContent="center" width="100%" minHeight="100vh">
+        <Flex flexDirection="column" flex="0 1 880px" padding="0 20px">
+          <Header siteTitle={data.site.siteMetadata.title} />
+          <Flex flexDirection="column" flex="1">
+            {children}
+          </Flex>
         </Flex>
-        <Footer />
-        <FloatingButton />
       </Flex>
+      <Footer />
+      <FloatingButton />
     </ThemeProvider>
   )
 }

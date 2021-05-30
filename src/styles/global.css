@@ -126,21 +126,31 @@ table td {
   border-bottom: 1px solid var(--border-color);
 }
 
-code[class*='language-'],
-pre[class*='language-'] {
-  color: black;
-  background: none;
+pre {
+  border-radius: 3px;
+  padding: 1.4em;
+  overflow: auto;
+  word-wrap: normal; /* So code will scroll on Safari. */
 }
 
-pre[class*='language-']::selection,
-pre[class*='language-'] ::selection,
-code[class*='language-']::selection,
-code[class*='language-'] ::selection {
-  background: #b3d4fc;
+code {
+  font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Roboto Mono',
+    'Droid Sans Mono', 'Liberation Mono', Menlo, Courier, monospace;
+  border-radius: 3px;
 }
 
-:not(pre) > code[class*='language-'],
-pre[class*='language-'] {
+pre code {
+  line-height: 1.4;
+}
+
+:not(pre) > code {
+  padding: 0 0.3em;
+  border-radius: 3px;
+  white-space: normal;
+}
+
+:not(pre) > code,
+pre {
   background: #f5f2f0;
 }
 

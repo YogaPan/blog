@@ -1,8 +1,8 @@
 import { Link as BaseLink } from 'gatsby'
 import React from 'react'
+import { Flex } from 'rebass'
 import { string } from 'prop-types'
 import styled, { css } from 'styled-components'
-import { gapHorizontal } from '@utils/style'
 import GithubIcon from '@assets/github.svg'
 import LinkedInIcon from '@assets/linkedin.svg'
 import BrandIcon from '@assets/brand.svg'
@@ -59,31 +59,19 @@ const OutsideLink = styled.a.attrs({
   ${linkStyleMixin}
 `
 
-const HeaderContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.45rem 1.0875rem;
-  height: 100px;
-  width: 100%;
-  max-width: 840px;
-`
-
-const SubContainer = styled.div`
-  ${gapHorizontal('16px')}
-  display: flex;
-  align-items: center;
-`
-
 const Header = () => {
   return (
-    <HeaderContainer>
+    <Flex
+      alignItems="center"
+      justifyContent="space-between"
+      height={100}
+      width="100%"
+    >
       <Link to="/" css={brandCss}>
         <BrandIcon />
         <span>Galtz&apos;s Blog</span>
       </Link>
-      <SubContainer>
+      <Flex alignItems="center" sx={{ '> * + *': { marginLeft: 16 } }}>
         <OutsideLink href="https://github.com/YogaPan">
           <GithubIcon />
         </OutsideLink>
@@ -94,8 +82,8 @@ const Header = () => {
           <LinkedInIcon />
         </OutsideLink>
         <ThemeSwitch />
-      </SubContainer>
-    </HeaderContainer>
+      </Flex>
+    </Flex>
   )
 }
 
