@@ -14,7 +14,6 @@ const ScrollTopButton = styled.div`
   position: fixed;
   right: 20px;
   bottom: 20px;
-  background-color: black;
   background-color: var(--scroll-button-color);
   cursor: pointer;
   transition: var(--transition-duration);

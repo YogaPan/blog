@@ -27,9 +27,11 @@ function Article({ node }) {
   if (/^WIP:/.test(node.frontmatter.title)) return null
   return (
     <Box key={node.id} py={24}>
-      <ArticleTitle to={node.fields.slug}>
-        {node.frontmatter.title}
-      </ArticleTitle>
+      <h1>
+        <ArticleTitle to={node.fields.slug}>
+          {node.frontmatter.title}
+        </ArticleTitle>
+      </h1>
       <p>{node.excerpt}</p>
       <p style={{ marginBottom: 16 }}>{node.frontmatter.date}</p>
       {/* <p style={{ marginBottom: 16 }}>{node.frontmatter.tags}</p> */}
