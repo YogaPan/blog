@@ -11,8 +11,8 @@ import useFadeIn from '@hooks/useFadeIn'
 
 const Title = styled.h1`
   text-align: center;
-  margin-top: 56px;
-  margin-bottom: 56px;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
 `
 
 const AnimatedBox = animated(Box)
