@@ -66,9 +66,7 @@ counter()
 
 關於 [Closure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) 的定義：
 
-A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment). In other words, a closure gives you access to an outer function’s scope from an inner function. In JavaScript, closures are created every time a function is created, at function creation time.
-
-重點是這句：a closure gives you access to an outer function’s scope from an inner function.
+A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment). In other words, **a closure gives you access to an outer function’s scope from an inner function.** In JavaScript, closures are created every time a function is created, at function creation time.
 
 以上範例中，`counter` 就是 **outer function**, `getCount`, `increment`, `decrement` 則是 **inner function**。
 由於 child scope 能夠存取到 parent scope，所以 `getCount` 和 `increment`, `decrement` 能夠存取變數 `count` 。
@@ -84,12 +82,12 @@ Example 1:
 ```js
 const counter = (function (initialCount) {
   let count = initialCount || 0 // private property
-  const change = (v) => (count += v) // private method
+  const change = v => (count += v) // private method
   return {
     // return public methods
     getCount: () => count,
     increment: () => change(1),
-    decrement: () => change(-1),
+    decrement: () => change(-1)
   }
 })()
 
@@ -105,12 +103,12 @@ Example 2:
 ```js
 function createCounter(initialCount) {
   let count = initialCount || 0 // private property
-  const change = (v) => (count += v) // private method
+  const change = v => (count += v) // private method
   return {
     // return public methods
     getCount: () => count,
     increment: () => change(1),
-    decrement: () => change(-1),
+    decrement: () => change(-1)
   }
 }
 
@@ -134,13 +132,7 @@ counter2.getCount() //10
 
 ### Currying
 
-在 Currying 之前，我們再來看 Closure 的另一個特性：Closure Scope Chaining
-
-For every closure we have three scopes:
-
-1. Local Scope (Own scope)
-2. Outer Functions Scope
-3. Global Scope
+在 Currying 之前，我們再來看 Closure 的另一個特性：**Closure Scope Chaining**
 
 ```js
 // Global Scope
@@ -164,7 +156,13 @@ function outer2() {
 }
 ```
 
-因為在目前這個 scope 裡面找不到變數，就會去上一層 function 的 scope 裡面尋找，如果還是找不到，就會再往上一層直到找到為止：
+在每個 Closure 中，我們都能夠存取三個 Scope：
+
+1. Local Scope (Own scope)
+2. Outer Functions Scope
+3. Global Scope
+
+在目前這個 scope 裡面找不到變數，就會去上一層 function 的 scope 裡面尋找，如果還是找不到，就會再往上一層直到找到為止：
 `local function scope -> outer1 function scope -> outer2 function scope → global scope`
 這就是 Closure Scope Chaining 的概念。
 
@@ -196,7 +194,7 @@ sum(1)(2)(3) // 6
 建議透過 [Arrow Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) 簡化成
 
 ```js
-const sum = (x) => (y) => (z) => x + y + z
+const sum = x => y => z => x + y + z
 sum(1)(2)(3) // 6
 ```
 

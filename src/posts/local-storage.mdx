@@ -4,7 +4,7 @@ date: '2020-01-02'
 tag: 'javascript'
 ---
 
-LocalStorage 是瀏覽器最簡單的資料儲存方法，儲存的資料不會隨著頁面重整或是瀏覽器關閉而丟失。這篇文章會紀錄 localStorage 的使用方式和情境，以及和 Cookie 的比較。
+**LocalStorage 是用 Key-Value 形式儲存資料在瀏覽器的方法，並且不會隨著頁面重整、關閉或是 Expire 而丟失**。這篇文章會紀錄 localStorage 的使用方式和情境，以及和 Cookie 的比較。
 
 ## 目錄
 
@@ -14,7 +14,8 @@ LocalStorage 是瀏覽器最簡單的資料儲存方法，儲存的資料不會�
 - [DevTools](#devtools)
 - [Life Cycle](#life-cycle)
 - [Session Storage](#session-storage)
-- [敏感資訊](#敏感資訊)
+- [Cookie vs Local Storage vs Session Storage](#cookie-vs-local-storage-vs-session-storage)
+- [安全性](#安全性)
 - [使用情境](#使用情境)
 - [React Hooks](#react-hooks)
 - [LocalForage](#localforage)
@@ -22,14 +23,7 @@ LocalStorage 是瀏覽器最簡單的資料儲存方法，儲存的資料不會�
 
 ## Web Storage API
 
-[window.localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) 能夠讓妳存取當前 Domain 下的 [Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage) 物件。Storage 是用 Key Value 的形式儲存資料，可以直接用物件的方式操作:
-
-```js
-localStorage.theme = dark
-console.log(localStorage.theme) // dark
-```
-
-但用以上方法操作會有[潛在的陷阱](https://2ality.com/2012/01/objects-as-maps.html)，所以建議呼叫以下四隻 API 進行操作:
+[window.localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) 能夠讓妳存取當前 Domain 下的 [Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage) 物件，並透過以下四隻 API 進行操作:
 
 - 設定資料: **[localStorage.setItem(key, value)](https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem)**
 - 獲取資料: **let storageValue = [localStorage.getItem(key)](https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem)**
@@ -38,7 +32,7 @@ console.log(localStorage.theme) // dark
 
 ### 轉型問題
 
-Storage 中的 key value 為 string 型態，所以如果給予非 string 的 key value 會自動轉型。
+Storage 中的 value 為 string 型態，所以如果給予非 string 的 value 會自動轉型。
 
 ```js
 localStorage.setItem('count', 41)
@@ -60,15 +54,8 @@ localStorage.getItem('person') // [object Object]
 解決方法： 使用 [JSON Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) 進行轉換
 
 ```js
-localStorage.setItem(
-  'person',
-  JSON.stringify({
-    name: 'Galtz',
-    age: 23,
-  })
-)
-
-JSON.parse(localStorage.getItem('person')) // {name: "Galtz", age: 23}
+localStorage.setItem('author', JSON.stringify({ name: 'Galtz', age: 23, }))
+JSON.parse(localStorage.getItem('author'))
 ```
 
 ## DevTools
@@ -83,7 +70,9 @@ JSON.parse(localStorage.getItem('person')) // {name: "Galtz", age: 23}
 
 ## Session Storage
 
-Session Storage 和 Local Storage 除了生命週期不同以外幾乎一模一樣。Session Storage 的生命周期只存在瀏覽囂的單一分頁中 ，也就是另開新分頁的話 ，又是一個新的 sessionStorage ，預設無逾期時間，除非關閉該分頁、關閉瀏覽器等，sessionStorage 就會消失。
+Session Storage 和 Local Storage 除了生命週期不同以外幾乎一模一樣。Session Storage 的生命周期只存在瀏覽囂的單一分頁中 ，也就是另開新分頁的話 ，又是一個新的 sessionStorage ，預設無逾期時間，除非關閉該分頁、關閉瀏覽器，sessionStorage 才會消失。
+
+## Cookie vs Local Storage vs Session Storage
 
 | 特性            | Cookie            | LocalStorage         | SessionStorage         |
 | --------------- | ----------------- | -------------------- | ---------------------- |
@@ -93,9 +82,9 @@ Session Storage 和 Local Storage 除了生命週期不同以外幾乎一模一�
 | 設置方法        | Header Set-Cookie | localStorage.setItem | sessionStorage.setItem |
 | Client 讀取方法 | document.cookie   | localStorage.getItem | sessionStorage.getItem |
 
-## 敏感資訊
+## 安全性
 
-安全性的問題我還不太暸解，可以先參考以下幾則討論
+能否用來儲存敏感資料目前有很多爭論，可以先參考以下幾則討論
 
 - https://stackoverflow.com/questions/3718349/html5-localstorage-security
 - https://stackoverflow.com/questions/17280390/can-local-storage-ever-be-considered-secure/24677597#24677597
