@@ -4,6 +4,17 @@
   "description": "galtz's blog",
   "version": "0.1.0",
   "author": "Galtz <galtz0321@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write \"{scripts,src}/**/*.{js,jsx,json,md}\" \"gatsby-*.js\"",
+    "lint": "eslint \"{scripts,src}/**/*.{js,jsx}\" \"gatsby-*.js\"",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \"",
+    "clear": "rm -rf node_modules public .cache "
+  },
   "dependencies": {
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
@@ -40,7 +51,6 @@
     "styled-components": "^5.3.0",
     "styled-system": "^5.1.5",
     "typography": "^0.16.21",
-    "typography-plugin-code": "^0.16.20",
     "typography-theme-fairy-gates": "^0.16.19",
     "typography-theme-funston": "^0.16.19"
   },
@@ -50,26 +60,5 @@
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-react": "^7.24.0",
     "prettier": "^2.3.0"
-  },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "MIT",
-  "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "format": "prettier --write \"{scripts,src}/**/*.{js,jsx,json,md}\" \"gatsby-*.js\"",
-    "lint": "eslint \"{scripts,src}/**/*.{js,jsx}\" \"gatsby-*.js\"",
-    "start": "npm run develop",
-    "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \"",
-    "clear": "rm -rf node_modules public .cache "
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
-  },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
   }
 }
