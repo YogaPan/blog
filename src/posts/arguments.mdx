@@ -14,7 +14,7 @@ tags: 'javascript'
 
 ## Arguments
 
-最近閱讀許多開源 Source Code，常看到 [arguments](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments) 這個傢伙。一開始還滿困惑的點在於：它既不是 global、window 底下的變數，也不是傳進 function 的參數，那這個 `arguments` 到底是從哪裡來的？
+最近閱讀許多開源 Source Code，常看到 [arguments](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments) 這個傢伙：
 
 ```js
 function foo() {
@@ -24,7 +24,7 @@ function foo() {
 foo('first argument', 'second argument', 'third argument')
 ```
 
-簡單來說，**arguments 就是一個能夠在 function 內存取的 Array Like Object，這個物件包含所有傳入這個 function 的參數。**上面的程式碼的輸出結果如下：
+這個 `arguments` 到底是什麼？簡單來說，**arguments 就是一個能夠在 function 內存取的 Array Like Object，這個物件包含所有傳入這個 function 的參數**。上面的程式碼的輸出結果如下：
 
 ![arguments](../images/arguments/001.png)
 
