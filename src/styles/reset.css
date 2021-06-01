@@ -1,0 +1,19 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a {
+  background-image: none;
+  cursor: pointer;
+}
+
+div {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  margin-bottom: 0;
+}

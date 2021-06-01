@@ -1,75 +1,7 @@
-* {
-  box-sizing: border-box;
-}
-
 html {
-  --brand-color: #1ca086;
-  --link-hover-color: #3fccb0;
-  --linkedin-color: #0077b5;
-
-  --primary-bg-color: #fff;
-  --primary-black-bg-color: #0f111a;
-
-  --primary-text-color: rgba(0, 0, 0, 0.8);
-  --primary-white-text-color: #fff;
-
-  --code-bg-color: #f8f8f8;
-
-  --primary-icon-color: rgb(50, 56, 63);
-  --primary-icon-hover-color: #777;
-
-  --theme-icon-color: var(--primary-icon-color);
-  --theme-icon-hover-color: var(--brand-color);
-
-  --border-color: rgba(0, 0, 0, 0.12);
-
-  --transition-duration: 0.2s;
-
-  --scroll-button-color: black;
-  --scroll-button-shadow: rgba(255, 255, 255, 0.5) 0px -1px 10px;
-
   color: var(--primary-text-color);
   background-color: var(--primary-bg-color);
   transition: var(--transition-duration);
-}
-
-html[data-theme='dark'] {
-  --primary-bg-color: #0f111a;
-  --primary-black-bg-color: #090b10;
-
-  --primary-text-color: rgba(255, 255, 255, 0.8);
-  --primary-white-text-color: #fff;
-
-  --code-bg-color: var(--primary-black-bg-color);
-
-  --primary-icon-color: var(--brand-color);
-  --primary-icon-hover-color: #fff;
-
-  --theme-icon-color: var(--brand-color);
-  --theme-icon-hover-color: var(--primary-icon-hover-color);
-
-  --border-color: rgba(255, 255, 255, 0.24);
-
-  --scroll-button-color: rgb(50, 56, 63);
-  --scroll-button-shadow: none;
-}
-
-html::-webkit-scrollbar {
-  width: 5px;
-}
-
-html::-webkit-scrollbar-thumb {
-  background: #000;
-  border-radius: 5px;
-}
-
-html[data-theme='dark']::-webkit-scrollbar-track {
-  background: var(--primary-black-bg-color);
-}
-
-html[data-theme='dark']::-webkit-scrollbar-thumb {
-  background: var(--brand-color);
-  border-radius: 5px;
 }
 
 @media (min-width: 320px) {
@@ -103,13 +35,6 @@ li {
   color: var(--primary-text-color);
 }
 
-a {
-  text-shadow: none;
-  background-image: none;
-  cursor: pointer;
-  transition: var(--transition-duration);
-}
-
 a:hover {
   color: var(--link-hover-color);
 }
@@ -119,15 +44,6 @@ a.anchor {
   vertical-align: baseline;
 }
 
-div {
-  margin: 0;
-  padding: 0;
-}
-
-img {
-  margin-bottom: 0;
-}
-
 table {
   color: var(--primary-text-color);
   transition: var(--transition-duration);
@@ -135,103 +51,4 @@ table {
 
 table td {
   border-bottom: 1px solid var(--border-color);
-}
-
-pre {
-  border-radius: 3px;
-  padding: 1.4em;
-  overflow: auto;
-  word-wrap: normal; /* So code will scroll on Safari. */
-}
-
-code {
-  font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Roboto Mono',
-    'Droid Sans Mono', 'Liberation Mono', Menlo, Courier, monospace;
-  border-radius: 3px;
-}
-
-pre code {
-  line-height: 1.4;
-}
-
-:not(pre) > code {
-  padding: 0 0.3em;
-  border-radius: 3px;
-  white-space: normal;
-}
-
-:not(pre) > code,
-pre {
-  background: #f5f2f0;
-}
-
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-  color: slategray;
-}
-
-.token.punctuation {
-  color: #999;
-}
-
-.token.namespace {
-  opacity: 0.7;
-}
-
-.token.property,
-.token.tag,
-.token.boolean,
-.token.number,
-.token.constant,
-.token.symbol,
-.token.deleted {
-  color: #905;
-}
-
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-  color: #690;
-}
-
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string {
-  color: #9a6e3a;
-}
-
-.token.atrule,
-.token.attr-value,
-.token.keyword {
-  color: #07a;
-}
-
-.token.function,
-.token.class-name {
-  color: #dd4a68;
-}
-
-.token.regex,
-.token.important,
-.token.variable {
-  color: #e90;
-}
-
-.token.important,
-.token.bold {
-  font-weight: bold;
-}
-.token.italic {
-  font-style: italic;
-}
-
-.token.entity {
-  cursor: help;
 }
