@@ -1,0 +1,33 @@
+html {
+  --brand-color: #1ca086;
+  --link-hover-color: #3fccb0;
+  --linkedin-color: #0077b5;
+  --primary-bg-color: #fff;
+  --primary-black-bg-color: #0f111a;
+  --primary-text-color: rgba(0, 0, 0, 0.8);
+  --primary-white-text-color: #fff;
+  --code-bg-color: #f8f8f8;
+  --primary-icon-color: rgb(50, 56, 63);
+  --primary-icon-hover-color: #777;
+  --theme-icon-color: var(--primary-icon-color);
+  --theme-icon-hover-color: var(--brand-color);
+  --border-color: rgba(0, 0, 0, 0.12);
+  --transition-duration: 0.2s;
+  --scroll-button-color: black;
+  --scroll-button-shadow: rgba(255, 255, 255, 0.5) 0px -1px 10px;
+}
+
+html[data-theme='dark'] {
+  --primary-bg-color: #0f111a;
+  --primary-black-bg-color: #090b10;
+  --primary-text-color: rgba(255, 255, 255, 0.8);
+  --primary-white-text-color: #fff;
+  --code-bg-color: var(--primary-black-bg-color);
+  --primary-icon-color: var(--brand-color);
+  --primary-icon-hover-color: #fff;
+  --theme-icon-color: var(--brand-color);
+  --theme-icon-hover-color: var(--primary-icon-hover-color);
+  --border-color: rgba(255, 255, 255, 0.24);
+  --scroll-button-color: rgb(50, 56, 63);
+  --scroll-button-shadow: none;
+}

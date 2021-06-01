@@ -1,1 +1,5 @@
+import '/src/styles/reset.css'
+import './src/styles/variable.css'
 import './src/styles/global.css'
+import './src/styles/scrollbar.css'
+import './src/styles/codeBlock.css'
