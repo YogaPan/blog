@@ -1,10 +1,14 @@
+const siteUrl = process.env.URL || 'https://galtz.netlify.app'
+
 module.exports = {
   siteMetadata: {
     title: "Galtz's Blog",
     description: "Galtz's Blog",
-    author: 'galtz0321@gmail.com'
+    author: 'galtz0321@gmail.com',
+    siteUrl
   },
   plugins: [
+    'gatsby-plugin-sitemap',
     'gatsby-plugin-styled-components',
     'gatsby-plugin-react-helmet',
     'gatsby-transformer-sharp',
@@ -68,7 +72,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-typography',
       options: {
-        pathToConfigModule: 'src/config/typography'
+        pathToConfigModule: `${__dirname}/src/config/typography`
       }
     },
     'gatsby-plugin-offline'
