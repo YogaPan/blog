@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { animated } from 'react-spring'
 import { Link, graphql } from 'gatsby'
 import { Box } from 'rebass'
@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import useFadeIn from '@hooks/useFadeIn'
 import SEO from '@components/Seo'
 import Layout from '@components/Layout/Layout'
+import Pagination from '@components/Pagination'
 
 const AnimatedBox = animated(Box)
 
@@ -24,7 +25,6 @@ const ArticleTitle = styled(Link)`
 `
 
 function Article({ node }) {
-  if (/^WIP:/.test(node.frontmatter.title)) return null
   return (
     <Box key={node.id} py={24}>
       <h1>
@@ -40,15 +40,31 @@ function Article({ node }) {
 }
 
 export default function IndexPage({ data }) {
+  const [pageIndex, setPageIndex] = useState(0)
+  const pageSize = 5
+  const posts = data.allMdx.edges.filter(
+    post => !/^WIP:/.test(post.node.frontmatter.title)
+  )
+  const currentPagePosts = posts.slice(
+    pageIndex * pageSize,
+    (pageIndex + 1) * pageSize
+  )
   return (
     <Layout>
       <SEO title="Home" />
       {/* <h1>{data.allMdx.totalCount} Posts</h1> */}
       <AnimatedBox style={useFadeIn}>
-        {data.allMdx.edges.map(edge => (
+        {currentPagePosts.map(edge => (
           <Article key={edge.node.id} node={edge.node} />
         ))}
       </AnimatedBox>
+      <Pagination
+        pageCount={Math.floor(posts.length / pageSize)}
+        onPageChange={({ selected }) => {
+          window.scrollTo(0, 0)
+          setPageIndex(selected)
+        }}
+      />
     </Layout>
   )
 }
