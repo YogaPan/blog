@@ -22,11 +22,11 @@ export default function useScrollToElement() {
     const value = window.scrollY + node.getBoundingClientRect().top
     window.addEventListener('wheel', onWheel)
     api.start({
-      y: value,
-      reset: true,
       from: { y: window.scrollY },
-      onRest,
-      onChange
+      to: { y: value },
+      reset: true,
+      onChange,
+      onRest
     })
   }
 

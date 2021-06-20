@@ -39,11 +39,6 @@ a:hover {
   color: var(--link-hover-color);
 }
 
-a.anchor {
-  margin-right: 8px;
-  vertical-align: baseline;
-}
-
 table {
   color: var(--primary-text-color);
   transition: var(--transition-duration);
