@@ -1,0 +1,11 @@
+a.anchor {
+  margin-left: 8px;
+}
+
+a.anchor > svg {
+  fill: var(--primary-text-color);
+}
+
+a.anchor:hover > svg {
+  fill: var(--link-hover-color);
+}

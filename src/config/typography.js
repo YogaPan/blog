@@ -12,7 +12,11 @@ const customizedTheme = {
     { name: 'Noto Sans TC', styles: ['400', '700'] }
   ],
   headerFontFamily: ['Titillium Web', 'Noto Sans TC', 'sans-serif'],
-  bodyFontFamily: ['Cabin Condensed', 'Noto Sans TC', 'georgia', 'sans-serif']
+  bodyFontFamily: ['Cabin Condensed', 'Noto Sans TC', 'georgia', 'sans-serif'],
+  overrideThemeStyles: ({ rhythm }) => ({
+    h2: { marginTop: rhythm(2) },
+    h3: { fontSize: '1.2rem' }
+  })
 }
 
 const typography = new Typography(customizedTheme)

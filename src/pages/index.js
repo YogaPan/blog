@@ -26,7 +26,7 @@ const ArticleTitle = styled(Link)`
 
 function Article({ node }) {
   return (
-    <Box key={node.id} py={24}>
+    <Box key={node.id} py={12}>
       <h1>
         <ArticleTitle to={node.fields.slug}>
           {node.frontmatter.title}
@@ -41,6 +41,7 @@ function Article({ node }) {
 
 export default function IndexPage({ data }) {
   const [pageIndex, setPageIndex] = useState(0)
+  const props = useFadeIn()
   const pageSize = 5
   const posts = data.allMdx.edges.filter(
     post => !/^WIP:/.test(post.node.frontmatter.title)
@@ -53,7 +54,7 @@ export default function IndexPage({ data }) {
     <Layout>
       <SEO title="Home" />
       {/* <h1>{data.allMdx.totalCount} Posts</h1> */}
-      <AnimatedBox style={useFadeIn}>
+      <AnimatedBox style={props}>
         {currentPagePosts.map(edge => (
           <Article key={edge.node.id} node={edge.node} />
         ))}
