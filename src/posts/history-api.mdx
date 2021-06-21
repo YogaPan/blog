@@ -39,7 +39,7 @@ history.go(2) // 回上兩頁
 API: **[history.pushState(state, title, url)](https://developer.mozilla.org/en-US/docs/Web/API/History/pushState)**
 
 - **state**: 儲存狀態，當瀏覽器 url 改變時，可利用 **window.onstatepop** 捕捉到。
-- **title**: 對目前大多數的瀏覽器沒有任何作用。通常帶入 null 即可。
+- **title**: 對目前大多數的瀏覽器沒有任何作用，通常帶入 null 即可。
 - **url**: 指定瀏覽器的 URL 顯示
 
 ### Case 1: Relative Path
@@ -95,7 +95,7 @@ API: **[history.replaceState(state, title, url)](https://developer.mozilla.org/e
 
 ## onstatepop event
 
-[MDN 的解釋：](https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onpopstate)A popstate event is dispatched to the window each time the active history entry changes between two history entries for the same document
+[MDN 的解釋](https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onpopstate)：A popstate event is dispatched to the window each time the active history entry changes between two history entries for the same document
 
 同一份 Document 進行瀏覽器操作：如 history.back() 或是點擊上一頁時觸發，但 **pushState/replaceState** 時不會觸發 onstatepop event.
 

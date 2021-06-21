@@ -20,7 +20,7 @@ const getPaginationConfig = (
 ) => ({
   from: pageIndex * pageSize,
   to: (pageIndex + 1) * pageSize,
-  pageCount: Math.floor(totalCount / pageSize),
+  pageCount: Math.ceil(totalCount / pageSize),
   onPageChange: ({ selected }) => {
     backToTop()
     setPageIndex(selected)

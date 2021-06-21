@@ -1,3 +1,9 @@
+pre,
+code {
+  transition: var(--transition-duration);
+  color: var(--primary-text-color);
+}
+
 pre {
   border-radius: 3px;
   padding: 1.4em;
@@ -24,6 +30,17 @@ pre code {
 :not(pre) > code,
 pre {
   background: #f5f2f0;
+}
+
+pre::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background: #eee;
+}
+
+pre::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #ccc;
 }
 
 .token.comment,
@@ -89,10 +106,109 @@ pre {
 .token.bold {
   font-weight: bold;
 }
-.token.italic {
+
+.token.italic,
+.token.comment,
+.token.doctype,
+.token.selector,
+.token.prolog,
+.token.cdata,
+.token.deleted {
   font-style: italic;
 }
 
 .token.entity {
   cursor: help;
+}
+
+html[data-theme='dark'] pre {
+  background: #011627;
+  color: white;
+}
+
+html[data-theme='dark'] :not(pre) > code {
+  background-color: #176152;
+}
+
+html[data-theme='dark'] pre::-webkit-scrollbar {
+  background: var(--primary-black-bg-color);
+  transition: var(--transition-duration);
+}
+
+html[data-theme='dark'] pre::-webkit-scrollbar-thumb {
+  background-color: var(--brand-color);
+}
+
+html[data-theme='dark'] .token.comment,
+html[data-theme='dark'] .token.prolog,
+html[data-theme='dark'] .token.cdata {
+  color: rgb(99, 119, 119);
+}
+
+html[data-theme='dark'] .token.punctuation {
+  color: rgb(199, 146, 234);
+}
+
+html[data-theme='dark'] .namespace {
+  color: rgb(178, 204, 214);
+}
+
+html[data-theme='dark'] .token.deleted {
+  color: rgba(239, 83, 80, 0.56);
+}
+
+html[data-theme='dark'] .token.symbol,
+.token.property {
+  color: rgb(128, 203, 196);
+}
+
+html[data-theme='dark'] .token.tag,
+html[data-theme='dark'] .token.operator,
+html[data-theme='dark'] .token.keyword {
+  color: rgb(127, 219, 202);
+}
+
+html[data-theme='dark'] .token.boolean {
+  color: rgb(255, 88, 116);
+}
+
+html[data-theme='dark'] .token.number {
+  color: rgb(247, 140, 108);
+}
+
+html[data-theme='dark'] .token.constant,
+html[data-theme='dark'] .token.function,
+html[data-theme='dark'] .token.builtin,
+html[data-theme='dark'] .token.char {
+  color: rgb(130, 170, 255);
+}
+
+html[data-theme='dark'] .token.selector,
+html[data-theme='dark'] .token.doctype {
+  color: rgb(199, 146, 234);
+}
+
+html[data-theme='dark'] .token.attr-name,
+.token.inserted {
+  color: rgb(173, 219, 103);
+}
+
+html[data-theme='dark'] .token.string,
+html[data-theme='dark'] .token.url,
+html[data-theme='dark'] .token.entity,
+html[data-theme='dark'] .language-css .token.string,
+html[data-theme='dark'] .style .token.string {
+  color: rgb(173, 219, 103);
+}
+
+html[data-theme='dark'] .token.class-name,
+html[data-theme='dark'] .token.atrule,
+html[data-theme='dark'] .token.attr-value {
+  color: rgb(255, 203, 139);
+}
+
+html[data-theme='dark'] .token.regex,
+html[data-theme='dark'] .token.important,
+html[data-theme='dark'] .token.variable {
+  color: rgb(214, 222, 235);
 }

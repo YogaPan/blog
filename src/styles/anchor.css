@@ -3,6 +3,7 @@ a.anchor {
 }
 
 a.anchor > svg {
+  transition: var(--transition-duration);
   fill: var(--primary-text-color);
 }
 
