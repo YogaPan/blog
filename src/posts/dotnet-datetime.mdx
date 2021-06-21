@@ -4,49 +4,19 @@ date: '2020-06-10'
 tags: 'C# Dotnet'
 ---
 
-- [前言](#前言)
-- [DateTime](#datetime)
-  - [Constructor](#constructor)
-  - [Kind](#kind)
-  - [Now](#now)
-  - [Parse](#parse)
-  - [Get & Set](#get--set)
-  - [Manipulate](#manipulate)
-    - [Add & Subtract](#add--subtract)
-    - [StartOf & EndOf](#startof--endof)
-  - [Query](#query)
-  - [Display](#display)
-  - [Serialize](#serialize)
-- [TimeSpan](#timespan)
-  - [Construct/Parse](#constructparse)
-    - [1. TimeSpan.Zero/TimeSpan()](#1-timespanzerotimespan)
-    - [2. TimeSpan(int hours, int minutes, int seconds)](#2-timespanint-hours-int-minutes-int-seconds)
-    - [3. Static Method](#3-static-method)
-    - [4. By calling a method or performing an operation that returns a TimeSpan value](#4-by-calling-a-method-or-performing-an-operation-that-returns-a-timespan-value)
-    - [5. Parsing from string](#5-parsing-from-string)
-  - [Operation](#operation)
-- [DateTimeOffset](#datetimeoffset)
-  - [Construct](#construct)
-  - [Convert to DateTime](#convert-to-datetime)
-  - [Convert to Unix Timestamp](#convert-to-unix-timestamp)
-  - [Parse](#parse-1)
-  - [Manipulate](#manipulate-1)
-  - [Query](#query-1)
-  - [Display](#display-1)
-  - [Serialize/Deserialize](#serializedeserialize)
-- [gRPC Timestamp](#grpc-timestamp)
+會寫這篇筆記的原因是，C# 官方對於 DateTime 的文件相當多，但卻缺乏一個大方向的介紹，讓人很難入門，不知道該從何學起。
 
-## 前言
+由於自己較擅長 Javascript 開發，以下很多用法都會跟 Javascript 中的 [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) 和 [Moment](https://momentjs.com/) 對照。並且為了解說方便，Local 的時區以台北時區 +08:00 為準。
 
-會寫這篇筆記的原因是，C# 官方對於 DateTime 的文件相當多，但是卻缺乏一個大方向的介紹，讓人很難入門不知道該從哪裡開始學起。
+C# 中的時間主要有三個物件: DateTime, DateTimeOffset 和 TimeSpan，以下我們一一介紹。
 
-由於自己本身是比較擅長 Javascript 的開發者，
-以下很多用法都會跟 Javascript 中的 [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) 和 [Moment](https://momentjs.com/) 對照。
-並且為了解說方便，Local 的時區以台北時區 +08:00 為準。
+## Table of Contents
 
-C# 中的時間主要有三個物件: DateTime, DateTimeOffset 和 TimeSpan，以下我們一一介紹：
+```toc
 
-## DateTime
+```
+
+## 1. DateTime
 
 ### Constructor
 
@@ -210,7 +180,7 @@ Console.WriteLine(JsonSerializer.Serialize(DateTime.UtcNow)); // 2020-05-03T10:4
 
 客製化方法參考: [System.Text.Json 中的 DateTime 和 DateTimeOffset 支援 | Microsoft Docs](https://docs.microsoft.com/zh-tw/dotnet/standard/datetime/system-text-json-support#the-extended-iso-8601-12019-profile-in-systemtextjson)
 
-## TimeSpan
+## 2. TimeSpan
 
 [TimeSpan 結構 (System) | Microsoft Docs](https://docs.microsoft.com/zh-tw/dotnet/api/system.timespan?view=netcore-3.1)
 
@@ -272,7 +242,7 @@ var result = new DateTime(2020, 1, 1) + interval3;
 Console.WiteLine(result.ToString("O"));  // 2020-01-01T05:03:05.0000000
 ```
 
-## DateTimeOffset
+## 3. DateTimeOffset
 
 The [DateTimeOffset](https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset?view=netcore-3.1) structure includes a DateTime value, together with an [Offset](https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset.offset?view=netcore-3.1) property that defines the difference between the current DateTimeOffset instance's date and time and Coordinated Universal Time (UTC). Because it exactly defines a date and time relative to UTC, the DateTimeOffset structure does not include a Kind member,as the DateTime structure does.
 
@@ -351,7 +321,7 @@ DateTimeOffset.UtcNow.ToOffset(TimeSpan.FromHours(8));
 
 同 DateTime
 
-## gRPC Timestamp
+## 4. gRPC Timestamp
 
 - [Protobuf 時間屬性該如何表示？ - Yowko's Notes](https://blog.yowko.com/protobuf-datetime-timestamp/)
 - [Google.Protobuf.WellKnownTypes.Timestamp Class Reference](https://developers.google.com/protocol-buffers/docs/reference/csharp/class/google/protobuf/well-known-types/timestamp)

@@ -28,6 +28,17 @@ module.exports = {
             options: { isIconAfterHeader: true }
           },
           {
+            resolve: 'gatsby-remark-table-of-contents',
+            options: {
+              exclude: 'Table of Contents',
+              tight: false,
+              ordered: false,
+              fromHeading: 1,
+              toHeading: 3,
+              className: 'table-of-contents'
+            }
+          },
+          {
             resolve: 'gatsby-remark-prismjs',
             options: {
               classPrefix: 'language-',

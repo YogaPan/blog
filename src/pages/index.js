@@ -1,12 +1,31 @@
 import React, { useState } from 'react'
 import { animated } from 'react-spring'
 import { Link, graphql } from 'gatsby'
-import { Box } from 'rebass'
+import { Box, Flex } from 'rebass'
 import styled from 'styled-components'
 import useFadeIn from '@hooks/useFadeIn'
 import SEO from '@components/Seo'
 import Layout from '@components/Layout/Layout'
 import Pagination from '@components/Pagination'
+
+const PAGE_SIZE = 5
+
+const backToTop = () => window.scrollTo(0, 0)
+
+const getPaginationConfig = (
+  pageIndex,
+  pageSize,
+  totalCount,
+  setPageIndex
+) => ({
+  from: pageIndex * pageSize,
+  to: (pageIndex + 1) * pageSize,
+  pageCount: Math.floor(totalCount / pageSize),
+  onPageChange: ({ selected }) => {
+    backToTop()
+    setPageIndex(selected)
+  }
+})
 
 const AnimatedBox = animated(Box)
 
@@ -34,7 +53,6 @@ function Article({ node }) {
       </h1>
       <p>{node.excerpt}</p>
       <p style={{ marginBottom: 16 }}>{node.frontmatter.date}</p>
-      {/* <p style={{ marginBottom: 16 }}>{node.frontmatter.tags}</p> */}
     </Box>
   )
 }
@@ -42,37 +60,41 @@ function Article({ node }) {
 export default function IndexPage({ data }) {
   const [pageIndex, setPageIndex] = useState(0)
   const props = useFadeIn()
-  const pageSize = 5
-  const posts = data.allMdx.edges.filter(
-    post => !/^WIP:/.test(post.node.frontmatter.title)
+
+  const { edges, totalCount } = data.allMdx
+  const { from, to, pageCount, onPageChange } = getPaginationConfig(
+    pageIndex,
+    PAGE_SIZE,
+    data.allMdx.totalCount,
+    setPageIndex
   )
-  const currentPagePosts = posts.slice(
-    pageIndex * pageSize,
-    (pageIndex + 1) * pageSize
-  )
+
   return (
     <Layout>
       <SEO title="Home" />
-      {/* <h1>{data.allMdx.totalCount} Posts</h1> */}
       <AnimatedBox style={props}>
-        {currentPagePosts.map(edge => (
+        {edges.slice(from, to).map(edge => (
           <Article key={edge.node.id} node={edge.node} />
         ))}
       </AnimatedBox>
       <Pagination
-        pageCount={Math.floor(posts.length / pageSize)}
-        onPageChange={({ selected }) => {
-          window.scrollTo(0, 0)
-          setPageIndex(selected)
-        }}
+        totalCount={totalCount}
+        pageCount={pageCount}
+        onPageChange={onPageChange}
       />
+      <Flex alignItems="center" justifyContent="center">
+        <h2>Total {data.allMdx.totalCount} Posts</h2>
+      </Flex>
     </Layout>
   )
 }
 
 export const query = graphql`
   query {
-    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMdx(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { title: { regex: "/^(?!WIP)/" } } }
+    ) {
       totalCount
       edges {
         node {
