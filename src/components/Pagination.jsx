@@ -3,7 +3,7 @@ import { Flex } from 'rebass'
 import ReactPaginate from 'react-paginate'
 import { func, number } from 'prop-types'
 
-export default function Pagination({ onPageChange, pageCount, ...restProps }) {
+export default function Pagination({ pageCount, onPageChange, ...restProps }) {
   return (
     <Flex alignItems="center" justifyContent="center">
       <ReactPaginate
