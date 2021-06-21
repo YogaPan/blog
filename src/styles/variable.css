@@ -2,10 +2,11 @@ html {
   --brand-color: #1ca086;
   --link-hover-color: #3fccb0;
   --linkedin-color: #0077b5;
-  --primary-bg-color: #fff;
+  --primary-bg-color: white;
   --primary-black-bg-color: #0f111a;
   --primary-text-color: rgba(0, 0, 0, 0.8);
-  --primary-white-text-color: #fff;
+  --strong-text-color: black;
+  --primary-white-text-color: white;
   --code-bg-color: #f8f8f8;
   --primary-icon-color: rgb(50, 56, 63);
   --primary-icon-hover-color: #777;
@@ -20,11 +21,12 @@ html {
 html[data-theme='dark'] {
   --primary-bg-color: #0f111a;
   --primary-black-bg-color: #090b10;
-  --primary-text-color: rgba(255, 255, 255, 0.8);
-  --primary-white-text-color: #fff;
+  --primary-text-color: rgba(255, 255, 255, 0.75);
+  --strong-text-color: rgba(255, 255, 255, 0.9);
+  --primary-white-text-color: white;
   --code-bg-color: var(--primary-black-bg-color);
   --primary-icon-color: var(--brand-color);
-  --primary-icon-hover-color: #fff;
+  --primary-icon-hover-color: white;
   --theme-icon-color: var(--brand-color);
   --theme-icon-hover-color: var(--primary-icon-hover-color);
   --border-color: rgba(255, 255, 255, 0.24);

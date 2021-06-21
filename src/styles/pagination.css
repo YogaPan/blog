@@ -31,8 +31,8 @@
 }
 
 .pagination-active {
-  background-color: black;
-  color: white;
+  background-color: var(--primary-icon-color);
+  color: var(--primary-white-text-color);
 }
 
 .pagination-active a:hover {

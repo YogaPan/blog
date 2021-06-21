@@ -31,9 +31,14 @@ h4,
 h5,
 h6,
 p,
+span,
 li {
   transition: var(--transition-duration);
   color: var(--primary-text-color);
+}
+
+strong {
+  color: var(--strong-text-color);
 }
 
 a:hover {

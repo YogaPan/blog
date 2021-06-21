@@ -6,11 +6,13 @@ const FooterContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
   height: 200px;
   margin-top: 50px;
   background-color: var(--primary-black-bg-color);
-  color: var(--primary-white-text-color);
+
+  span {
+    color: var(--primary-white-text-color);
+  }
 `
 
 export default function Footer() {
