@@ -4,11 +4,17 @@ date: '2020-01-02'
 tags: 'node.js js express backend'
 ---
 
-## Middleware
-
 最近開始工作開始接觸到後端開發。Express 這個基於 Node.js 的框架前端工程師也可以快速上手進行開發。Express 最重要的概念便是 middleware 了，以下紀錄幾個常見的使用情境：
 
-### Case 1:
+## Table of Contents
+
+```toc
+toHeading: 2
+```
+
+## Middleware
+
+### Case 1
 
 基本使用情境
 
@@ -51,7 +57,7 @@ middleware 2 end
 middleware 1 end
 ```
 
-### Case 2:
+### Case 2
 
 如果沒有呼叫 **next**，代表不想把控制權轉移給下個 middleware。
 
@@ -80,7 +86,7 @@ middleware 1 end
 
 - client: `hello from middleware 1`
 
-### Case 3:
+### Case 3
 
 若無呼叫 **res.send**，client 端無法收到回應。
 
@@ -107,7 +113,7 @@ middleware 1 end
 
 Client 無法得到回應
 
-### Case 4:
+### Case 4
 
 ```js
 app.get(
@@ -137,7 +143,7 @@ Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the cli
 
 client: `hello from middleware 2`
 
-### Case 5:
+### Case 5
 
 ```js
 app.get(
@@ -178,7 +184,7 @@ app.use((err, req, res, next) => {
 })
 ```
 
-### Case 1:
+### Case 1
 
 Next 帶入參數
 
@@ -210,7 +216,7 @@ middleware 1 start
 Error: my error
 ```
 
-### Case 2:
+### Case 2
 
 Throw new Error
 
