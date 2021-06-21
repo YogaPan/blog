@@ -4,17 +4,10 @@ date: '2020-02-01'
 tags: 'js f2e'
 ---
 
-## 目錄
-- [目錄](#目錄)
-- [什麼是 Data URLs](#什麼是-data-urls)
-- [使用範例](#使用範例)
-- [Webpack file-loader & url-loader](#webpack-file-loader--url-loader)
-- [Bonus: 動手玩 base64 編碼](#bonus-動手玩-base64-編碼)
-  - [URL](#url)
-  - [Canvas](#canvas)
-  - [Form](#form)
-- [小技巧](#小技巧)
-- [參考資料](#參考資料)
+## Table of Contents
+
+```toc
+```
 
 ## 什麼是 Data URLs
 
@@ -69,14 +62,14 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'static/media/[name].[hash:8].[ext]',
+          name: 'static/media/[name].[hash:8].[ext]'
         }
       },
       {
         test: [/\.svg$/, /\.ttf$/, /\.woff$/, /\.woff2$/, /\.eot$/],
         loader: 'file-loader',
         options: {
-          name: 'static/media/[name].[hash:8].[ext]',
+          name: 'static/media/[name].[hash:8].[ext]'
         }
       }
     ]
