@@ -8,7 +8,7 @@ module.exports = {
     siteUrl
   },
   plugins: [
-    'gatsby-plugin-sitemap',
+    'gatsby-plugin-advanced-sitemap',
     'gatsby-plugin-styled-components',
     'gatsby-plugin-react-helmet',
     'gatsby-transformer-sharp',
