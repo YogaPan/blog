@@ -33,7 +33,6 @@ h6,
 p,
 span,
 li {
-  transition: var(--transition-duration);
   color: var(--primary-text-color);
 }
 
@@ -47,9 +46,22 @@ a:hover {
 
 table {
   color: var(--primary-text-color);
-  transition: var(--transition-duration);
 }
 
 table td {
   border-bottom: 1px solid var(--border-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+strong,
+li,
+table {
+  transition: var(--transition-duration);
 }
