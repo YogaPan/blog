@@ -172,13 +172,13 @@ youtube-dl --playlist-start 2 --playlist-end 4 -f mp4 <playlist-url>
 
 `-o, --output TEMPLATE` 指定檔名輸出模板。預設是 `%(title)s-%(id)s.%(ext)s`
 
-假如說我覺得影片 id 很煩很醜，我要把他去掉，只留下影片標題跟副檔名
+假如說我覺得影片 id 很煩很醜，我要把他去掉，只留下影片標題跟副檔名：
 
 ```shell
 youtube-dl -o '%(title)s.%(ext)s'
 ```
 
-也可以直接指定下載下來的影片檔名
+也可以直接指定下載下來的影片檔名：
 
 ```shell
 youtube-dl -o "test.mp4" -f mp4 <url>
