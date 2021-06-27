@@ -13,7 +13,7 @@ tag: 'javascript'
 
 ## Web Storage API
 
-[window.localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) 能夠讓妳存取當前 Domain 下的 [Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage) 物件，並透過以下四隻 API 進行操作:
+[window.localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) 能夠讓妳存取當前 Domain 下的 [Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage) 物件，並透過以下支 API 進行操作:
 
 - 設定資料: **[localStorage.setItem(key, value)](https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem)**
 - 獲取資料: **let storageValue = [localStorage.getItem(key)](https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem)**
@@ -124,7 +124,7 @@ localforage.setItem('key', 'value', doSomethingElse)
 
 1. 如果 Browser 支援 [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Using_IndexedDB)，就優先使用 IndexedDB 來儲存
 2. 如果不支援，則使用 WebSQL
-3. 如果連 WebSQL 都不支援，才會使用 LocaloStorage 來儲存資料。
+3. 如果連 WebSQL 都不支援，才會使用 LocalStorage 來儲存資料。
 
 LocalForage 解決了以下幾個問題:
 

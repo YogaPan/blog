@@ -4,7 +4,7 @@ date: '2019-12-21'
 tag: 'javascript'
 ---
 
-寫 RWD 網頁的工程師應該都很熟悉，在 css 中可以利用 [@media](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries) 來針對指定的媒體設定樣式。例如說我要讓螢幕寬度 <= 600px 的裝置背景為紅色：
+寫 RWD 網頁的工程師應該都很熟悉，在 css 中可以利用 `@media` 來針對指定的媒設定樣式。例如說我要讓螢幕寬度 <= 600px 的裝置背景為紅色：
 
 ```css
 @media (max-width: 600px) {
@@ -20,15 +20,15 @@ tag: 'javascript'
 const mediaQueryList = window.matchMedia('(max-width: 600px)')
 
 console.log(mediaQueryList.media) // (max-width: 600px)
-console.log(mediaQueryList.matches) // true
+console.log(mediaQueryList.matches) // true or false
 ```
 
 這裡會回傳一個 [MediaQueryList](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList) object，其中有幾個重要的屬性：
 
-- [media](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList/media): 查詢的 query，以上範例中就是 **(max-width: 600px)**
+- [media](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList/media): 查詢的 query，以上範例中就是 `(max-width: 600px)`
 - [matches](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList/matches): boolean, 代表是否符合 query 條件
 
-值得特別注意的是，回傳的 mediaQueryList 的 matches 會根據最新的查詢結果動態改變。以上面的例子來說，原本查詢的條件為 **true**，但是當我把 browser 的寬度拉到大於 600px 時，不需重新呼叫 window.matchMedia，mediaQueryList.matches 這時會自動更新為 **false**。下面可以試玩：
+值得特別注意的是，回傳的 `mediaQueryList` 的 `matches` 會根據最新的查詢結果動態改變。以上面的例子來說，原本查詢的條件為 **true**，但是當我把 browser 的寬度拉到大於 600px 時，不需重新呼叫 `window.matchMedia`，`mediaQueryList.matches` 這時會自動更新為 **false**。
 
 <iframe
   src="https://codesandbox.io/embed/gifted-cerf-xn89f?fontsize=14&hidenavigation=1&theme=dark"
@@ -43,7 +43,7 @@ console.log(mediaQueryList.matches) // true
 - [addListener](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList/addListener)
 - [removeListener](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList/removeListener)
 
-addListener 可以監聽 [MediaQueryListEvent](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryListEvent) ，當 query 的結果，也就是 **matches** 發生變化時，可以透過傳入的 callback function 來得知。以下範例
+`addListener` 可以監聽 [MediaQueryListEvent](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryListEvent) ，當 query 的結果： `matches` 發生變化時，可以透過 callback function 進行處理。
 
 <iframe
   src="https://codesandbox.io/embed/intelligent-sky-mngmz?fontsize=14&hidenavigation=1&theme=dark"
@@ -55,11 +55,9 @@ addListener 可以監聽 [MediaQueryListEvent](https://developer.mozilla.org/en-
 
 ## React Hooks
 
-[react-use](https://github.com/streamich/react-use) 這個 Hooks 的 library 提供 [useMedia](https://github.com/streamich/react-use/blob/master/docs/useMedia.md) 這支 Hook，當 matches 改變時便會觸發 Rerender：
+[react-use](https://github.com/streamich/react-use) 這個 Hooks 的 library 提供 [useMedia](https://github.com/streamich/react-use/blob/master/docs/useMedia.md) 這支 Hook，當 `matches` 改變時便會觸發 re-render：
 
 ```jsx
-const isWide = useMedia('(min-width: 480px)')
-
 const Demo = () => {
   const isWide = useMedia('(min-width: 480px)')
   return <div>Screen is wide: {isWide ? 'Yes' : 'No'}</div>
@@ -68,7 +66,7 @@ const Demo = () => {
 
 ## 實戰演練
 
-Visible: 當螢幕寬度 >= 600px 時才顯示特定元素
+Visible Component: 當螢幕寬度 >= 600px 時才顯示特定元素
 
 <iframe
   src="https://codesandbox.io/embed/match-media-visible-fdngg?fontsize=14&hidenavigation=1&theme=dark"
@@ -78,7 +76,7 @@ Visible: 當螢幕寬度 >= 600px 時才顯示特定元素
   sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
 ></iframe>
 
-Splitted Table: 當螢幕寬度 >= 600px 時，將表格一分為二。
+Split Table: 當螢幕寬度 >= 600px 時，將表格一分為二。
 
 <iframe
   src="https://codesandbox.io/embed/match-media-spitted-table-c77mk?fontsize=14&hidenavigation=1&theme=dark"
@@ -88,9 +86,7 @@ Splitted Table: 當螢幕寬度 >= 600px 時，將表格一分為二。
   sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
 ></iframe>
 
-## Futher Reading
-
-對於 CSS Media Query 還不熟悉的話可以參考以下兩篇文章：
+## Reference
 
 - [Using media queries - CSS: Cascading Style Sheets | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries)
 - [CSS Media Queries 詳細介紹 - OXXO.STUDIO](https://www.oxxostudio.tw/articles/201810/css-media-queries.html)
