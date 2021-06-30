@@ -15,15 +15,15 @@ tags: 'http'
 
 ### Case 1
 
-假設現在時間 `2020-01-01 00:00:00`，Client 第一次請求 **index.html** 的資源，
+假設現在時間 `2020-01-01 00:00:00`，Client 第一次請求 `index.html` 的資源，
 Server 回應 Header：
 
 ```http
 Cache-Control: max-age=3600
 ```
 
-- 在 `2020-01-01 00:00:00` + 3600 秒 = `2020-01-01 01:00:00` 以前請求 **index.html**，瀏覽器都會直接拿 Cache 的資源，而不向 Server 發出 Request。
-- `2020-01-01T01:00:00Z` 以後請求 **index.html**，會重新發出 request
+- 在 `2020-01-01 00:00:00` + 3600 秒 = `2020-01-01 01:00:00` 以前請求 `index.html`，瀏覽器都會直接拿 Cache 的資源，而不向 Server 發出 Request。
+- `2020-01-01T01:00:00Z` 以後請求 `index.html`，會重新發出 request
 
 ### Case 2
 
@@ -33,8 +33,8 @@ Server 回應 Header：
 Expires: 2020-01-01 12:00:00
 ```
 
-- 在 `2020-01-01 12:00:00` 以前請求 **index.html**，瀏覽器都會直接拿 Cache 的資源，而不向 Server 發出 Request。
-- 在 `2020-01-01 12:00:00` 以後請求 **index.html**，會重新發出 request
+- 在 `2020-01-01 12:00:00` 以前請求 `index.html`，瀏覽器都會直接拿 Cache 的資源，而不向 Server 發出 Request。
+- 在 `2020-01-01 12:00:00` 以後請求 `index.html`，會重新發出 request
 
 ### Case 3
 
@@ -104,8 +104,7 @@ If-Modified-Since: 2017-01-01 13:00:00
 ## no-store, no-cache
 
 Q: 如果我想要檔案有更動就能夠馬上得知該怎麼做呢？
-
-A: 每次請求都問 Server 檔案是否有更動，如果有更動  則回應新的資源，否則回應 `status code: 304 (Not Modified)`
+A: 每次請求都問 Server 檔案是否有更動，如果有更動則回應新的資源，否則回應 `status code: 304 (Not Modified)`
 
 ### Example
 
@@ -129,15 +128,14 @@ Cache-Control: no-store
 
 ### 重點整理
 
-**no-cache**: 每次都會發送 Request 去確認檔案是否更動
-**no-store**: 完全不使用快取
+- **no-cache**: 每次都會發送 Request 去確認檔案是否更動
+- **no-store**: 完全不使用快取
 
 ## Long Term Cache
 
 參考：https://developers.google.com/web/fundamentals/performance/webpack/use-long-term-caching
 
 Q: 有沒有辦法能夠甚至連請求都不發，但是卻能夠知道檔案已經更動了呢？
-
 A: 將 Etag 的機制自己實作在檔名裡
 
 ### Example
@@ -172,21 +170,21 @@ js 檔名加上 Hash:
 </html>
 ```
 
-JavaScript 的檔名變成：**script-fgi81ksdff.js**，其實就跟 Etag 一樣，都是代表這個檔案的 hash 值。然後我們把這個檔案的快取策略設成：
+JavaScript 的檔名變成：`script-fgi81ksdff.js`，其實就跟 Etag 一樣，都是代表這個檔案的 hash 值。然後我們把這個檔案的快取策略設成：
 
-```
+```http
 Cache-Control: max-age=31536000。
 ```
 
 這樣子這個檔案就會被快取住一年。一年之內都不會對這個 URL 發送新的 Request。
 
-藉由把 Etag 的機制實作在 **index.html** 裡面，我們就達成了我們的目標：「只要檔案不更新，瀏覽器就不會發 Request，直接沿用快取。只要檔案一更新，瀏覽器就要立即抓取新的檔案」。原理就是針對不同的檔案採用不同的快取策略，並且直接用「更換 JavaScript 檔案」的方式強制瀏覽器重新下載。
+藉由把 Etag 的機制實作在 `index.html` 裡面，我們就達成了我們的目標：「只要檔案不更新，瀏覽器就不會發 Request，直接沿用快取。只要檔案一更新，瀏覽器就要立即抓取新的檔案」。原理就是針對不同的檔案採用不同的快取策略，並且直接用「更換 JavaScript 檔案」的方式強制瀏覽器重新下載。
 
 ![filehash](../images/browser-cache/002.png)
 
 ## 總結
 
-**Expires** 跟 **max-age** 是在負責看這個快取是不是「新鮮」，**Last-Modified**, **If-Modified-Since**, **Etag**, **If-None-Match** 是負責詢問這個快取能不能「繼續使用」，而 **no-cache** 與 **no-store** 則是代表到底要不要使用快取，以及應該如何使用。
+`Expires` 跟 `max-age` 是在負責看這個快取是不是「新鮮」，`Last-Modified`, `If-Modified-Since`, `Etag`, `If-None-Match` 是負責詢問這個快取能不能「繼續使用」，而 `no-cache` 與 `no-store` 則是代表到底要不要使用快取，以及應該如何使用。
 
 ## 待解決問題
 
