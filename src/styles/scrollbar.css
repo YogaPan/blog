@@ -1,12 +1,11 @@
+/* Webkit browser scrollbar */
 html::-webkit-scrollbar {
-  width: 5px;
-  transition: var(--transition-duration);
+  width: 6px;
 }
 
 html::-webkit-scrollbar-thumb {
-  border-radius: 5px;
+  border-radius: 6px;
   background: var(--primary-black-bg-color);
-  transition: var(--transition-duration);
 }
 
 html[data-theme='dark']::-webkit-scrollbar-track {
@@ -15,5 +14,14 @@ html[data-theme='dark']::-webkit-scrollbar-track {
 
 html[data-theme='dark']::-webkit-scrollbar-thumb {
   background: var(--brand-color);
-  border-radius: 5px;
+}
+
+/* Firefox scrollbar */
+html {
+  scrollbar-color: var(--primary-black-bg-color) var(--primary-bg-color);
+  scrollbar-width: thin;
+}
+
+html[data-theme='dark'] {
+  scrollbar-color: var(--brand-color) var(--primary-black-bg-color);
 }

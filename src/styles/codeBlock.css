@@ -32,15 +32,21 @@ pre {
   background: #f5f2f0;
 }
 
+/* Webkit scrollbar */
 pre::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-  background: #eee;
+  width: 6px;
+  height: 6px;
 }
 
 pre::-webkit-scrollbar-thumb {
-  border-radius: 5px;
-  background: #ccc;
+  border-radius: 6px;
+  background: var(--primary-black-bg-color);
+}
+
+/* Firefox scrollbar */
+pre {
+  scrollbar-color: var(--primary-black-bg-color) var(--primary-bg-color);
+  scrollbar-width: thin;
 }
 
 .token.comment,
@@ -130,13 +136,18 @@ html[data-theme='dark'] :not(pre) > code {
   background-color: #176152;
 }
 
+/* Webkit scrollbar */
 html[data-theme='dark'] pre::-webkit-scrollbar {
   background: var(--primary-black-bg-color);
-  transition: var(--transition-duration);
 }
 
 html[data-theme='dark'] pre::-webkit-scrollbar-thumb {
   background-color: var(--brand-color);
+}
+
+/* Firefox Scrollbar */
+html[data-theme='dark'] pre {
+  scrollbar-color: var(--brand-color) var(--primary-black-bg-color);
 }
 
 html[data-theme='dark'] .token.comment,

@@ -52,9 +52,9 @@ export default function ThemeSwitch() {
     <Container onClick={toggleTheme}>
       {transitions((props, item, key) =>
         item ? (
-          <AnimatedSunIcon key={key} style={props} />
-        ) : (
           <AnimatedMoonIcon key={key} style={props} />
+        ) : (
+          <AnimatedSunIcon key={key} style={props} />
         )
       )}
     </Container>
