@@ -32,7 +32,7 @@
     "gatsby-plugin-react-svg": "^3.0.1",
     "gatsby-plugin-sharp": "^3.8.0",
     "gatsby-plugin-styled-components": "^4.8.0",
-    "gatsby-plugin-typography": "^3.8.0",
+    "gatsby-plugin-typography": "^3.9.0",
     "gatsby-remark-autolink-headers": "^4.5.0",
     "gatsby-remark-images": "^5.5.0",
     "gatsby-remark-prismjs": "^5.5.0",
