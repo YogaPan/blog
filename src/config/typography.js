@@ -14,8 +14,9 @@ const customizedTheme = {
   headerFontFamily: ['Titillium Web', 'Noto Sans TC', 'sans-serif'],
   bodyFontFamily: ['Cabin Condensed', 'Noto Sans TC', 'georgia', 'sans-serif'],
   overrideThemeStyles: ({ rhythm }) => ({
-    h2: { marginTop: rhythm(2) },
-    h3: { fontSize: '1.2rem' }
+    h2: { marginTop: rhythm(3) },
+    h3: { fontSize: '1.2rem' },
+    p: { lineHeight: 1.6 }
   })
 }
 

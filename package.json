@@ -10,7 +10,7 @@
     "format": "prettier --write \"{scripts,src}/**/*.{js,jsx,json,md}\" \"gatsby-*.js\"",
     "lint": "eslint \"{scripts,src}/**/*.{js,jsx}\" \"gatsby-*.js\"",
     "start": "npm run develop",
-    "serve": "gatsby serve",
+    "serve": "gatsby serve -p 5000",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \"",
     "clear": "rm -rf node_modules public .cache ",
     "prepare": "husky install"
@@ -23,7 +23,7 @@
     "@styled-system/theme-get": "^5.1.2",
     "babel-plugin-styled-components": "^1.13.2",
     "gatsby": "^3.9.0",
-    "gatsby-image": "^3.8.0",
+    "gatsby-image": "^3.9.0",
     "gatsby-plugin-advanced-sitemap": "^2.0.0",
     "gatsby-plugin-manifest": "^3.9.0",
     "gatsby-plugin-mdx": "^2.9.0",

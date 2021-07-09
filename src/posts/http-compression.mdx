@@ -1,7 +1,7 @@
 ---
 title: 'Http Compression 筆記'
 date: '2020-01-10'
-tags: 'http'
+tags: ['HTTP']
 ---
 
 ## Table of Contents
@@ -9,7 +9,9 @@ tags: 'http'
 ```toc
 ```
 
-## What is Compression
+## 基本概念
+
+### What is Compression
 
 [根據 Ilya Grigorik 的總整理](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer):
 
@@ -17,7 +19,9 @@ tags: 'http'
 - GZIP performs best on text-based assets: CSS, JavaScript, HTML.
 - All modern browsers support GZIP compression and will automatically request it.
 
-不過也不是說任何資源我都無腦亂壓一通，根據 [ASP.NET Core 中的回應壓縮 | Microsoft Docs](https://docs.microsoft.com/zh-tw/aspnet/core/performance/response-compression?view=aspnetcore-3.1)：
+### 使用時機
+
+根據 [ASP.NET Core 中的回應壓縮 | Microsoft Docs](https://docs.microsoft.com/zh-tw/aspnet/core/performance/response-compression?view=aspnetcore-3.1)：
 
 You shouldn't compress natively compressed assets, such as PNG files.
 If you attempt to further compress a natively compressed response,
@@ -25,16 +29,31 @@ any small additional reduction in size and transmission time will likely be over
 Don't compress files smaller than about 150-1000 bytes (depending on the file's content and the efficiency of compression).
 The overhead of compressing small files may produce a compressed file larger than the uncompressed file.
 
-## Proactive Negotiation (內容協商)
+簡單來說，**應該只針對大型的文字檔案進行壓縮**。若對圖片或是極小的文字檔案進行壓縮，除了會造成處理壓縮的時間大於節省的網路傳輸時間，甚至可能出現壓縮後的檔案大於原本檔案的情形。
 
-User Agent 發送 `期望或偏好的` representation，使 Server 根據該偏好資訊，使用適當的演算法選擇 representation。
-但 server 仍可能回應非預期的 representation, 或是 [406 Not acceptable](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/406)、[415 Unsupported Media Type](https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Status/415)。
+### Content Negotiation (內容協商)
 
-[Accept-Encoding](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Encoding): `期望` server 使用的編碼方式。
+內容協商就是 User Agent 發送**期望或偏好的** representation，使 Server 根據該偏好資訊，使用適當的演算法選擇 representation。這裡舉個例子會比較好懂：就像小時候你跟媽媽說你**想吃**勁辣雞腿堡，你跟你媽表達這個意願就是你跟你媽**協商**的過程，那麼接下來可能會發生什麼事呢？
+
+1. 你媽買了勁辣雞腿堡給你吃 => 可喜可賀，今天是上面被辣到，明天是下面被辣到。
+2. 現在沒有賣勁辣雞腿堡，你媽只好買三色豆香菜漢堡給你吃 => 你雖然堅強地活了下去，但同時你的生命好像也隱隱失去了什麼重要的東西。
+3. 「死因仔脯！吃什麼麥當勞蛤沒被揍過是不是啦！」=> 你什麼都吃不到，幫 QQ
+
+從上述的舉例可以發現，**Server 有可能對於你的期望不買單，輕則回應非預期的格式，重則回傳錯誤代碼**：像是 [406 Not acceptable](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/406)、[415 Unsupported Media Type](https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Status/415) 等等。
+
+### HTTP Header
+
+使用 [Accept-Encoding](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Encoding) 進行[內容協商](https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation)，告訴 Server 我偏好的壓縮格式：
 
 ```http
 Accept-Encoding: gzip, deflate, br
 ```
+
+現代的瀏覽器發出的請求預設都會要求 Server 使用壓縮：
+
+![content-encoding](../images/http-compression/001.png)
+
+其中 `br` 代表 [brotli](https://github.com/google/brotli)， 是 Google 推出的壓縮標準。
 
 [Content-Encoding](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding): 指出應用於表示的編碼方式，以指示瀏覽器使用相應的解碼機制來獲取資料。
 
@@ -42,13 +61,12 @@ Accept-Encoding: gzip, deflate, br
 Content-Encoding: gzip
 ```
 
-其中 `br` 代表 [botli](https://github.com/google/brotli)， 是 google 推出的壓縮標準
+這裡可以從開發工具看到檔案傳輸大小因為壓縮節省了多少流量：
+TODO
 
-上面有提到，現代的瀏覽器都會自動在 Request Header 要求 Server 使用壓縮：
+## 實戰應用
 
-![content-encoding](../images/http-compression/001.png)
-
-## 使用 Express Middleware 壓縮
+### 使用 Express Middleware 壓縮
 
 透過 [compression middleware](https://github.com/expressjs/compression)，可以對 response 進行 `deflate` 或 `gzip` 壓縮：
 
@@ -65,11 +83,11 @@ app.get('/', (req, res) => {
 })
 ```
 
-## 使用 Dotnet Core Middleware 壓縮
+### 使用 .NET Core Middleware 壓縮
 
 透過 [NuGet Gallery | Microsoft.AspNetCore.ResponseCompression 2.2.0](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/)，可以對 response 進行 `brotli` 或 `gzip` 壓縮。
 
-Donet Core 3.0 開始預設使用 `Brotli` 演算法壓縮：
+.NET Core 3.0 開始預設使用 `brotli` 演算法壓縮：
 
 ```csharp
 using Microsoft.AspNetCore.ResponseCompression;
@@ -112,11 +130,54 @@ public class Startup
 }
 ```
 
+### 使用 Nginx 壓縮
+
+```nginx
+http {
+  server {
+    gzip on;
+    gzip_min_length 10240;
+    gzip_comp_level 1;
+    gzip_types
+        # text/html is always compressed by HttpGzipModule
+        text/css
+        text/javascript
+        text/xml
+        text/plain
+        text/x-component
+        application/javascript
+        application/x-javascript
+        application/json
+        application/xml
+        application/rss+xml
+        application/atom+xml
+        font/truetype
+        font/opentype
+        application/vnd.ms-fontobject
+        image/svg+xml;
+  }
+}
+```
+
+1. `gzip on`: 開啟使用 gzip 壓縮
+2. `gzip_min_length`: 根據 `Content-Length` 決定是否要進行壓縮。
+3. `gzip_comp_level`: 指定 compression level 1~9。
+4. `gzip_types`: 指定需要被壓縮的 [mime_types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types) 。除了 `text/html` 以外都需要手動指定才會開啟壓縮功能。
+
+詳細設定可以參考 [HttpGzipModule](nginx.org/en/docs/http/ngx_http_gzip_module.html)
+
 ## Reference
 
-- [Optimizing Encoding and Transfer Size of Text-Based Assets](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer)
+### Content Negotiation
+
+- [Content negotiation - HTTP | MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation)
 - [HTTP 內容協商 (Content Negotiation) - NotFalse 技術客](https://notfalse.net/41/http-content-negotiation#-server-driven)
 - [HTTP 內容類型 (Content-Type) & 內容編碼 (Content-Encoding) - NotFalse 技術客](https://notfalse.net/40/http-representation?subscribe=success#blog_subscription-9)
+
+### Compression
+
+- [Optimizing Encoding and Transfer Size of Text-Based Assets | Google Developer](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer)
 - [ASP.NET Core 中的回應壓縮 | Microsoft Docs](https://docs.microsoft.com/zh-tw/aspnet/core/performance/response-compression?view=aspnetcore-3.1)
 - [expressjs/compression: Node.js compression middleware](https://github.com/expressjs/compression)
 - [google/brotli: Brotli compression format](https://github.com/google/brotli)
+- [Nginx HttpGzipModule](nginx.org/en/docs/http/ngx_http_gzip_module.html)
