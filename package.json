@@ -1,7 +1,7 @@
 {
   "name": "galtz-blog",
-  "private": true,
   "description": "galtz's blog",
+  "private": true,
   "version": "0.1.0",
   "author": "Galtz <galtz0321@gmail.com>",
   "scripts": {
@@ -21,27 +21,27 @@
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
     "@styled-system/theme-get": "^5.1.2",
-    "babel-plugin-styled-components": "^1.13.1",
-    "gatsby": "^3.8.1",
+    "babel-plugin-styled-components": "^1.13.2",
+    "gatsby": "^3.9.0",
     "gatsby-image": "^3.8.0",
     "gatsby-plugin-advanced-sitemap": "^2.0.0",
-    "gatsby-plugin-manifest": "^3.8.0",
-    "gatsby-plugin-mdx": "^2.8.0",
-    "gatsby-plugin-offline": "^4.8.0",
-    "gatsby-plugin-react-helmet": "^4.8.0",
+    "gatsby-plugin-manifest": "^3.9.0",
+    "gatsby-plugin-mdx": "^2.9.0",
+    "gatsby-plugin-offline": "^4.9.0",
+    "gatsby-plugin-react-helmet": "^4.9.0",
     "gatsby-plugin-react-svg": "^3.0.1",
-    "gatsby-plugin-sharp": "^3.8.0",
-    "gatsby-plugin-styled-components": "^4.8.0",
-    "gatsby-plugin-typography": "^3.8.0",
-    "gatsby-remark-autolink-headers": "^4.5.0",
-    "gatsby-remark-images": "^5.5.0",
-    "gatsby-remark-prismjs": "^5.5.0",
+    "gatsby-plugin-sharp": "^3.9.0",
+    "gatsby-plugin-styled-components": "^4.9.0",
+    "gatsby-plugin-typography": "^3.9.0",
+    "gatsby-remark-autolink-headers": "^4.6.0",
+    "gatsby-remark-images": "^5.6.0",
+    "gatsby-remark-prismjs": "^5.6.0",
     "gatsby-remark-table-of-contents": "^1.0.0",
-    "gatsby-source-filesystem": "^3.8.0",
-    "gatsby-transformer-remark": "^4.5.0",
-    "gatsby-transformer-sharp": "^3.8.0",
+    "gatsby-source-filesystem": "^3.9.0",
+    "gatsby-transformer-remark": "^4.6.0",
+    "gatsby-transformer-sharp": "^3.9.0",
     "lodash": "^4.17.21",
-    "prismjs": "^1.24.0",
+    "prismjs": "^1.24.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -57,12 +57,25 @@
     "typography-theme-funston": "^0.16.19"
   },
   "devDependencies": {
-    "eslint": "^7.29.0",
+    "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-react": "^7.24.0",
-    "husky": "^6.0.0",
+    "husky": "^7.0.1",
     "lint-staged": "^11.0.0",
-    "prettier": "^2.3.1"
+    "prettier": "^2.3.2"
+  },
+  "browserslist": {
+    "development": [
+      ">0.25%",
+      "last 2 version",
+      "not dead",
+      "not ie <= 11"
+    ],
+    "production": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
