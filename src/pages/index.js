@@ -51,7 +51,7 @@ function Article({ node }) {
           {node.frontmatter.title}
         </ArticleTitle>
       </h1>
-      <p>{node.excerpt}</p>
+      <p>{node.frontmatter.description || node.excerpt}</p>
       <p style={{ marginBottom: 16 }}>{node.frontmatter.date}</p>
     </Box>
   )
@@ -93,7 +93,7 @@ export const query = graphql`
   query {
     allMdx(
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { title: { regex: "/^(?!WIP)/" } } }
+      filter: { frontmatter: { draft: { ne: true } } }
     ) {
       totalCount
       edges {
@@ -103,6 +103,7 @@ export const query = graphql`
             title
             date(formatString: "YYYY-MM-DD")
             tags
+            description
           }
           fields {
             slug

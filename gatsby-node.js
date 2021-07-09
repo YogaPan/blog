@@ -3,10 +3,9 @@ const { createFilePath } = require('gatsby-source-filesystem')
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
-  if (node.internal.type === 'Mdx') {
-    const value = createFilePath({ node, getNode })
-    createNodeField({ name: 'slug', node, value })
-  }
+  if (node.internal.type !== 'Mdx') return
+  const value = createFilePath({ node, getNode })
+  createNodeField({ name: 'slug', node, value })
 }
 
 exports.createPages = async ({ graphql, actions }) => {
@@ -16,7 +15,9 @@ exports.createPages = async ({ graphql, actions }) => {
       allMdx {
         edges {
           node {
-            id
+            frontmatter {
+              draft
+            }
             fields {
               slug
             }
@@ -26,13 +27,16 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  result.data.allMdx.edges.forEach(({ node }) => {
+  let { edges } = result.data.allMdx
+  if (process.env.NODE_ENV === 'production')
+    edges = edges.filter(({ node }) => !node.frontmatter.draft)
+
+  edges.forEach(({ node }) => {
+    const { slug } = node.fields
     createPage({
-      path: node.fields.slug,
+      path: slug,
       component: path.resolve('./src/templates/blog-post.js'),
-      context: {
-        slug: node.fields.slug
-      }
+      context: { slug }
     })
   })
 }
