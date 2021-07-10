@@ -22,7 +22,7 @@
     "@mdx-js/react": "^1.6.22",
     "@styled-system/theme-get": "^5.1.2",
     "babel-plugin-styled-components": "^1.13.2",
-    "gatsby": "^3.9.0",
+    "gatsby": "^3.9.1",
     "gatsby-image": "^3.9.0",
     "gatsby-plugin-advanced-sitemap": "^2.0.0",
     "gatsby-plugin-manifest": "^3.9.0",
@@ -57,9 +57,9 @@
     "typography-theme-funston": "^0.16.19"
   },
   "devDependencies": {
-    "@galtz-library/browserslist-config": "^0.2.1",
-    "@galtz-library/eslint-config": "^0.1.0",
-    "@galtz-library/prettier-config": "^0.1.0",
+    "@galtz-library/browserslist-config": "^0.2.4",
+    "@galtz-library/eslint-config": "^0.1.3",
+    "@galtz-library/prettier-config": "^0.1.3",
     "eslint": "^7.30.0",
     "husky": "^7.0.1",
     "lint-staged": "^11.0.0",
