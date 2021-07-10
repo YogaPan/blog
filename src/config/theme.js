@@ -7,11 +7,14 @@ breakpoints.lg = breakpoints[3]
 breakpoints.xl = breakpoints[4]
 breakpoints.xxl = breakpoints[5]
 
-export const widthSmallerThan = size => `max-width:${breakpoints[size] - 1}px`
-export const widthLargerThan = size => `min-width:${breakpoints[size] - 1}px`
+export const widthSmallerThan = size =>
+  `@media (max-width:${breakpoints[size] - 1})`
+export const widthLargerThan = size =>
+  `@media (min-width:${breakpoints[size] - 1})`
 export const widthEqualOrSmallerThan = size =>
-  `max-width:${breakpoints[size]}px`
-export const widthEqualOrLargerThan = size => `min-width:${breakpoints[size]}px`
+  `@media (max-width:${breakpoints[size]})`
+export const widthEqualOrLargerThan = size =>
+  `@media (min-width:${breakpoints[size]})`
 
 export default {
   breakpoints,

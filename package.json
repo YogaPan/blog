@@ -53,8 +53,7 @@
     "rebass": "^4.0.7",
     "styled-components": "^5.3.0",
     "styled-system": "^5.1.5",
-    "typography": "^0.16.21",
-    "typography-theme-funston": "^0.16.19"
+    "typography": "^0.16.21"
   },
   "devDependencies": {
     "@galtz-library/browserslist-config": "^0.2.4",
