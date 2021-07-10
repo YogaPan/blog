@@ -32,7 +32,7 @@ const AnimatedBox = animated(Box)
 const ArticleTitle = styled(Link)`
   display: block;
   margin: 16px 0;
-  font-size: 30px;
+  font-size: 1.6rem;
   font-weight: bold;
   text-decoration: none;
   color: var(--primary-text-color);
@@ -72,7 +72,7 @@ export default function IndexPage({ data }) {
   return (
     <Layout>
       <SEO title="Home" />
-      <AnimatedBox style={props}>
+      <AnimatedBox style={props} mt={[3, 4]}>
         {edges.slice(from, to).map(edge => (
           <Article key={edge.node.id} node={edge.node} />
         ))}

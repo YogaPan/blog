@@ -1,22 +1,38 @@
 import Typography from 'typography'
-import FunstonTheme from 'typography-theme-funston'
+import { widthEqualOrSmallerThan } from './theme'
 
 const customizedTheme = {
-  ...FunstonTheme,
   baseFontSize: '18px',
-  headerWeight: '700',
+  baseLineHeight: 1.6,
   googleFonts: [
-    { name: 'JetBrains Mono', styles: ['400', '700'] },
     { name: 'Titillium Web', styles: ['400', '700'] },
     { name: 'Cabin Condensed', styles: ['400', '700'] },
-    { name: 'Noto Sans TC', styles: ['400', '700'] }
+    { name: 'Noto Sans TC', styles: ['400', '700'] },
+    { name: 'JetBrains Mono', styles: ['400', '700'] }
   ],
   headerFontFamily: ['Titillium Web', 'Noto Sans TC', 'sans-serif'],
   bodyFontFamily: ['Cabin Condensed', 'Noto Sans TC', 'georgia', 'sans-serif'],
-  overrideThemeStyles: ({ rhythm }) => ({
-    h2: { marginTop: rhythm(3) },
-    h3: { fontSize: '1.2rem' },
-    p: { lineHeight: 1.6 }
+  bodyColor: 'hsla(0,0%,0%,0.87)',
+  bodyWeight: 400,
+  headerWeight: 700,
+  boldWeight: 700,
+  overrideStyles: ({ rhythm }) => ({
+    body: {
+      letterSpacing: '.03em'
+    },
+    h2: { marginTop: rhythm(2.5) },
+    h3: {
+      fontSize: '1.2rem',
+      marginTop: rhythm(1)
+    },
+    li: { marginBottom: rhythm(1 / 3) },
+    'li > p': { marginBottom: rhythm(1 / 3) },
+    'li > ul': { marginTop: rhythm(1 / 3) },
+    [widthEqualOrSmallerThan('sm')]: {
+      html: {
+        fontSize: '16px'
+      }
+    }
   })
 }
 

@@ -3,6 +3,7 @@ import React from 'react'
 import { Flex } from 'rebass'
 import { string } from 'prop-types'
 import styled, { css } from 'styled-components'
+import { widthEqualOrSmallerThan } from '@app/config/theme'
 import GithubIcon from '@assets/github.svg'
 import LinkedInIcon from '@assets/linkedin.svg'
 import BrandIcon from '@assets/brand.svg'
@@ -11,7 +12,6 @@ import ThemeSwitch from './ThemeSwitch'
 const linkStyleMixin = css`
   display: flex;
   align-items: center;
-  font-size: 32px;
   line-height: 1;
   color: var(--primary-text-color);
 
@@ -27,20 +27,33 @@ const linkStyleMixin = css`
     width: 30px;
     fill: var(--primary-icon-color);
     transition: var(--transition-duration);
+    ${widthEqualOrSmallerThan('sm')} {
+      height: 24px;
+      width: 24px;
+    }
   }
 `
 
 const brandCss = css`
+  text-decoration: none;
+
   svg {
     height: 40px;
     width: 40px;
-  }
-  span {
-    margin-left: 16px;
-    width: 200px;
+    ${widthEqualOrSmallerThan('sm')} {
+      height: 30px;
+      width: 30px;
+    }
   }
 
-  text-decoration: none;
+  span {
+    font-size: 32px;
+    margin-left: 16px;
+    ${widthEqualOrSmallerThan('sm')} {
+      font-size: 24px;
+      margin-left: 8px;
+    }
+  }
 `
 
 const linkedInCss = css`
