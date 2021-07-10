@@ -1,7 +1,1 @@
-{
-  "arrowParens": "avoid",
-  "semi": false,
-  "singleQuote": true,
-  "tabWidth": 2,
-  "trailingComma": "none"
-}
+"@galtz-library/prettier-config"
