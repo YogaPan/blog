@@ -4,7 +4,9 @@
     "Noto",
     "Titillium",
     "browserslist",
+    "browserslistrc",
     "frontmatter",
-    "funston"
+    "funston",
+    "symlink"
   ]
 }
