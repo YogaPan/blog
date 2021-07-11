@@ -32,7 +32,7 @@ description: '介紹如何將前端常用的 eslint, prettier, browserslist 設�
 
 ### 2.2 進行使用 NPM 的準備工作
 
-我們知道了 extends 的使用方法後，接著我們就要建造自己的 shareable config 並且發布至 [npm](https://www.npmjs.com/)。首先必須至 npm 註冊用戶，並在本機 command line 執行 `npm adduser` 進行登入，這樣才能確保後續能夠透過 `npm publish` 發布套件。接著我們在 npm 上建立自己的 [organization](https://docs.npmjs.com/organizations)，這麼做的好處很明顯：可以利用 [scope](https://docs.npmjs.com/cli/v7/using-npm/scope) 來避免套件名稱已經被使用的問題。
+我們知道了 extends 的使用方法後，接著我們就要建造自己的 shareable config 並且發布至 [npm](https://www.npmjs.com/)。首先必須至 npm 註冊用戶，並在本機 command line 執行 `npm adduser` 進行登入，這樣才能確保後續能夠透過 `npm publish` 發布套件。接著我們在 npm 上建立自己的 [organization](https://docs.npmjs.com/organizations)，這麼做的好處很明顯：可以利用 [scope](https://docs.npmjs.com/cli/v7/using-npm/scope) 來避免套件名稱已經被使用的問題。以下假設我們成功建立了名為 `my-org` 的 organization。
 
 ### 2.3 立 Shareable Config 專案
 
@@ -47,7 +47,7 @@ npm install eslint eslint-plugin-import eslint-plugin-react eslint-config-pretti
 ```js
 module.exports = {
   env: { node: true, es2021: true },
-  extends: ['eslint:recommended'],
+  extends: ['eslint:recommended', 'prettier'],
   plugins: ['import'],
   rules: {
     'import/order': 'error',
@@ -182,17 +182,17 @@ packages/
 
 ## 4. Github Actions 自動 Publish
 
-能自動化的事情就盡量自動化，開發者會希望能夠專注在開發上，publish 就交給自動化的流程去處理。[Github Actions](https://github.com/features/actions) 可以協助我們在每次 push 程式碼到 Github 上後，自動幫我執行 build, test, lint 一系列動作，若都成功就 publish 至 npm。
+能自動化的事情就盡量自動化，開發者會希望能夠專注在開發上，publish 就交給自動化的流程去處理。[Github Actions](https://github.com/features/actions) 可以協助我們在每次 push 程式碼到 Github 上後，自動幫我執行 build -> test -> lint -> publish 一系列動作。
 
 ### 4.1 設定 npm Automation Token
 
-在本機上必須先用帳號密碼登入 npm 才有權限 publish，那如何賦予 Github Actions 權限呢？方法是在 npm 上面產生一組 automation token ，接著在 Github repo 上的 settings -> secrets 設定 `NPM_TOKEN` 的值。有了這把 token 就能夠任意發布套件至你個人或是 organization 底下，所以必須小心保管。
+在本機上必須先用帳號密碼登入 npm 才有權限 publish，那如何賦予 Github Actions 權限呢？方法是在 npm 上面[產生一組 automation token](https://docs.npmjs.com/creating-and-viewing-access-tokens) ，接著在 Github repo 上的 settings -> secrets 設定 `NPM_TOKEN` 的值。有了這把 token 就能夠任意發布套件至你個人或是 organization 底下，請務必小心保管。
 
 註：npm token 有三種，但有 publish 權限且可繞過 2FA 的只有 automation token。
 
 ### 4.2 設定針對 CI 使用的 npm scripts
 
-以下為 package.json 中的設定：
+以下為 `package.json` 中的設定：
 
 ```json
 {
