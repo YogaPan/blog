@@ -1,0 +1,252 @@
+---
+title: '用 Lerna 管理共同前端設定，並透過 Github Actions 自動發布至 npm'
+date: '2021-07-11'
+tags: ['javascript', 'lerna', 'github workflows', 'npm']
+description: '介紹如何將前端常用的 eslint, prettier, browserslist 設定提取至 Lerna 管理的 monorepo，並利用 Github Actions 自動發布至 npm。這篇文章也記錄了如何利用 npm link 在本機快速測試套件。'
+---
+
+## Table of Contents
+
+```toc
+```
+
+## 1. 動機
+
+前端專案通常都會有 webpack、eslint、prettier、browserslist 等設定。當專案開始大量增加時，這些重複的設定會散落在各個專案，導致後續維護和修改的困難。這時我們可以開始把共用的專案設定抽至一個 common library 並發布成 npm package。有了統一的設定，其他專案只需要安裝這些 npm package 並且在需要時更新 `package.json` 即可。
+
+## 2. Shareable Config
+
+### 2.1 Extends 機制
+
+`.eslintrc`, `.prettier`, `.browserslistrc` 都有提供 [extends](https://eslint.org/docs/user-guide/configuring/configuration-files#extending-configuration-files) 的使用方式，簡單來說就是可以直套用別人寫好的 rules，缺少的、不符合需求的 rules 再自己補上或是 override。以下用 eslint 舉例：
+
+```json
+{
+  "extends": ["eslint:recommended"],  // extends 官方推薦的規則，讓你不必每條規則逐一設定
+  "rules": {
+    "no-console": "error",  // 假設我認為 debug 用的 console 忘記拿掉的人都該死，我就加這條規則。
+    "no-sparse-arrays": "off" // 假設我認為官方推薦的規則太嚴格了，那我就可以 override 這條規則把檢查關掉。
+  }
+}
+```
+
+### 2.2 進行使用 NPM 的準備工作
+
+我們知道了 extends 的使用方法後，接著我們就要建造自己的 shareable config 並且發布至 [npm](https://www.npmjs.com/)。首先必須至 npm 註冊用戶，並在本機 command line 執行 `npm adduser` 進行登入，這樣才能確保後續能夠透過 `npm publish` 發布套件。接著我們在 npm 上建立自己的 [organization](https://docs.npmjs.com/organizations)，這麼做的好處很明顯：可以利用 [scope](https://docs.npmjs.com/cli/v7/using-npm/scope) 來避免套件名稱已經被使用的問題。
+
+### 2.3 立 Shareable Config 專案
+
+建立一個名叫 `eslint-config` 的資料夾，並在資料夾內執行 `npm init --scope=@my-org` 初始化 npm 專案來產生 `package.json`。接著我們安裝相關的 dependencies:
+
+```shell
+npm install eslint eslint-plugin-import eslint-plugin-react eslint-config-prettier --save
+```
+
+由於可能不同的專案類型可能會需要不同的 eslint 設定，所以我們在創建 `lib/` 並在其中建立兩份設定：`vanilla.js`、`react.js`，一份是純 js 專案的設定，一份 React 專案的設定。以下為 `vanilla.js` 的範例：
+
+```js
+module.exports = {
+  env: { node: true, es2021: true },
+  extends: ['eslint:recommended'],
+  plugins: ['import'],
+  rules: {
+    'import/order': 'error',
+    'no-var': 'error',
+    quotes: ['error', 'single', { avoidEscape: true }]
+  }
+}
+```
+
+接著在 `package.json` 中設定 `main` 作為套件的入口，`files` 為被打包進套件，可供外界使用的檔案：
+
+```json
+{
+  "main": "lib/vanilla.js",
+  "files": [
+    "/lib"
+  ]
+}
+```
+
+都設定好了之後，我們就可以開始體驗一下如何使用這個套件。在專案根目錄執行 `node` 進入交互模式：
+
+```js
+> const vanillaEslintConfig = require('@my-org/eslint-config')
+> console.log(vanillaEslintConfig)  // show my vanilla eslint config
+
+> const reactEslintConfig = require('@my-org/eslint-config/lib/react')
+> console.log(reactEslintConfig)  // show my react eslint config
+```
+
+暸解使用方式後，在專案的根目錄加上 `.eslintrc` 設定：
+
+```json
+{
+  "extends": "@my-org/eslint-config"  // 自己吃自己，自己訂定的規則自己也必須遵守。
+}
+```
+
+到這一步驟，我們就可以執行 `npx eslint lib/**/*.js` ，用自己訂下的 eslint 規則來 lint 專案本身。
+
+各套件 shareable config 詳細設定方式參考以下連結，不再贅述。
+
+- [Eslint Shareable Config](https://eslint.org/docs/developer-guide/shareable-configs)
+- [Prettier Shareable Config](https://prettier.io/docs/en/configuration.html#sharing-configurations)
+- [Browserslist Shareable Config](https://github.com/browserslist/browserslist#shareable-configs)
+
+### 2.4 Publish 至 npm
+
+接著我們要 publish 至 npm，讓其他前端專案也能夠使用這份設定。npm 的套件建議遵守 [Semantic Version](https://semver.org/)。如果套件在初期開發不穩定的情況下，可以從 `0.1.0` 版本開始，和過去 API 不相容的修改跳 Minor 版號，其餘跳 Patch 版號。確定好版本後就可以發布至 NPM：
+
+```shell
+npm publish --access public
+```
+
+等到成功發布後就可以在其他專案中使用：
+
+```shell
+npm install @my-org/eslint-config --save-dev
+```
+
+設定 `.eslintrc`
+
+```json
+{
+  "extends": "@my-org/eslint-config"
+}
+```
+
+### 2.5 使用 npm link 快速試用
+
+在開發初期，如果需要在其他專案下引入這份設定一邊試用一邊進行調整的話，那麼每次修改完 `@my-org/eslint-config` 都需要發布至 npm 後再 install 下來也太沒效率了。這個時候就會需要借助 [npm link](https://docs.npmjs.com/cli/v7/commands/npm-link) 的力量了。
+
+在 `@my-org/eslint-config` 專案底下執行 `npm link` 產生 global link (其實就是 symlink)，接著執行 `npm ls -g --depth=0 --link=true` 來查看所有 global link：
+
+```text
+/Users/galtz/.nvm/versions/node/v16.4.2/lib
+└── @my-org/eslint-config@0.1.0 -> ./../../../../../Developer/eslint-config
+```
+
+在我們需要引入 `eslint-config` 進行測試的專案執行 `npm link @my-org/eslint-config` 建立連結，設定完後我們就能直接修改 `@my-org/eslint-config` 的內容。因為是軟連結，修改會即時反應在所有其他執行過 `npm link @my-org/eslint-config` 的專案下，以測試的角度來說相當方便。
+
+## 3. Lerna & Monorepo
+
+除了上述的 eslint，browserslist, prettier 也需要抽出 sharing config。如果全部都各自建一個 repo 的會又會讓這些設定分散各處，一切又變得雜亂起來，根本自己搞自己。這個時候**我們可以使用 Monorepo 的方式，即是在單一 repo 中，管理多個模組。**
+
+[Lerna](https://github.com/lerna/lerna) 就是用來管理這些小王八蛋的，透過指令協助開發者對多個模組進行管理。使用方式很簡單，在一個新資料夾底下執行 `lerna init --independent`。會產生 `package.json`, `lerna,json` 以及 `packages/`
+
+```json
+{
+  "packages": [
+    "packages/*"
+  ],
+  "version": "independent"
+}
+```
+
+我們可以看到我們成功創立了一個 independent mode 的 monorepo，並且 `packages/*` 就是這些小王八蛋的住所。接下來就是把各模組放到裏面，架構會長得像是下面這樣：
+
+```text
+lerna.json
+package.json
+packages/
+├── eslint-config/
+│   ├── lib/
+│   └── package.json
+├── prettier-config/
+│   ├── index.js
+│   └── package.json
+└── browserslist-config/
+    ├── index.js
+    └── package.json
+```
+
+需要特別在各模組下的 `package.json` 中加入以下設定，確保 scope 下的 package 為公開 publish。
+
+```json
+{
+  "publishConfig": {
+    "access": "public"
+  }
+}
+```
+
+這裡簡單紀錄幾個常用指令：
+
+- `lerna init`: 初始 monorepo
+- `lerna bootstrap`: 為所有子模組執行 `npm install`
+- `lerna clean`: 刪除所有子模組中的 `node_modules`
+- `lerna run <command>`: 執行所有子模組的 `npm run <command>`。
+- `lerna version`: 為有修改過的子模組進版，並且自動 commit、為 commit 打上 git tag，最後 push 到 git remote。
+- `lerna publish`: 發布所有子模組至 npm。
+
+## 4. Github Actions 自動 Publish
+
+能自動化的事情就盡量自動化，開發者會希望能夠專注在開發上，publish 就交給自動化的流程去處理。[Github Actions](https://github.com/features/actions) 可以協助我們在每次 push 程式碼到 Github 上後，自動幫我執行 build, test, lint 一系列動作，若都成功就 publish 至 npm。
+
+### 4.1 設定 npm Automation Token
+
+在本機上必須先用帳號密碼登入 npm 才有權限 publish，那如何賦予 Github Actions 權限呢？方法是在 npm 上面產生一組 automation token ，接著在 Github repo 上的 settings -> secrets 設定 `NPM_TOKEN` 的值。有了這把 token 就能夠任意發布套件至你個人或是 organization 底下，所以必須小心保管。
+
+註：npm token 有三種，但有 publish 權限且可繞過 2FA 的只有 automation token。
+
+### 4.2 設定針對 CI 使用的 npm scripts
+
+以下為 package.json 中的設定：
+
+```json
+{
+  "ci:bootstrap": "npx lerna bootstrap --ci",
+  "ci:publish": "npx lerna publish from-package --yes --no-verify-access"
+}
+```
+
+1. 通常在本機的開發，會使用 `npm install` 來安裝套件；但是發布出去的套件會用 [npm ci](https://docs.npmjs.com/cli/v7/commands/npm-ci/) 來確保 dependencies 完全依照 `package-lock.json` 中指定的版本進行安裝。所以明確指定 `--ci`。
+2. Lerna 在使用 npm 的 automation token 會遇到問題，必須使用 `--no-verify-access` 繞過。詳細可以參考[這串 issue](https://github.com/lerna/lerna/issues/2788)。
+
+### 4.3 設定 Github Actions
+
+接著新增資料夾 `.github/workflows`，並在其中新增 `main.yml`：
+
+```yml
+name: Publish
+  on:
+    # 當有新的 change 進到 master 時觸發
+    push:
+      branches:
+        - master
+    # 讓你能夠手動觸發，方便測試
+    workflow_dispatch:
+
+jobs:
+  publish:
+    # 運行在 ubuntu 上
+    runs-on: ubuntu-latest
+    steps:
+      # checkout 至 repo 的 master branch
+      - uses: actions/checkout@v2
+      # 設定 node 環境
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          registry-url: 'https://registry.npmjs.org'
+      # install & lint
+      - run: npm run ci:bootstrap
+      - run: npm run lint
+      # 利用 automation token publish 至 npm
+      - run: npm run ci:publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+```
+
+到這裡就全部設定完畢了。接下來只需要
+
+1. 修改程式碼並 commit。
+2. 執行 `npx lerna version`， Lerna 會為修改過的模組進版，接著 commit、上 git tag 後 push 至 Github remote。
+3. 觸發 Github Actions 的 publish job，它會運行腳本確認程式碼品質正常後自動發布至 npm。
+
+## 5. 專案範例
+
+- [YogaPan/f2e-library](https://github.com/YogaPan/f2e-library)
+- [YogaPan/blog](https://github.com/YogaPan/blog)
