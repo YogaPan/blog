@@ -169,7 +169,7 @@ html[data-theme='dark'] .token.deleted {
 }
 
 html[data-theme='dark'] .token.symbol,
-.token.property {
+html[data-theme='dark'] .token.property {
   color: rgb(128, 203, 196);
 }
 
