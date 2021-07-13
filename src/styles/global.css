@@ -14,7 +14,7 @@ strong {
 }
 
 a {
-  color: var(--primary-text-color);
+  color: inherit;
   transition: var(--transition-duration);
 }
 
