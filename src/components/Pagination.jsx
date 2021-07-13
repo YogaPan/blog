@@ -5,7 +5,7 @@ import { func, number } from 'prop-types'
 
 export default function Pagination({ pageCount, onPageChange, ...restProps }) {
   return (
-    <Flex alignItems="center" justifyContent="center">
+    <Flex alignItems="center" justifyContent="center" {...restProps}>
       <ReactPaginate
         pageCount={pageCount}
         onPageChange={onPageChange}

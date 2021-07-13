@@ -5,11 +5,13 @@ html {
   --primary-bg-color: white;
   --primary-black-bg-color: #0f111a;
   --primary-text-color: rgba(0, 0, 0, 0.8);
+  --secondary-text-color: rgba(0, 0, 0, 0.65);
   --strong-text-color: black;
   --primary-white-text-color: white;
   --code-bg-color: #f8f8f8;
   --primary-icon-color: rgb(50, 56, 63);
   --primary-icon-hover-color: #777;
+  --secondary-icon-hover-color: #aaa;
   --theme-icon-color: var(--primary-icon-color);
   --theme-icon-hover-color: var(--brand-color);
   --border-color: rgba(0, 0, 0, 0.12);
@@ -22,10 +24,12 @@ html[data-theme='dark'] {
   --primary-bg-color: #0f111a;
   --primary-black-bg-color: #090b10;
   --primary-text-color: rgba(255, 255, 255, 0.75);
+  --secondary-text-color: var(--brand-color);
   --strong-text-color: rgba(255, 255, 255, 0.9);
   --primary-white-text-color: white;
   --code-bg-color: var(--primary-black-bg-color);
   --primary-icon-color: var(--brand-color);
+  --secondary-icon-hover-color: #aaa;
   --primary-icon-hover-color: white;
   --theme-icon-color: var(--brand-color);
   --theme-icon-hover-color: var(--primary-icon-hover-color);

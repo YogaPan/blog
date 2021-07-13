@@ -22,7 +22,7 @@ export default function Layout({ children }) {
   return (
     <ThemeProvider theme={theme}>
       <Flex justifyContent="center" width="100%" minHeight="80vh">
-        <Flex flexDirection="column" flex="0 1 880px" padding="0 20px">
+        <Flex flexDirection="column" flex="0 1 880px" py={0} px={3}>
           <Header siteTitle={data.site.siteMetadata.title} />
           <Flex flexDirection="column" flex="1">
             {children}

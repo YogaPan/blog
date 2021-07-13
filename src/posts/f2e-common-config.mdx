@@ -1,7 +1,7 @@
 ---
 title: '用 Lerna 管理共同前端設定，並透過 Github Actions 自動發布至 npm'
 date: '2021-07-11'
-tags: ['javascript', 'lerna', 'github workflows', 'npm']
+tags: ['javascript', 'npm', 'lerna', 'CI', 'github actions']
 description: '介紹如何將前端常用的 eslint, prettier, browserslist 設定提取至 Lerna 管理的 monorepo，並利用 Github Actions 自動發布至 npm。'
 ---
 
@@ -12,7 +12,7 @@ description: '介紹如何將前端常用的 eslint, prettier, browserslist 設�
 
 ## 1. 動機
 
-前端專案通常都會有 webpack、eslint、prettier、browserslist 等設定。當專案開始大量增加時，這些重複的設定會散落在各個專案，導致後續維護和修改的困難。這時我們可以開始把共用的專案設定抽至一個 common library 並發布成 npm package。有了統一的設定，其他專案只需要安裝這些 npm package 並且在需要時更新 `package.json` 即可。
+前端專案通常都會有 webpack、eslint、prettier、browserslist 等設定，當專案開始大量增加時，這些重複的設定會散落在各個專案，導致後續維護和修改的困難。這時我們可以開始把共用的專案設定抽至一個 common library 並發布成 npm package。有了統一的設定，其他專案只需要安裝這些 npm package 並且在需要時更新 `package.json` 即可。
 
 ## 2. 使用 Shareable Config
 
@@ -194,7 +194,7 @@ packages/
 }
 ```
 
-1. 通常在本機的開發，會使用 `npm install` 來安裝套件；但是發布出去的套件會用 [npm ci](https://docs.npmjs.com/cli/v7/commands/npm-ci/) 來確保 dependencies 完全依照 `package-lock.json` 中指定的版本進行安裝。所以明確指定 `--ci`。
+1. 通常在本機的開發，會使用 `npm install` 來安裝套件；但是發布出去的套件會用 [npm ci](https://docs.npmjs.com/cli/v7/commands/npm-ci/) 來確保 dependencies 完全依照 `package-lock.json` 中指定的版本進行安裝，所以明確指定 `--ci`。
 2. Lerna 在使用 npm 的 automation token 會遇到問題，必須使用 `--no-verify-access` 繞過。詳細可以參考[這串 issue](https://github.com/lerna/lerna/issues/2788)。
 
 ### 4.3 設定 Github Actions

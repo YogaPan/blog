@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { animated } from 'react-spring'
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import { Box, Flex } from 'rebass'
-import styled from 'styled-components'
 import useFadeIn from '@hooks/useFadeIn'
 import SEO from '@components/Seo'
 import Layout from '@components/Layout/Layout'
 import Pagination from '@components/Pagination'
+import Article from '@components/Article'
 
 const PAGE_SIZE = 5
 
@@ -29,34 +29,6 @@ const getPaginationConfig = (
 
 const AnimatedBox = animated(Box)
 
-const ArticleTitle = styled(Link)`
-  display: block;
-  margin: 16px 0;
-  font-size: 1.6rem;
-  font-weight: bold;
-  text-decoration: none;
-  color: var(--primary-text-color);
-  transition: var(--transition-duration);
-
-  &:hover {
-    color: var(--primary-icon-hover-color);
-  }
-`
-
-function Article({ node }) {
-  return (
-    <Box key={node.id} py={12}>
-      <h1>
-        <ArticleTitle to={node.fields.slug}>
-          {node.frontmatter.title}
-        </ArticleTitle>
-      </h1>
-      <p>{node.frontmatter.description || node.excerpt}</p>
-      <p style={{ marginBottom: 16 }}>{node.frontmatter.date}</p>
-    </Box>
-  )
-}
-
 export default function IndexPage({ data }) {
   const [pageIndex, setPageIndex] = useState(0)
   const props = useFadeIn()
@@ -78,12 +50,13 @@ export default function IndexPage({ data }) {
         ))}
       </AnimatedBox>
       <Pagination
+        mt={4}
         totalCount={totalCount}
         pageCount={pageCount}
         onPageChange={onPageChange}
       />
       <Flex alignItems="center" justifyContent="center">
-        <h2>Total {data.allMdx.totalCount} Posts</h2>
+        <h3>Total {data.allMdx.totalCount} Posts</h3>
       </Flex>
     </Layout>
   )
