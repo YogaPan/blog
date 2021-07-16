@@ -2,6 +2,7 @@
 title: 'Javascript 中的 Arguments & Rest Operator'
 date: '2019-12-21'
 tags: ['javascript']
+description: '解釋常在舊 javascript 專案看到的 arguments 是什麼，以及如何使用較新潮的 rest operator 語法。'
 ---
 
 ## Table of Contents
@@ -9,9 +10,9 @@ tags: ['javascript']
 ```toc
 ```
 
-## Arguments
+## 1. Arguments
 
-最近閱讀許多開源 Source Code，常看到 [arguments](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments) 這個傢伙：
+最近閱讀許多開源 source code，常看到 [arguments](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments) 這個小可愛：
 
 ```js
 function foo() {
@@ -21,11 +22,11 @@ function foo() {
 foo('first argument', 'second argument', 'third argument')
 ```
 
-這個 `arguments` 到底是什麼？簡單來說，**arguments 就是一個能夠在 function 內存取的 Array Like Object，這個物件包含所有傳入這個 function 的參數**。上面的程式碼的輸出結果如下：
+這個 `arguments` 到底是什麼？簡單來說，**arguments 就是一個能夠在 function 內存取的 Array like object，這個物件包含所有傳入這個 function 的參數**。上面的程式碼的輸出結果如下：
 
 ![arguments](../images/arguments/001.png)
 
-這邊補充一下，所謂 Array-Like 指的就是**有 Array 的屬性，但沒有 Array 的方法。**
+這邊補充一下，所謂 Array-like 指的就是**有 Array 的屬性，但沒有 Array 的方法。**
 
 ```js
 console.log(arguments[0]) // first argument
@@ -45,7 +46,7 @@ const arr = Array.from(arguments)
 const arr = [...arguments]
 ```
 
-**注意！** 要使用 arguments 必須在 **function** 內使用，[Arrow Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) 中無法使用 arguments，
+**注意！** 要使用 arguments 必須在 **function** 內使用，[arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) 中無法使用 arguments：
 
 ```js
 const foo = () => {
@@ -53,32 +54,33 @@ const foo = () => {
 }
 ```
 
-## Rest Operator
+## 2. Rest Operator
 
-利用 Rest Operator 語法 `...`，讓我們**把非固定數量的參數作為 Array 處理**：
+### 2.1 基本觀念
+
+ES6 開始加入了 rest operator `...`，讓我們**把非固定數量的參數作為 Array 處理**：
 
 ```js
-function myFun(a, b, ...manyMoreArgs) {
+function foo(a, b, ...restParameter) {
   console.log('a', a)
   console.log('b', b)
-  console.log('manyMoreArgs', manyMoreArgs)
+  console.log('restParameter', restParameter)
 }
 
-myFun('one', 'two', 'three', 'four', 'five', 'six')
+foo('one', 'two', 'three', 'four', 'five', 'six')
 
 // Console Output:
 // a, one
 // b, two
-// manyMoreArgs, [three, four, five, six]
+// restParameter, [three, four, five, six]
 ```
 
-和 Arguments 比起來，使用 Rest Operator 的好處是
+和 arguments 比起來，使用 rest operator 的好處是：
 
-1. 直接就是 Array，不需要再從 Array Like Object 進行轉換
-2. 可以任意在 Arrow Function 中使用
-3. ~~ES6 語法，就是比較潮~~
+1. rest parameters 直接就是 Array，不需要再從 Array like object 進行轉換
+2. 可以任意在 arrow function 中使用
 
-## 實戰應用
+### 2.2 實戰應用
 
 無法確定傳入的參數個數時：
 
@@ -95,11 +97,14 @@ const max = (...args) =>
 const foo = (...args) => {
   // Rest Operator
   // 略
-  return bar(...args) //  要注意這個是 Spread Operator，和 Rest Operator 的作用不同
+  return bar(...args) //  Spread Syntax
 }
 ```
 
-## Reference
+特別注意上述程式碼中 `bar(...args)` 是 [spread operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)，和 rest operator 功能完全不同。
+
+## 3. Reference
 
 - [The arguments object - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments)
 - [Rest parameters - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters)
+- [Spread Syntax - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)

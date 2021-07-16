@@ -11,13 +11,13 @@ description: '介紹什麼是 youtube-dl、為何要使用 youtube-dl 下載影�
 toHeading: 4
 ```
 
-## 什麼是 youtube-dl
+## 1. 什麼是 youtube-dl
 
 ![yotube-dl github](../images/youtube-dl-note/youtube-dl-github.png)
 
 [youtube-dl](https://github.com/ytdl-org/youtube-dl) 是在 [Github](https://github.com/) 上擁有將近 10w 顆星星的 Python 開源專案。主樣功能是讓使用者透過 Command Line 來下載 YouTube 上的影片。
 
-## 為什麼使用 youtube-dl?
+## 2. 為什麼使用 youtube-dl?
 
 現在已經有很多免費的線上 YouTube 影片下載工具了，為什麼還要使用沒有 UI 介面的 youtube-dl 呢？原因是這些**線上免費服務通常會有諸多限制**：
 
@@ -39,9 +39,9 @@ toHeading: 4
 
 [所有支援下載的網站清單](https://github.com/ytdl-org/youtube-dl/blob/master/docs/supportedsites.md)
 
-## 如何使用 youtube-dl
+## 3. 如何使用 youtube-dl
 
-### 安裝
+### 3.1 安裝
 
 利用 mac 套件管理神器 [Homebrew](https://brew.sh) 來安裝：
 
@@ -57,16 +57,16 @@ brew install ffmpeg
 
 若是使用 Linux、Windows 平台，可以參考[官方安裝文件](https://github.com/ytdl-org/youtube-dl#installation)
 
-### 下載影片
+### 3.2 下載影片
 
-#### 格式和解析度
+#### 3.2.1 格式和解析度
 
 1. 列出可下載的影片檔案格式： 用 `-F` 或是 `--list-formats`
 2. 格式: 用 `-f` 或是 `--format`
    1. 指定檔案格式 `mp4, flv, mkv, webm`，預設會下載最高畫質的影片
    2. 指定 `--list-formats` 所列出的 `format code`
 
-#### 嵌入字幕
+#### 3.2.2 嵌入字幕
 
 `--list-subs` 列出所有可下載字幕的語言
 
@@ -77,7 +77,7 @@ brew install ffmpeg
 
 注意：`--write-sub` 必須和 `--embed-sub` 合併使用
 
-#### 使用流程
+#### 3.2.3 使用流程
 
 假如我想要下載這首超好聽的[竹內瑪莉亞 - Plastic Love](https://www.youtube.com/watch?v=3bNITQR4Uso)
 ![plastic love](../images/youtube-dl-note/plastic-love.png)
@@ -113,14 +113,14 @@ youtube-dl --write-sub --embed-sub --all-subs -f mp4 https://www.youtube.com/wat
 打開下載下來的影片即可選擇字幕：
 ![subtitle select](../images/youtube-dl-note/subtitle-select.png)
 
-### 下載音樂
+### 3.3 下載音樂
 
-#### 指定音樂檔案類型
+#### 3.3.1 指定音樂檔案類型
 
 - `-x` 或 `--extract-audio` 表示提取音頻
 - `--audio-format` 後面指定音頻檔案類型： `mp3, wav, m4a, aac`
 
-#### 縮圖和歌曲資訊
+#### 3.3.2 縮圖和歌曲資訊
 
 - `--embed-thumbnail` 加入 youtube 影片縮圖
 - `—-add-metadata` 加入歌曲資訊
@@ -138,7 +138,7 @@ youtube-dl -x --audio-format mp3 --embed-thumbnail --add-metadata https://www.yo
 
 ![king gnu info](../images/youtube-dl-note/king-gnu-info.png)
 
-### 下載 Playlist
+### 3.4 下載 Playlist
 
 除了影片網址的部分改成影片清單的網址，其他部分和下載影片一樣。
 
@@ -167,9 +167,7 @@ youtube-dl --playlist-end 3 -f mp4 <playlist-url>
 youtube-dl --playlist-start 2 --playlist-end 4 -f mp4 <playlist-url>
 ```
 
-## 進階功能
-
-### 客製化輸出檔名
+### 3.5 客製化輸出檔名
 
 `-o, --output TEMPLATE` 指定檔名輸出模板。預設是 `%(title)s-%(id)s.%(ext)s`
 
@@ -203,13 +201,13 @@ youtube-dl -o '%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'
 
 參考[模板參數](https://github.com/ytdl-org/youtube-dl#output-template)
 
-### 登入
+### 3.6 登入
 
 如果有些壞壞的影片要登入後才能觀看該怎麼辦呢？youtube-dl 還有支援帳戶登入的功能：
 
 - `-u, --username USERNAME`
 - `-p, --password PASSWORD`
 
-## 總結
+## 4. 總結
 
 這篇文章是從我[舊 Blog 文章](https://yogapan.github.io/2017/08/16/Youtube-dl%E6%BF%83%E7%B8%AE%E6%95%99%E5%AD%B8%E7%AD%86%E8%A8%98/)經過整理後搬移過來的，相信以上的內容已經涵蓋了大多數的使用場景了。當然 youtube-dl 還有更多強大功能和參數可供使用，參考 [youtube-dl 官方文件](https://github.com/ytdl-org/youtube-dl)。

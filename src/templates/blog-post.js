@@ -17,10 +17,6 @@ const Title = styled.h1`
 
 const AnimatedBox = animated(Box)
 
-const components = {
-  // TODO
-}
-
 export default function BlogPost({ data: { mdx } }) {
   const props = useFadeIn()
   return (
@@ -28,7 +24,7 @@ export default function BlogPost({ data: { mdx } }) {
       <SEO title={mdx.frontmatter.title} />
       <AnimatedBox style={props} width="100%">
         <Title>{mdx.frontmatter.title}</Title>
-        <MDXProvider components={components}>
+        <MDXProvider>
           <MDXRenderer>{mdx.body}</MDXRenderer>
         </MDXProvider>
       </AnimatedBox>

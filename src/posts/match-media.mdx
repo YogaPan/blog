@@ -2,9 +2,18 @@
 title: 'Javascript matchMedia 筆記'
 date: '2019-12-21'
 tags: ['javascript']
+description: '除了 CSS 的 media query，Javascript 也能利用 matchMedia API 偵測設備的特徵或參數來做出對應的處理。本篇同時會利用 React UseMedia Hooks 實戰演練。'
 ---
 
-寫 RWD 網頁的工程師應該都很熟悉，在 css 中可以利用 `@media` 來針對指定的媒設定樣式。例如說我要讓螢幕寬度 <= 600px 的裝置背景為紅色：
+## Table of Contents
+
+```toc
+
+```
+
+## 1. MatchMedia API
+
+寫 RWD 網頁的工程師應該都很熟悉，在 css 中可以利用 `@media` 根據設備特徵或參數來指定樣式。例如說我要讓螢幕寬度 `<= 600px` 的裝置背景為紅色：
 
 ```css
 @media (max-width: 600px) {
@@ -53,7 +62,7 @@ console.log(mediaQueryList.matches) // true or false
   sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
 ></iframe>
 
-## React Hooks
+## 2. React Hook
 
 [react-use](https://github.com/streamich/react-use) 這個 Hooks 的 library 提供 [useMedia](https://github.com/streamich/react-use/blob/master/docs/useMedia.md) 這支 Hook，當 `matches` 改變時便會觸發 re-render：
 
@@ -64,9 +73,11 @@ const Demo = () => {
 }
 ```
 
-## 實戰演練
+## 3. 實戰演練
 
-Visible Component: 當螢幕寬度 >= 600px 時才顯示特定元素
+### 3.1 Visible Component
+
+當螢幕寬度 `>= 600px` 時才顯示特定元素：
 
 <iframe
   src="https://codesandbox.io/embed/match-media-visible-fdngg?fontsize=14&hidenavigation=1&theme=dark"
@@ -76,7 +87,9 @@ Visible Component: 當螢幕寬度 >= 600px 時才顯示特定元素
   sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
 ></iframe>
 
-Split Table: 當螢幕寬度 >= 600px 時，將表格一分為二。
+### 3.2 Split Table
+
+當螢幕寬度 >= 600px 時，將表格一分為二：
 
 <iframe
   src="https://codesandbox.io/embed/match-media-spitted-table-c77mk?fontsize=14&hidenavigation=1&theme=dark"
@@ -86,7 +99,7 @@ Split Table: 當螢幕寬度 >= 600px 時，將表格一分為二。
   sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
 ></iframe>
 
-## Reference
+## 4. Reference
 
 - [Using media queries - CSS: Cascading Style Sheets | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries)
 - [CSS Media Queries 詳細介紹 - OXXO.STUDIO](https://www.oxxostudio.tw/articles/201810/css-media-queries.html)

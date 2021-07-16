@@ -73,7 +73,7 @@ module.exports = {
 
 都設定好了之後，我們就可以開始體驗一下如何使用這個套件。在專案根目錄執行 `node` 進入交互模式：
 
-```js
+```js｀
 > const vanillaEslintConfig = require('@my-org/eslint-config')
 > console.log(vanillaEslintConfig)  // show my vanilla eslint config
 
@@ -81,7 +81,7 @@ module.exports = {
 > console.log(reactEslintConfig)  // show my react eslint config
 ```
 
-暸解使用方式後，在專案的根目錄加上 `.eslintrc` 設定：
+暸解使用方式後，在專案的根目錄加上 `.eslintrc` 設定：
 
 ```json
 {
@@ -90,7 +90,7 @@ module.exports = {
 }
 ```
 
-到這一步驟，我們就可以執行 `npx eslint lib/**/*.js` ，用自己訂下的 eslint 規則來 lint 專案本身。
+到這一步驟，我們就可以執行 `npx eslint lib/**/*.js` ，'用自己訂下的 eslint 規則來 lint 專案本身。
 
 各套件 shareable config 詳細設定方式參考以下連結，不再贅述。
 
@@ -194,7 +194,7 @@ packages/
 }
 ```
 
-1. 通常在本機的開發，會使用 `npm install` 來安裝套件；但是發布出去的套件會用 [npm ci](https://docs.npmjs.com/cli/v7/commands/npm-ci/) 來確保 dependencies 完全依照 `package-lock.json` 中指定的版本進行安裝，所以明確指定 `--ci`。
+1. 通常在本機的開發，會使用 `npm install` 來安裝套件；但是發布出去的套件會用 [npm ci](https://docs.npmjs.com/cli/v7/commands/npm-ci/) 來確保 dependencies 完全依照 `package-lock.json` 中指定的版本進行安裝，所以明確指定 `--ci`。
 2. Lerna 在使用 npm 的 automation token 會遇到問題，必須使用 `--no-verify-access` 繞過。詳細可以參考[這串 issue](https://github.com/lerna/lerna/issues/2788)。
 
 ### 4.3 設定 Github Actions
