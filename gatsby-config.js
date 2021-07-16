@@ -1,5 +1,49 @@
 const siteUrl = process.env.URL || 'https://galtz.netlify.app'
 
+const feedQuery = `
+  {
+    allMdx(
+      filter: { frontmatter: { draft: { ne: true } } }
+      sort: {
+        order: DESC,
+        fields: [frontmatter___date]
+      }
+      limit: 1000,
+    ) {
+      edges {
+        node {
+          frontmatter {
+            title
+            date
+          }
+          fields {
+            slug
+          }
+          excerpt
+          html
+        }
+      }
+    }
+  }
+`
+
+const feedPluginOptions = {
+  feeds: [
+    {
+      serialize: ({ query: { site, allMdx } }) =>
+        allMdx.edges.map(edge => ({
+          ...edge.node.frontmatter,
+          description: edge.node.excerpt,
+          url: site.siteMetadata.siteUrl + edge.node.fields.slug,
+          guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+          custom_elements: [{ 'content:encoded': edge.node.html }]
+        })),
+      query: feedQuery,
+      output: 'rss.xml'
+    }
+  ]
+}
+
 module.exports = {
   siteMetadata: {
     title: "Galtz's Blog",
@@ -9,6 +53,10 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-advanced-sitemap',
+    {
+      resolve: 'gatsby-plugin-feed',
+      options: feedPluginOptions
+    },
     'gatsby-plugin-styled-components',
     'gatsby-plugin-react-helmet',
     'gatsby-transformer-sharp',
