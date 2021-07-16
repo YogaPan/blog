@@ -1,3 +1,4 @@
+const path = require('path')
 const siteUrl = process.env.URL || 'https://galtz.netlify.app'
 
 const feedQuery = `
@@ -56,6 +57,14 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-feed',
       options: feedPluginOptions
+    },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: siteUrl,
+        sitemap: path.join(siteUrl, 'sitemap.xml'),
+        policy: [{ userAgent: '*', allow: '/' }]
+      }
     },
     'gatsby-plugin-styled-components',
     'gatsby-plugin-react-helmet',
