@@ -60,7 +60,7 @@
   "devDependencies": {
     "@galtz-library/browserslist-config": "^0.2.4",
     "@galtz-library/eslint-config": "^0.1.3",
-    "@galtz-library/prettier-config": "^0.1.3",
+    "@galtz-library/prettier-config": "^0.1.4",
     "eslint": "^7.30.0",
     "husky": "^7.0.1",
     "lint-staged": "^11.0.1",
