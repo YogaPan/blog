@@ -56,7 +56,7 @@ const feedPluginOptions = {
 module.exports = {
   siteMetadata,
   plugins: [
-    'gatsby-plugin-advanced-sitemap',
+    'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-feed',
       options: feedPluginOptions
