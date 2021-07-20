@@ -1,5 +1,13 @@
 const path = require('path')
+
 const siteUrl = process.env.URL || 'https://galtz.netlify.app'
+const sitemap = path.join(siteUrl, 'sitemap.xml')
+const siteMetadata = {
+  title: "Galtz's Blog",
+  description: "Galtz's Blog",
+  author: 'galtz0321@gmail.com',
+  siteUrl
+}
 
 const feedQuery = `
   {
@@ -34,7 +42,7 @@ const feedPluginOptions = {
       serialize: ({ query: { site, allMdx } }) =>
         allMdx.edges.map(edge => ({
           ...edge.node.frontmatter,
-          description: edge.node.excerpt,
+          description: edge.node.frontmatter.description || edge.node.excerpt,
           url: site.siteMetadata.siteUrl + edge.node.fields.slug,
           guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
           custom_elements: [{ 'content:encoded': edge.node.html }]
@@ -46,12 +54,7 @@ const feedPluginOptions = {
 }
 
 module.exports = {
-  siteMetadata: {
-    title: "Galtz's Blog",
-    description: "Galtz's Blog",
-    author: 'galtz0321@gmail.com',
-    siteUrl
-  },
+  siteMetadata,
   plugins: [
     'gatsby-plugin-advanced-sitemap',
     {
@@ -62,7 +65,7 @@ module.exports = {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
         host: siteUrl,
-        sitemap: path.join(siteUrl, 'sitemap.xml'),
+        sitemap,
         policy: [{ userAgent: '*', allow: '/' }]
       }
     },
@@ -76,9 +79,7 @@ module.exports = {
         gatsbyRemarkPlugins: [
           {
             resolve: 'gatsby-remark-images',
-            options: {
-              maxWidth: 1200
-            }
+            options: { maxWidth: 1200 }
           },
           {
             resolve: 'gatsby-remark-autolink-headers',

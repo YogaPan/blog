@@ -5,7 +5,7 @@ import SEO from '@components/Seo'
 
 const NotFoundPage = () => (
   <Layout>
-    <SEO title="404: Not found" />
+    <SEO pageTitle="404: Not found" />
     <Flex
       height={300}
       flexDirection="column"
