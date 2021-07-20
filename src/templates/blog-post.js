@@ -21,7 +21,10 @@ export default function BlogPost({ data: { mdx } }) {
   const props = useFadeIn()
   return (
     <Layout>
-      <SEO title={mdx.frontmatter.title} />
+      <SEO
+        pageTitle={mdx.frontmatter.title}
+        pageDescription={mdx.frontmatter.description}
+      />
       <AnimatedBox style={props} width="100%">
         <Title>{mdx.frontmatter.title}</Title>
         <MDXProvider>
@@ -39,6 +42,7 @@ export const query = graphql`
       body
       frontmatter {
         title
+        description
       }
     }
   }

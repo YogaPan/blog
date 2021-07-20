@@ -13,7 +13,7 @@ const AboutMePage = () => {
 
   return (
     <Layout>
-      <SEO title="About Me" />
+      <SEO pageTitle="About Me" />
       <animated.div style={props}>
         <h1>About Me</h1>
         <p>

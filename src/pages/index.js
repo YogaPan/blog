@@ -43,7 +43,7 @@ export default function IndexPage({ data }) {
 
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO />
       <AnimatedBox style={props} mt={[3, 4]}>
         {edges.slice(from, to).map(edge => (
           <Article key={edge.node.id} node={edge.node} />

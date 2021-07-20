@@ -11,7 +11,12 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
 
-function SEO({ description, lang, meta, title }) {
+const mergeTitle = (siteTitle, pageTitle) => {
+  if (!pageTitle) return siteTitle
+  return `${pageTitle} - ${siteTitle}`
+}
+
+function SEO({ pageTitle, pageDescription, lang, meta }) {
   const [theme] = useLocalStorage('theme')
   const [preload, setPreload] = useState(true)
 
@@ -35,46 +40,22 @@ function SEO({ description, lang, meta, title }) {
     `
   )
 
-  const metaDescription = description || site.siteMetadata.description
+  const title = mergeTitle(site.siteMetadata.title, pageTitle)
+  const description = pageDescription || site.siteMetadata.description
 
   return (
     <Helmet
       htmlAttributes={{ lang }}
       title={title}
-      titleTemplate={`${site.siteMetadata.title} | %s`}
       meta={[
-        {
-          name: 'description',
-          content: metaDescription
-        },
-        {
-          property: 'og:title',
-          content: title
-        },
-        {
-          property: 'og:description',
-          content: metaDescription
-        },
-        {
-          property: 'og:type',
-          content: 'website'
-        },
-        {
-          name: 'twitter:card',
-          content: 'summary'
-        },
-        {
-          name: 'twitter:creator',
-          content: site.siteMetadata.author
-        },
-        {
-          name: 'twitter:title',
-          content: title
-        },
-        {
-          name: 'twitter:description',
-          content: metaDescription
-        }
+        { name: 'description', content: description },
+        { property: 'og:title', content: title },
+        { property: 'og:description', content: description },
+        { property: 'og:type', content: 'website' },
+        { name: 'twitter:card', content: 'summary' },
+        { name: 'twitter:creator', content: site.siteMetadata.author },
+        { name: 'twitter:title', content: title },
+        { name: 'twitter:description', content: description }
       ].concat(meta)}
     >
       <html data-theme={theme} data-preload={preload} lang={lang} />
