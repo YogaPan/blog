@@ -42,7 +42,7 @@
     "gatsby-remark-table-of-contents": "^1.0.0",
     "gatsby-source-filesystem": "^3.9.0",
     "gatsby-transformer-remark": "^4.6.0",
-    "gatsby-transformer-sharp": "^3.9.0",
+    "gatsby-transformer-sharp": "^3.10.0",
     "lodash": "^4.17.21",
     "prismjs": "^1.24.1",
     "prop-types": "^15.7.2",
