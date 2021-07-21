@@ -40,12 +40,12 @@ const feedPluginOptions = {
   feeds: [
     {
       serialize: ({ query: { site, allMdx } }) =>
-        allMdx.edges.map(edge => ({
-          ...edge.node.frontmatter,
-          description: edge.node.frontmatter.description || edge.node.excerpt,
-          url: site.siteMetadata.siteUrl + edge.node.fields.slug,
-          guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
-          custom_elements: [{ 'content:encoded': edge.node.html }]
+        allMdx.edges.map(({ node }) => ({
+          ...node.frontmatter,
+          description: node.frontmatter.description || node.excerpt,
+          url: site.siteMetadata.siteUrl + node.fields.slug,
+          guid: site.siteMetadata.siteUrl + node.fields.slug,
+          custom_elements: [{ 'content:encoded': node.html }]
         })),
       query: feedQuery,
       output: 'rss.xml'
