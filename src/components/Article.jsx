@@ -46,14 +46,15 @@ function Tag({ name }) {
 }
 
 export default function Article({ node }) {
-  const { id, fields, excerpt, frontmatter } = node
+  const { id, slug, title, excerpt, published_at, tags, meta_description } =
+    node
 
   return (
     <Box key={id} py={12}>
       <h1>
-        <ArticleTitle to={fields.slug}>{frontmatter.title}</ArticleTitle>
+        <ArticleTitle to={slug}>{title}</ArticleTitle>
       </h1>
-      <p>{frontmatter.description || excerpt}</p>
+      <p>{meta_description || excerpt}</p>
       <Flex
         alignItems="center"
         flexWrap="wrap"
@@ -62,10 +63,10 @@ export default function Article({ node }) {
         fontSize={'0.85rem'}
         sx={{ gap: 3 }}
       >
-        <span>{frontmatter.date}</span>
-        {frontmatter.tags.map((tag, index) => {
-          return <Tag name={tag} key={index} />
-        })}
+        <span>{published_at}</span>
+        {tags.map(tag => (
+          <Tag name={tag.name} key={tag.id} />
+        ))}
       </Flex>
     </Box>
   )

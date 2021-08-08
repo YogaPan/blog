@@ -1,8 +1,8 @@
 import React from 'react'
 import { animated } from 'react-spring'
 import { graphql } from 'gatsby'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
-import { MDXProvider } from '@mdx-js/react'
+// import { MDXRenderer } from 'gatsby-plugin-mdx'
+// import { MDXProvider } from '@mdx-js/react'
 import styled from 'styled-components'
 import { Box } from 'rebass'
 import Layout from '@components/Layout/Layout'
@@ -17,19 +17,19 @@ const Title = styled.h1`
 
 const AnimatedBox = animated(Box)
 
-export default function BlogPost({ data: { mdx } }) {
+export default function BlogPost({ data: { ghostPost } }) {
   const props = useFadeIn()
   return (
     <Layout>
-      <SEO
-        pageTitle={mdx.frontmatter.title}
-        pageDescription={mdx.frontmatter.description}
-      />
+      <SEO pageTitle={ghostPost.title} pageDescription={ghostPost.excerpt} />
       <AnimatedBox style={props} width="100%">
-        <Title>{mdx.frontmatter.title}</Title>
-        <MDXProvider>
-          <MDXRenderer>{mdx.body}</MDXRenderer>
-        </MDXProvider>
+        <Title>{ghostPost.title}</Title>
+        <section
+          dangerouslySetInnerHTML={{ __html: ghostPost.childHtmlRehype.html }}
+        />
+        {/* <MDXProvider>
+          <MDXRenderer>{ghostPost.body}</MDXRenderer>
+        </MDXProvider> */}
       </AnimatedBox>
     </Layout>
   )
@@ -37,13 +37,14 @@ export default function BlogPost({ data: { mdx } }) {
 
 export const query = graphql`
   query BlogPostQuery($slug: String!) {
-    mdx(fields: { slug: { eq: $slug } }) {
+    ghostPost(slug: { eq: $slug }) {
       id
-      body
-      frontmatter {
-        title
-        description
+      title
+      childHtmlRehype {
+        html
       }
+      excerpt
+      meta_description
     }
   }
 `

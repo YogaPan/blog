@@ -33,11 +33,11 @@ export default function IndexPage({ data }) {
   const [pageIndex, setPageIndex] = useState(0)
   const props = useFadeIn()
 
-  const { edges, totalCount } = data.allMdx
+  const { edges, totalCount } = data.allGhostPost
   const { from, to, pageCount, onPageChange } = getPaginationConfig(
     pageIndex,
     PAGE_SIZE,
-    data.allMdx.totalCount,
+    data.allGhostPost.totalCount,
     setPageIndex
   )
 
@@ -56,7 +56,7 @@ export default function IndexPage({ data }) {
         onPageChange={onPageChange}
       />
       <Flex alignItems="center" justifyContent="center">
-        <h3>Total {data.allMdx.totalCount} Posts</h3>
+        <h3>Total {data.allGhostPost.totalCount} Posts</h3>
       </Flex>
     </Layout>
   )
@@ -64,24 +64,20 @@ export default function IndexPage({ data }) {
 
 export const query = graphql`
   query {
-    allMdx(
-      sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { draft: { ne: true } } }
-    ) {
+    allGhostPost(sort: { fields: [published_at], order: DESC }) {
       totalCount
       edges {
         node {
           id
-          frontmatter {
-            title
-            date(formatString: "YYYY-MM-DD")
-            tags
-            description
-          }
-          fields {
-            slug
-          }
+          slug
+          title
           excerpt
+          published_at(formatString: "YYYY-MM-DD")
+          tags {
+            id
+            name
+          }
+          meta_description
         }
       }
     }

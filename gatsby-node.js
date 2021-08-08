@@ -1,42 +1,74 @@
 const path = require('path')
-const { createFilePath } = require('gatsby-source-filesystem')
+// const { createFilePath } = require('gatsby-source-filesystem')
 
-exports.onCreateNode = ({ node, getNode, actions }) => {
-  const { createNodeField } = actions
-  if (node.internal.type !== 'Mdx') return
-  const value = createFilePath({ node, getNode })
-  createNodeField({ name: 'slug', node, value })
-}
+// exports.onCreateNode = ({ node, getNode, actions }) => {
+//   const { createNodeField } = actions
+//   if (node.internal.type !== 'Mdx') return
+//   const value = createFilePath({ node, getNode })
+//   createNodeField({ name: 'slug', node, value })
+// }
 
-exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions
+// exports.createPages = async ({ graphql, actions }) => {
+//   const { createPage } = actions
+//   const result = await graphql(`
+//     query {
+//       allGhostPost {
+//         edges {
+//           node {
+//             frontmatter {
+//               draft
+//             }
+//             fields {
+//               slug
+//             }
+//           }
+//         }
+//       }
+//     }
+//   `)
+
+//   let { edges } = result.data.allGhostPost
+//   if (process.env.NODE_ENV === 'production')
+//     edges = edges.filter(({ node }) => !node.frontmatter.draft)
+
+//   edges.forEach(({ node }) => {
+//     const { slug } = node.fields
+//     createPage({
+//       path: slug,
+//       component: path.resolve('./src/templates/blog-post.js'),
+//       context: { slug }
+//     })
+//   })
+// }
+
+exports.createPages = async ({ graphql, actions, reporter }) => {
+  const postTemplate = path.resolve('./src/templates/post.js')
   const result = await graphql(`
-    query {
-      allMdx {
+    {
+      allGhostPost(sort: { order: ASC, fields: published_at }) {
         edges {
           node {
-            frontmatter {
-              draft
-            }
-            fields {
-              slug
-            }
+            slug
           }
         }
       }
     }
   `)
+  if (result.errors) {
+    reporter.panicOnBuild('Error while running GraphQL query.')
+    return
+  }
+  if (!result.data.allGhostPost) return
 
-  let { edges } = result.data.allMdx
-  if (process.env.NODE_ENV === 'production')
-    edges = edges.filter(({ node }) => !node.frontmatter.draft)
-
-  edges.forEach(({ node }) => {
-    const { slug } = node.fields
-    createPage({
-      path: slug,
-      component: path.resolve('./src/templates/blog-post.js'),
-      context: { slug }
+  const items = result.data.allGhostPost.edges
+  items.forEach(({ node }) => {
+    node.url = `/${node.slug}/`
+    actions.createPage({
+      path: node.url,
+      component: postTemplate,
+      context: {
+        slug: node.slug
+      }
     })
   })
 }
