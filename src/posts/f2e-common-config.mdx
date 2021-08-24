@@ -39,7 +39,7 @@ description: '介紹如何將前端常用的 eslint, prettier, browserslist 設�
 
 ### 2.3 建立 Shareable Config 專案
 
-建立一個名叫 `eslint-config` 的資料夾，並在資料夾內執行 `npm init --scope=@my-org` 初始化 npm 專案來產生 `package.json`。接著我們安裝相關的 dependencies:
+建立一個名叫 `eslint-config` 的資料夾，並在資料夾內執行 `npm init --scope=@my-org` 初始化 npm 專案來產生 `package.json`。接著我們安裝相關的 dependencies：
 
 ```shell
 npm install eslint eslint-plugin-import eslint-plugin-react eslint-config-prettier --save
@@ -166,9 +166,9 @@ packages/
 
 這裡簡單紀錄幾個常用指令：
 
-- `lerna init`: 初始 monorepo
-- `lerna bootstrap`: 為所有子模組執行 `npm install`
-- `lerna clean`: 刪除所有子模組中的 `node_modules`
+- `lerna init`: 初始 monorepo。
+- `lerna bootstrap`: 為所有子模組執行 `npm install`。
+- `lerna clean`: 刪除所有子模組中的 `node_modules`。
 - `lerna run <command>`: 執行所有子模組的 `npm run <command>`。
 - `lerna version`: 為有修改過的子模組進版，並且自動 commit、為 commit 打上 git tag，最後 push 到 git remote。
 - `lerna publish`: 發布所有子模組至 npm。
