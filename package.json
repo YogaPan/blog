@@ -63,7 +63,7 @@
     "@galtz-library/eslint-config": "^0.1.4",
     "@galtz-library/prettier-config": "^0.1.4",
     "eslint": "^7.32.0",
-    "husky": "^7.0.1",
+    "husky": "^7.0.2",
     "lint-staged": "^11.1.2",
     "prettier": "^2.3.2"
   }
