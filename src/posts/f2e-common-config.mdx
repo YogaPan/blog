@@ -2,7 +2,7 @@
 title: '用 Lerna 管理共同前端設定，並透過 Github Actions 自動發布至 npm'
 date: '2021-07-11'
 tags: ['javascript', 'npm', 'lerna', 'ci', 'github actions']
-description: '介紹如何將前端常用的 eslint, prettier, browserslist 設定提取至 Lerna 管理的 monorepo，並利用 Github Actions 自動發布至 npm。'
+description: '介紹如何將前端常用的 ESLint, Prettier, Browserslist 設定提取至 Lerna 管理的 monorepo，並利用 Github Actions 自動發布至 npm。'
 ---
 
 ## Table of Contents
@@ -12,13 +12,13 @@ description: '介紹如何將前端常用的 eslint, prettier, browserslist 設�
 
 ## 1. 動機
 
-前端專案通常都會有 webpack、eslint、prettier、browserslist 等設定，當專案開始大量增加時，這些重複的設定會散落在各個專案，導致後續維護和修改的困難。這時我們可以開始把共用的專案設定抽至一個 common library 並發布成 npm package。有了統一的設定，其他專案只需要安裝這些 npm package 並且在需要時更新 `package.json` 即可。
+前端專案通常都會有 Webpack、ESLint、Prettier、Browserslist 等設定，當專案開始大量增加時，這些重複的設定會散落在各個專案，導致後續維護和修改的困難。這時我們可以開始把共用的專案設定抽至一個 common library 並發布成 npm package。有了統一的設定，其他專案只需要安裝這些 npm package 並且在需要時更新 `package.json` 即可。
 
 ## 2. 使用 Shareable Config
 
 ### 2.1 Extends 機制
 
-`.eslintrc`, `.prettier`, `.browserslistrc` 都有提供 [extends](https://eslint.org/docs/user-guide/configuring/configuration-files#extending-configuration-files) 的使用方式，簡單來說就是可以直套用別人寫好的 rules，缺少的、不符合需求的 rules 再自己補上或是 override。以下用 eslint 舉例：
+`.eslintrc`, `.prettier`, `.browserslistrc` 都有提供 [extends](https://eslint.org/docs/user-guide/configuring/configuration-files#extending-configuration-files) 的使用方式，簡單來說就是可以直套用別人寫好的 rules，缺少的、不符合需求的 rules 再自己補上或是 override。以下用 ESLint 舉例：
 
 ```json
 {
@@ -45,7 +45,7 @@ description: '介紹如何將前端常用的 eslint, prettier, browserslist 設�
 npm install eslint eslint-plugin-import eslint-plugin-react eslint-config-prettier --save
 ```
 
-由於可能不同的專案類型可能會需要不同的 eslint 設定，所以我們在創建 `lib/` 並在其中建立兩份設定：`vanilla.js`、`react.js`，一份是純 js 專案的設定，一份 React 專案的設定。以下為 `vanilla.js` 的範例：
+由於可能不同的專案類型可能會需要不同的 ESLint 設定，所以我們在創建 `lib/` 並在其中建立兩份設定：`vanilla.js`、`react.js`，一份是純 js 專案的設定，一份 React 專案的設定。以下為 `vanilla.js` 的範例：
 
 ```js
 module.exports = {
@@ -90,11 +90,11 @@ module.exports = {
 }
 ```
 
-到這一步驟，我們就可以執行 `npx eslint lib/**/*.js` ，'用自己訂下的 eslint 規則來 lint 專案本身。
+到這一步驟，我們就可以執行 `npx eslint lib/**/*.js` ，'用自己訂下的 ESLint 規則來 lint 專案本身。
 
 各套件 shareable config 詳細設定方式參考以下連結，不再贅述。
 
-- [Eslint Shareable Config](https://eslint.org/docs/developer-guide/shareable-configs)
+- [ESLint Shareable Config](https://eslint.org/docs/developer-guide/shareable-configs)
 - [Prettier Shareable Config](https://prettier.io/docs/en/configuration.html#sharing-configurations)
 - [Browserslist Shareable Config](https://github.com/browserslist/browserslist#shareable-configs)
 
@@ -135,7 +135,7 @@ npm install @my-org/eslint-config --save-dev
 
 ## 3. 利用 Lerna 管理 Monorepo
 
-除了上述的 eslint，browserslist, prettier 也需要抽出 sharing config。如果全部都各自建一個 repo 的會又會讓這些設定分散各處，一切又變得雜亂起來，根本自己搞自己。這個時候**我們可以使用 monorepo 的方式，即是在單一 repo 中，管理多個模組。**
+除了上述的 ESLint，Browserslist、Prettier 也需要抽出 sharing config。如果全部都各自建一個 repo 的會又會讓這些設定分散各處，一切又變得雜亂起來，根本自己搞自己。這個時候**我們可以使用 monorepo 的方式，即是在單一 repo 中，管理多個模組。**
 
 [Lerna](https://github.com/lerna/lerna) 就是用來管理這些小王八蛋的，透過指令協助開發者對多個模組進行管理。使用方式很簡單，在一個新資料夾底下執行 `lerna init --independent`。會產生 `package.json`, `lerna,json` 以及 `packages/`：就是這些小王八蛋的住所。接下來就是把各模組放到裏面，架構會長得像是下面這樣：
 
@@ -179,7 +179,7 @@ packages/
 
 ### 4.1 設定 npm Automation Token
 
-在本機上必須先用帳號密碼登入 npm 才有權限 publish，那如何賦予 Github Actions 權限呢？方法是在 npm 上面[產生一組 automation token](https://docs.npmjs.com/creating-and-viewing-access-tokens) ，接著在 Github repo 上的 settings -> secrets 設定 `NPM_TOKEN` 的值。有了這把 token 就能夠任意發布套件至你個人或是 organization 底下，請務必小心保管。
+在本機上必須先用帳號密碼登入 npm 才有權限 publish，那如何賦予 Github Actions 權限呢？方法是在 npm 上面[產生一組 automation token](https://docs.npmjs.com/creating-and-viewing-access-tokens) ，接著在 Github repo 上的 settings -> secrets 設定 `NPM_TOKEN` 的值。有了這把 token 就能夠任意發布套件至你個人或 organization 底下，請務必小心保管。
 
 註：npm access token 有三種，但只有 publish 權限且可繞過 2FA 的只有 automation token。
 
@@ -233,7 +233,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 ```
 
-到這裡就全部設定完畢了。接下來只需要
+到這裡就全部設定完畢了。接下來只需要：
 
 1. 修改程式碼並 commit。
 2. 執行 `npx lerna version`， Lerna 會為修改過的模組進版，接著 commit、上 git tag 後 push 至 Github remote。
@@ -243,3 +243,9 @@ jobs:
 
 - [YogaPan/f2e-library](https://github.com/YogaPan/f2e-library)
 - [YogaPan/blog](https://github.com/YogaPan/blog)
+
+## 6. 延伸閱讀
+
+推薦閱讀：[PJCHENder - 建立公司內部使用的 eslint-config package](https://medium.com/onedegree-tech-blog/建立公司內部使用的-eslint-config-package-4b76c089848)
+
+針對 ESLint 中 extends、plugin、overrides 之間的愛恨糾葛描述的清晰明暸。
