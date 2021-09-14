@@ -1,23 +1,25 @@
 {
   "cSpell.words": [
-    "Combinator",
-    "Combinators",
-    "Flexbox",
-    "Galtz's",
-    "Noto",
-    "Titillium",
-    "WORKDIR",
     "browserslist",
     "browserslistrc",
     "cloudbuild",
     "cloudrun",
     "cloudsdktool",
+    "Combinator",
+    "Combinators",
     "entrypoint",
+    "Flexbox",
     "frontmatter",
     "funston",
+    "Galtz's",
     "gcloud",
     "gtag",
+    "Jamstack",
+    "markdownlint",
+    "Noto",
     "serviceworker",
-    "symlink"
+    "symlink",
+    "Titillium",
+    "WORKDIR"
   ]
 }
