@@ -29,10 +29,14 @@
 
 - Git branch/commit 基本上遵守 [Angular Convention](https://github.com/angular/angular/blob/master/CONTRIBUTING.md)。
 - Javascript 風格遵守個人 [F2E Library](https://github.com/YogaPan/f2e-library) 下的 ESLint、Prettier rules。
-  - Git commit 時會透過 [lint-staged](https://github.com/okonet/lint-staged) 檢查。
+  - Git commit 時會透過 [lint-staged](https://github.com/okonet/lint-staged) + [husky](https://github.com/typicode/husky) 檢查。
   - Pull request 時會觸發 [Github Actions](https://github.com/features/actions) 進行檢查，設定檔在 [.github/workflows/main.yml](./.github/workflows/main.yml)。
-- Markdown 格式遵守 [markdownlint](https://github.com/markdownlint/markdownlint) 下的 [Rules](https://github.com/markdownlint/markdownlint/blob/master/docs/RULES.md)。
+- Markdown 格式遵守 [markdownlint](https://github.com/markdownlint/markdownlint) 下的 [rules](https://github.com/markdownlint/markdownlint/blob/master/docs/RULES.md)。
 - 文章的撰寫格式遵守 [writing guideline](./docs/writing-guideline.md)。
+
+### Depfu
+
+[Depfu](https://depfu.com/) 會在 npm packages 有新版本時發出 PR 且列出 changelog，方便我們進行例行性套件升級。
 
 ### Recommended VSCode Extension
 
@@ -43,6 +47,10 @@
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
+### Free Icon
+
+免費使用的 icon 資源參考 [icon.md](./docs/icon.md)。
+
 ## 延伸閱讀
 
 - [Jamstack](https://jamstack.org/)
@@ -52,4 +60,4 @@
 - [Delivering Modern Website Experiences: The Journey to a Content Mesh | Gatsby](https://www.gatsbyjs.com/blog/2018-10-04-journey-to-the-content-mesh/)
 - [Day 14  Server-Side-Rendering - (1) - iT 邦幫忙::一起幫忙解決難題，拯救 IT 人的一天](https://ithelp.ithome.com.tw/articles/10244948)
 
-P.S. 舊版 Blog [小蛇蛇的筆記](https://yogapan.github.io/)已經沒有在維護囉，不過有興趣的還是可以逛逛。
+P.S. 舊版 Blog [小蛇蛇的筆記](https://yogapan.github.io/)已沒有在維護，不過有興趣的還是可以逛逛。
