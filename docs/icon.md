@@ -10,6 +10,7 @@
 可免費商業使用
 
 - [Free Icon Shop](https://freeiconshop.com/)
+- [Free icon rainbow](https://free-icon-rainbow.com/)
 
 Free svg need to credit author.
 
