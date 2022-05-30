@@ -13,7 +13,7 @@ export default function LinkedInIconLink() {
   return (
     <Link.Outside
       css={linkedInCss}
-      href="https://www.linkedin.com/in/%E6%98%B1%E5%98%89-%E6%BD%98-5a7927ab/"
+      href="https://www.linkedin.com/in/raven-pan-5a7927ab/"
     >
       <LinkedInIcon />
     </Link.Outside>
