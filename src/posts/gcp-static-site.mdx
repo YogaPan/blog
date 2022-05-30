@@ -315,7 +315,7 @@ gcloud builds submit \
   --substitutions=REVISION_ID=${REVISION_ID}
 ```
 
-執行腳本建置完成後，就可以到 [Viewing build logs](https://console.cloud.google.com/cloud-build/builds)這裡查看 build results：
+執行腳本建置完成後，就可以到 [Viewing build logs](https://console.cloud.google.com/cloud-build/builds) 這裡查看 build results：
 ![Cloud Build Console](../images/gcp-static-site/cloud-build-console.png)
 
 若有 performance 上的考量需使用 Docker image cache，可以閱讀官方這篇 [Best practices for speeding up builds](https://cloud.google.com/build/docs/speeding-up-builds)，其中的 [Using a cached Docker image](https://cloud.google.com/build/docs/speeding-up-builds#using_a_cached_docker_image) 方法用在 multi-stage 的建置會遇到無法完全利用 cache 的問題，需要拆分成多顆 image，參考 [garethr/multi-stage-build-example/cloudbuild.yaml](https://github.com/garethr/multi-stage-build-example/blob/master/cloudbuild.yaml)。
